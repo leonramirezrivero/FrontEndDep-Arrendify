@@ -1,0 +1,496 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Detalles Arrendador {{arrendador.nombre}} {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="/static/assets/css/nav.css" rel="stylesheet"/>
+{% endblock stylesheets %}
+
+{% block content %}
+{% comment %} Cargar el js para mostrar el fiador/obligado de forma dinamica {% endcomment %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div>
+        <a href="/fiador_obligado/"><button type="button" class="btn btn-secondary " ><svg class="icon icon-xs" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" clip-rule="evenodd"></path></svg>Regresar  
+        </button>
+        </a>
+    </div>
+</div>
+<div class="d-block">
+    <div class="row" id="cargar_tabla">
+        <div class="col-12 col-xl" id="FSPF" style="Display:none;">
+            <div class="card card-body border-0 shadow mb-4">
+                <h2 class="h5 mb-2" id="nombre_full" ></h2>
+                <hr class="hr" />
+
+                
+                <nav class="borde border-0">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+
+                      <button class="nav-link active" id="nav-datos_g" data-bs-toggle="tab" data-bs-target="#datos_g" type="button" role="tab" aria-controls="datos_g" aria-selected="true">Datos Generales</button>
+                      <button class="nav-link" id="nav-datos_d" data-bs-toggle="tab" data-bs-target="#datos_d" type="button" role="tab" aria-controls="nav-profil" aria-selected="false">Datos Domiciliarios</button>
+                      <button class="nav-link" id="nav-contacto-1" name="nav-contacto1" data-bs-toggle="tab" data-bs-target="#nav-contacto" type="button" role="tab" aria-controls="nav-empleo" aria-selected="false" >Contacto</button>
+                      <button class="nav-link" id="nav-empleo1" name="nav-empleo" data-bs-toggle="tab" data-bs-target="#nav-empleo" type="button" role="tab" aria-controls="nav-empleo" aria-selected="false" >Datos De Empleo</button>
+                      <button class="nav-link" id="nav-escritura1" name="nav-escritura1" data-bs-toggle="tab" data-bs-target="#nav-escritura" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Datos De Escritura</button>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+
+                    <div class="tab-pane fade show active" id="datos_g" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Datos Generales</h2>
+                        <hr class="hr" />    
+                        <div class="row" >
+                            <div class="col-md-6 mb-3">
+                                <label>Deudor: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" name="inquilino" id="inquilino"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>RFC: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" name="rfc_fiador" id="rfc_fiador"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Parentesco: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="p_fiador" name="p_fiador"   type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Estado Civil: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1"  id="estado_civil_fiador" name="estado_civil_fiador"  type="text" value=""  readonly>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="datos_d" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                            <h2 class="h5 mb-2 mt-2">Datos Domiciliarios</h2>
+                        <hr class="hr" />
+                        <div class="col-md-6 mb-3">
+                            <label for="direccon">Domicilio: </label>
+                            <input class="form-control-plaintext card shadow border-1 ps-1" id="full_dom" type="text" value="" readonly>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-contacto" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0" >
+                        <div class="row">
+                            <h2 class="h5 mb-2">Datos Contacto </h2>
+                            <hr class="hr" />
+                            <div class="col-md-12 mb-4">                                    
+                                <label for="jefe">Teléfono: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="tel_fiador" name="tel_fiador" type="text"  readonly>                                  
+                            </div>
+                            <div class="col-md-12 mb-4">                                    
+                                <label for="puesto">Celular: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="tel2_fiador" name="tel2_fiador" type="text"  readonly>                                    
+                            </div>
+                            <div class="col-md-12 mb-4">                                    
+                                <label for="pagina_web">Email </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="email_fiador" name="email_fiador" type="text" readonly>                                 
+                            </div>                            
+                        </div>  
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-empleo" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <div id="datos_empleo" class="row">
+                            <h2 class="h5 mb-2">Datos De Empleo</h2>
+                            <hr class="hr" />
+                            <div class="col-md-3 mb-1">                                
+                                <label for="Profesión u Ocupación">Profesión, Ocupación u Oficio:  </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="prof_fiador" name="prof_fiador" type="text" readonly>
+                            </div>
+                            <div class="col-md-3 mb-1">                                
+                                <label for="antiguedad">Empresa Donde Labora: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="empresa_fiador" name="empresa_fiador" type="text" value="{{ inquilino.antiguedad }} años" readonly>
+                                                                                           
+                            </div>
+                            <div class="col-md-3 mb-1">                                    
+                                <label for="puesto">Número Teléfono Empresa: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="tel_em_fiador" name="tel_em_fiador" type="text" value="{{ inquilino.puesto }}" readonly>
+                                       
+                            </div>
+                            <div class="col-md-3 mb-3">                                
+                                <label for="Ingreso Mensual">Salario Mensual: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="ingreso_men_fiador" name="ingreso_men_fiador" type="text" value="$ {{ inquilino.ingreso_men}}" readonly>                           
+                            </div>
+                            <div class="col-md-3 mb-4">                                    
+                                <label for="numerocel_empresa">Recibos de Nómina: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="recibos" name="recibos" type="text" value="{{ inquilino.cel_empleo }}" readonly>                                  
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-escritura" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <div id="acta_con" class="row">
+                            <h2 class="h5 mb-2 mt-2">Datos De La Escritura</h2>
+                            <hr class="hr" />
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Escritura Pública: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="escritura_publica" name="escritura_publica" type="text" value="{{ arrendador.empresa_constituida}}"  readonly>
+                                </div>  
+                              
+                                <div class="col-md-6 mb-3">
+                                    <label>Fecha de Propiedad: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="fecha_propiedad" name="fecha_propiedad" type="text" value="{{ arrendador.fecha_ac}}" readonly>
+                                </div>      
+                                <div class="col-md-6 mb-3">
+                                    <label>Número de Notario Público: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="numero_notario" name="numero_notario" type="text" value="{{ arrendador.escritura_numero_ac}}" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label>Nombre Notario Público: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_notario" name="nombre_notario"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                                </div>
+                            </div>
+                          
+                        </div>  
+                    </div>
+
+                 <hr class="hr" />
+            </div>
+        </div> 
+    </div>
+{% comment %} //////////////////////////////////////// {% endcomment %}
+    <div class="row">
+        <div class="col-12 col-xl" id="OSPM" style="Display:none;" >
+            <div class="card card-body border-0 shadow mb-4">
+                <h2 class="h5 mb-2" id="nombre_full_em" ></h2>
+                <hr class="hr" />
+
+                <nav class="borde border-0">
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-datos-empresa" name="nav-datos-empresa" data-bs-toggle="tab" data-bs-target="#datos_ge" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Datos Empresa</button>
+                    <button class="nav-link" id="nav-acta-constitutiva" name="nav-acta-constitutiva" data-bs-toggle="tab" data-bs-target="#nav-acta" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Acta Constitutiva</button>
+                    <button class="nav-link" id="nav-dom_fiscal_empresa" name="nav-dom_fiscal_empresa" data-bs-toggle="tab" data-bs-target="#nav-domicilio_fiscal" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Dom. Fiscal Empresa</button>
+                    <button class="nav-link" id="nav-representante_legal" name="nav-representante_legal" data-bs-toggle="tab" data-bs-target="#nav-rep_legal" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Representante Legal</button>
+                    <button class="nav-link" id="nav-dom_rl" name="nav-dom_rl" data-bs-toggle="tab" data-bs-target="#nav-domicilio-rl" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Dom. Representante Legal</button>
+                    <button class="nav-link" id="nav-ref" name="nav-ref" data-bs-toggle="tab" data-bs-target="#nav-referencia" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Referencias</button>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+
+                    <div class="tab-pane fade show active" id="datos_ge" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Datos Generales De La Empresa</h2>
+                        <hr class="hr" />    
+                        <div class="row" >
+                            <div class="col-md-4 mb-3">
+                                <label>Deudor: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" name="inquilino2" id="inquilino2"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>RFC: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="rfc_fiador_em" name="rfc_fiador_em"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Ingreso Mensual: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="ingreso_fiador_opm" name="ingreso_fiador_opm"  type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Antiguedad: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="antiguedad_opm" name="antiguedad_opm" type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Tel: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="tel_opm" name="tel_opm"  type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Cel: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="cel_opm" name="cel_opm"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Email: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="email_em_opm" name="email_em_opm"  type="text" value="" readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label>Página Web: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="pagina_web_f" name="pagina_web_f" type="text" value=""  readonly>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-acta" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <div id="acta_con" class="row">
+                            <h2 class="h5 mb-2 mt-2">Acta Constitutiva</h2>
+                            <hr class="hr" />
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Escritura Número: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="escritura_publica_ac" name="escritura_publica_ac" type="text" value="{{ arrendador.escritura_numero_ac}}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Fecha Propiedad: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="fecha_propiedad_ac" name="fecha_propiedad_ac" type="text" value="{{ arrendador.fecha_ac}}" readonly>
+                                </div>      
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Nombre del Notario: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_notario_ac" name="nombre_notario_ac"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                                </div>  
+                                <div class="col-md-4 mb-3">
+                                    <label>Edo Méx o CDMX: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="coe" name="coe" type="text" value="{{ arrendador.coe}}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Folio Mercantil: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="folio_mercantil" name="folio_mercantil" type="text" value="{{ arrendador.folio_mercantil}}" readonly>
+                                </div>      
+                            </div>
+                        </div>  
+                    </div>
+
+
+                    <div class="tab-pane fade" id="nav-domicilio_fiscal" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Domicilio Fiscal Empresa </h2>
+                        <hr class="hr" />
+                        <div class="col-md-6 mb-3">
+                            <label for="direccon">Domicilio: </label>
+                            <input class="form-control-plaintext card shadow border-1 ps-1" id="full_dom_fiscal" type="text" value="" readonly>
+                        </div>
+                    </div> 
+
+                    <div class="tab-pane fade" id="nav-rep_legal" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <div id="rep_leg" class="row">
+                            <h2 class="h5 mb-2 mt-2">Representante Legal</h2>
+                            <hr class="hr" />
+                            <div class="row">
+                                <div class="col-md-8 mb-3">
+                                    <label>Nombre Completo: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="full_nombre_rl" name="full_nombre_rl" type="text" value="{{ arrendador.escritura_numero_ac}}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Cel: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="cel_rl" name="cel_rl"  type="text" value="{{ arrendador.fecha_ac}}" readonly>
+                                </div>      
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label>Email: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="email_rl" name="email_rl"   type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                                </div>  
+                                <div class="col-md-6 mb-3">
+                                    <label>Página Web </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="pagina_rl" name="pagina_rl" type="text" value="{{ arrendador.coe}}" readonly>
+                                </div>  
+                            </div>
+                        </div>  
+                    </div>
+
+                    <div class="tab-pane fade" id="nav-domicilio-rl" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Domicilio Representante Legal </h2>
+                        <hr class="hr" />
+                        <div class="col-md-8 mb-3">
+                            <label for="direccon">Domicilio: </label>
+                            <input class="form-control-plaintext card shadow border-1 ps-1" id="full_dom_rl" type="text" value="" readonly>
+                        </div>
+                    </div> 
+
+                    <div class="tab-pane fade" id="nav-referencia" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                        <div id="ref1" class="row">
+                            <h2 class="h5 mb-2 mt-2">Referencias</h2>
+                            <hr class="hr" />
+                            <div class="row">
+                                <h6 style="font-weight:bold">Referencia 1</h6>
+                            <hr class="hr" />
+                                <div class="col-md-4 mb-3">
+                                    <label>Nombre De Empresa: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_empresa" name="nombre_empresa" type="text" value="{{ arrendador.empresa_constituida}}"  readonly>
+                                </div>  
+                                <div class="col-md-4 mb-3">
+                                    <label>Nombre Del Contacto: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_contacto" name="nombre_contacto" type="text" value="{{ arrendador.escritura_numero_ac}}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Tiempo De Relación: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="tiempo_relacion" name="tiempo_relacion" type="text" value="{{ arrendador.fecha_ac}}" readonly>
+                                </div>      
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label>Tel: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="tel_ref" name="tel_ref"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                                </div>  
+                                <div class="col-md-3 mb-3">
+                                    <label>Email: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="email_ref" name="email_ref" type="text" value="{{ arrendador.coe}}" readonly>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label>Cel: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="cel_ref" name="cel_ref" type="text" value="{{ arrendador.folio_mercantil}}" readonly>
+                                </div>      
+                                <div class="col-md-3 mb-3">
+                                    <label>Relacion Comercial: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="relacion_comercial" name="relacion_comercial" type="text" value="{{ arrendador.folio_mercantil}}" readonly>
+                                </div> 
+                            </div>
+                        </div>  
+
+                        <div id="ref2" class="row">
+                            <hr class="hr" />
+                            <div class="row">
+                                <h6 style="font-weight:bold">Referencia 1</h6>
+                            <hr class="hr" />
+                                <div class="col-md-4 mb-3">
+                                    <label>Nombre De Empresa: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_empresa2" name="nombre_empresa2" type="text" value="{{ arrendador.empresa_constituida}}"  readonly>
+                                </div>  
+                                <div class="col-md-4 mb-3">
+                                    <label>Nombre Del Contacto: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_contacto2" name="nombre_contacto2" type="text" value="{{ arrendador.escritura_numero_ac}}" readonly>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Tiempo De Relación: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="tiempo_relacion2" name="tiempo_relacion2" type="text" value="{{ arrendador.fecha_ac}}" readonly>
+                                </div>      
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 mb-3">
+                                    <label>Tel: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="tel_ref2" name="tel_ref2"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                                </div>  
+                                <div class="col-md-3 mb-3">
+                                    <label>Email: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="email_ref2" name="email_ref2" type="text" value="{{ arrendador.coe}}" readonly>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label>Cel: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="cel_ref2" name="cel_ref2" type="text" value="{{ arrendador.folio_mercantil}}" readonly>
+                                </div>      
+                                <div class="col-md-3 mb-3">
+                                    <label>Relacion Comercial: </label>
+                                    <input class="form-control-plaintext card shadow border-1 ps-1" id="relacion_comercial2" name="relacion_comercial2" type="text" value="{{ arrendador.folio_mercantil}}" readonly>
+                                </div> 
+                            </div>
+                        </div>   
+                    </div>
+                <hr class="hr" />
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+     
+
+{% comment %} onkeyup="sumar() o onload=mostrar()" {% endcomment %}
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+{% comment %} <script src="/static/assets/repositorios/detail_inq.js"></script>  {% endcomment %}
+
+<script>
+    const server = 'https://arrendify-api.onrender.com';
+    var datos = JSON.parse( localStorage.getItem('data_fiador'))
+    var full = document.getElementById("nombre_full")
+    var full_em = document.getElementById("nombre_full_em")
+    const configin = {
+        headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+      }; 
+    document.getElementById("cargar_tabla").onload = plantar()
+    
+function plantar()
+{
+    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    .then(function (response) {
+        var datos_inq = response.data;
+        var select = document.getElementById('inquilino');
+        var select2 = document.getElementById('inquilino2');
+        datos_inq.forEach(function(dato) {
+        if (dato.id == this.datos.inquilino){
+            select.value = dato.nombre+ " " + dato.apellido + " " + dato.apellido1;
+            select2.value = dato.nombre+ " " + dato.apellido + " " + dato.apellido1;
+        }
+    });
+  })
+  .catch(function (error) {
+    // manejar error
+    console.log(error);
+  });
+  
+    if(datos.fiador_obligado == "Fiador Solidario" || datos.fiador_obligado == "Obligado Solidario Persona Fisica"){
+        console.log("persona f")
+        full.textContent = `${datos.n_fiador} ${datos.a_fiador} ${datos.a2_fiador}`
+        document.getElementById("FSPF").style.display = ""
+
+        plantar_pf()
+    }
+    
+    if(datos.fiador_obligado == "Obligado Solidario Persona Moral"){
+        console.log("persona m")
+        full_em.textContent = `${datos.nombre_comercial}`
+        document.getElementById("OSPM").style.display = ""
+
+        plantar_pm()
+    }
+
+    
+    //localStorage.removeItem('data_inquilino')
+    //console.log("limpio",localStorage)
+            
+}
+
+function plantar_pf(){
+
+    var k1 = Object.getOwnPropertyNames(datos);
+    console.log("soy datos",datos)
+    console.log("soy k1",k1)
+    
+    // datos generales
+    document.getElementById("inquilino").value = datos.inquilino_nombre + " " + datos.inquilino_apellido + " " +  datos.inquilino_apellido1
+    document.getElementById("rfc_fiador").value = datos.rfc_fiador
+    document.getElementById("p_fiador").value = datos.p_fiador
+    document.getElementById("estado_civil_fiador").value = datos.estado_civil_fiador
+   
+    // datos Domiciliarios
+    document.getElementById("full_dom").value = `${ datos.calle_fiador } ${ datos.n_ext_fiador } Int. ${ datos.n_int_fiador } Col. ${ datos.colonia_fiador } ${ datos.cp_fiador } ${ datos.municipio_fiador}, ${datos.estado_fiador}` 
+    
+    
+    for(let i= 18; i<= 31;i++)
+    {
+        let k2 = document.getElementsByName(k1[i]);
+        k2[0].value =  datos[k1[i]];
+    }
+}
+
+function plantar_pm(){
+    var k1 = Object.getOwnPropertyNames(datos);
+    console.log("soy datos",datos)
+    console.log("soy k1",k1)
+    // datos generales pm 
+    document.getElementById("inquilino2").value = datos.inquilino_nombre + " " + datos.inquilino_apellido + " " +  datos.inquilino_apellido1
+    document.getElementById("full_dom_fiscal").value = `${ datos.calle_em_pm } ${ datos.n_ext_em_pm } Int. ${ datos.n_int_em_pm } Col. ${ datos.colonia_em_pm } ${ datos.cp_em_pm } ${ datos.municipio_em_pm}, ${datos.estado_em_pm}` 
+    //represnetrante legal
+    document.getElementById("full_nombre_rl").value = `${datos.nombre_rl} ${datos.apellido_rl} ${datos.apellido1_rl}`
+    document.getElementById("cel_rl").value = datos.cel_rl
+    document.getElementById("email_rl").value = datos.email_rl
+    document.getElementById("pagina_rl").value = datos.pagina_rl
+    document.getElementById("full_dom_rl").value = `${ datos.calle_rl } ${ datos.n_ext_rl } Int. ${ datos.n_int_rl } Col. ${ datos.colonia_rl } ${ datos.cp_rl } ${ datos.municipio_rl}, ${datos.estado_rl}` 
+
+
+
+    for(let i= 31; i<= 42;i++)
+    {
+        let k2 = document.getElementsByName(k1[i]);
+        k2[0].value =  datos[k1[i]];
+    }
+
+    // segundo for para FO Persona Moral
+    for(let i = 63; i<= 76;i++)
+    {
+        let k2 = document.getElementsByName(k1[i]);
+        k2[0].value =  datos[k1[i]];
+    }
+  
+   
+}
+</script>
+
+{% endblock javascripts %}
