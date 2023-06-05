@@ -21,8 +21,7 @@ urlpatterns = [
     path('inmuebles/', views.path_inmuebles, name='inmuebles'),   
     path('fiador_obligado/', views.path_foo, name='fiador_obligado'),   
     path('detalles_fiador/<str:slug>', views.path_foo_detalles, name='inquilinos_detalles'),    
-    path('editar_fiador/<str:slug>', views.path_foo_edit, name='inquilinos_editar'),  
-    path('prueba/', views.prueba, name='Arren'),  
+    path('editar_fiador/<str:slug>', views.path_foo_edit, name='inquilinos_editar'),   
     path('tyc/', views.tyc, name='tyc'),
 
 
@@ -48,8 +47,7 @@ urlpatterns = [
     path('documentos_fia/<int:id>', views.path_archivos_fia, name='archivos_fiador'),    
     path('det_documentos/<int:id>', views.path_detalles_archivos_fia, name='detalles_archivos_fiador'),
     path('tyc/', views.tyc, name='tyc'),
-    
-    path('archivos', views.path_doc_inquilino, name='inquilinos_docs'),  
+     
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 
