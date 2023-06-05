@@ -46,15 +46,7 @@ def path_detalles_archivos_historial(request,id):
     return render(request, 'home/inquilinos/historial_documentos.html', {
     })
 #================FIADORES=================
-def path_foo(request):
-    return render(request, 'home/Fiador/Foo.html', {
-    })
-def path_foo_detalles(request,slug):
-    return render(request, 'home/Fiador/detalles_foo.html', {
-    })
-def path_foo_edit(request,slug):
-    return render(request, 'home/Fiador/edit_inq_foo.html', {
-    })    
+
  
 def path_inmuebles(request):
     return render(request, 'home/inmuebles.html', {
@@ -81,7 +73,7 @@ def path_arrendador_detalles(request,slug):
 
 #================FIADORES=================
 def path_foo(request):
-    return render(request, 'home/Fiador/Foo.html', {
+    return render(request, 'home/Fiador/FOO.html', {
     })
 def path_foo_detalles(request,slug):
     return render(request, 'home/Fiador/detalles_foo.html', {
