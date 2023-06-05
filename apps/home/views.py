@@ -45,19 +45,9 @@ def path_detalles_archivos(request,id):
 def path_detalles_archivos_historial(request,id):
     return render(request, 'home/inquilinos/historial_documentos.html', {
     })
-#================FIADORES=================
+    
+#================Arrendadors=================
 
- 
-def path_inmuebles(request):
-    return render(request, 'home/inmuebles.html', {
-    })   
-def path_doc_inquilino(request):
-    return render(request, 'home/Archivos.html', {
-    })   
-
-def prueba(request):
-    return render(request, 'home/datos_arren.html', {
-    })   
 
 def path_arrendador(request):
     return render(request, 'home/arrendador/arrendador.html', {
@@ -70,41 +60,6 @@ def path_arrendador_editar(request,slug):
 def path_arrendador_detalles(request,slug):
     return render(request, 'home/arrendador/detalles-arrendador.html', {
 })
-
-#================FIADORES=================
-def path_foo(request):
-    return render(request, 'home/Fiador/FOO.html', {
-    })
-def path_foo_detalles(request,slug):
-    return render(request, 'home/Fiador/detalles_foo.html', {
-    })
-def path_foo_edit(request,slug):
-    return render(request, 'home/Fiador/edit_inq_foo.html', {
-    })    
-def path_archivos_fia(request,id):
-    return render(request, 'home/Fiador/archivos_fiador.html', {
-    })
-def path_detalles_archivos_fia(request,id):
-    return render(request, 'home/Fiador/detalles_archivos.html', {
-    })
-
-def tyc(request):
-    return render(request, 'home/Terminos.html', {
-    })
-    
-
-# path inmuebles
-def path_inmuebles(request):
-    return render(request, 'home/inmuebles/inmuebles.html', {
-    })
-
-def path_inmuebles_editar(request, slug):
-    return render(request, 'home/inmuebles/edit_inmueble.html', {
-    })
-
-def path_inmuebles_detalles(request, slug):
-    return render(request, 'home/inmuebles/detalles-inmueble.html', {
-    })
 
 # path archivos arrendador
 
@@ -132,6 +87,43 @@ def path_documentos_arrendador_detalles_unico_arrendador(request, slug):
 def path_documentos_arrendador_ver_historial(request, slug):
     return render(request, 'home/arrendador/historial_arrendador.html',{    
     })
+
+#================FIADORES=================
+def path_foo(request):
+    return render(request, 'home/Fiador/FOO.html', {
+    })
+def path_foo_detalles(request,slug):
+    return render(request, 'home/Fiador/detalles_foo.html', {
+    })
+def path_foo_edit(request,slug):
+    return render(request, 'home/Fiador/edit_inq_foo.html', {
+    })    
+def path_archivos_fia(request,id):
+    return render(request, 'home/Fiador/archivos_fiador.html', {
+    })
+def path_detalles_archivos_fia(request,id):
+    return render(request, 'home/Fiador/detalles_archivos.html', {
+    })
+#================FIADORES===============
+
+def tyc(request):
+    return render(request, 'home/Terminos.html', {
+    })
+    
+
+# path inmuebles
+def path_inmuebles(request):
+    return render(request, 'home/inmuebles/inmuebles.html', {
+    })
+
+def path_inmuebles_editar(request, slug):
+    return render(request, 'home/inmuebles/edit_inmueble.html', {
+    })
+
+def path_inmuebles_detalles(request, slug):
+    return render(request, 'home/inmuebles/detalles-inmueble.html', {
+    })
+
 
 
 def pages(request):
