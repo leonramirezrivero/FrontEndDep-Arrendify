@@ -124,7 +124,14 @@ def path_inmuebles_detalles(request, slug):
     return render(request, 'home/inmuebles/detalles-inmueble.html', {
     })
 
-
+#=============INVESTIGACION=============
+def path_investigacion(request):
+    return render(request, 'home/Investigacion/investigacion_lista.html', {
+    })
+    
+def path_check_investigacion(request):
+    return render(request, 'home//Investigacion/investigacion-api.html', {
+    })
 
 def pages(request):
     context = {}

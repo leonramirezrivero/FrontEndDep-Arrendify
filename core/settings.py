@@ -35,11 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.home',  # Enable the inner home (home)
-    'rest_framework',
-    'rest_framework.authtoken',
-    'corsheaders',
-    # 'rest_framework.authentication.TokenAuthentication'
-    'rest_auth',
+    # 'rest_framework',
+    # 'rest_framework.authtoken',
+    # 'corsheaders',
+    # # 'rest_framework.authentication.TokenAuthentication'
+    # 'rest_auth',
 
 ]
 

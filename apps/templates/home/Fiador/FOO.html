@@ -1081,7 +1081,7 @@ function prueba2(val){
 localStorage.removeItem('data_fiador')
     var data_fiador = []
 // Configuracion general de axios
-    const server = 'https://arrendify-api.onrender.com';
+    const server = 'http://192.168.2.24:8001'
     const configin = {
         headers: {
           'Content-Type': 'application/json',
@@ -1277,11 +1277,8 @@ function editar(id){
         event.preventDefault();
 
         console.log("ojojojo")
-
         formulario = JSON.parse(localStorage.getItem('datos'));
-        
         console.log("viewform",formulario)
-        
         enviar_datos(formulario)
     
        

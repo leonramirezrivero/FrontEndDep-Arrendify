@@ -279,7 +279,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+
+                    <div class="col-md-4" id="div-rl" style="display:none;">
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h5 class="card-title" style="color:#231942ff;">Recomendacion Laboral</h5>
@@ -313,6 +314,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
@@ -347,9 +349,21 @@
                             </div>
                         </div>
                     </div>
+
+                    
+                </div>
+                <div class="row" id="div-ac" style="background-color:white; display:none;">
+                  <h5 class="card-title" style="color:#231942ff;">Link Acta Constitutiva: </h5>
+              
+                  <hr class="hr" />
+                  <div class="col-md-12 mb-4">  
+                    <input class="form-control-plaintext card shadow border-1 ps-1" id="Acta_constitutiva" name="Acta_constitutiva" type="text" value=""></input>                                 
+                    <a id="link_acta" target="_blank" href="" > Ver Documento.
+                    </a>                             
+                </div>
                 </div>
             {% comment %} <button type="submit" class="btn btn-primary">Enviar</button> {% endcomment %}
-            <button type="submit" id="finalizar"  class="btn btn-secondary mt-2">Guardar Cambios</button>
+            <button type="submit" id="finalizar" class="btn btn-secondary mt-2">Guardar Cambios</button>
         </form>
       </div>
     </div>
@@ -600,7 +614,7 @@
 
     });
 
-const server = 'https://arrendify-api.onrender.com';
+const server = 'http://192.168.2.24:8001'
 const configin = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -620,6 +634,7 @@ const configin = {
       var fileInputElement4 = document.getElementById("Ingresos")
       var fileInputElement5 = document.getElementById("Extras")
       var fileInputElement6 = document.getElementById("Recomendacion_laboral")
+      var link = document.getElementById("Acta_constitutiva")
       console.log(fileInputElement2.files)
      
       if (fileInputElement1.files.length == 1){
@@ -679,6 +694,16 @@ const configin = {
       console.log("Recomendacion laboral esta vacio")
         //
       }
+
+      /*if (link){
+        console.log("Link AC No esta vacio")
+        formData.append("Acta_constitutiva", document.getElementById("Acta_constitutiva").value );
+        enviar_datos(formData)
+      }
+      else{
+      console.log("Recomendacion laboral esta vacio")
+        
+      }*/
   if (fileInputElement6.files.length == 0 && fileInputElement5.files.length == 0 && fileInputElement4.files.length == 0 && fileInputElement3.files.length == 0 && fileInputElement2.files.length == 0 && fileInputElement1.files.length == 0 )
   {
     Swal.fire({
@@ -692,26 +717,21 @@ const configin = {
 
 function obtenerInquilino(){
     var datos = JSON.parse( localStorage.getItem('data_inquilino'))
-   
     console.log("detalles archivo",datos)
-   
     document.getElementById("inquilino").value = `${datos.id}`
     document.getElementById("inquilino_nombre").value = `${datos.nombre} ${datos.apellido} ${datos.apellido1}`
     
     comp = datos.archivos[0].Comp_dom
-    comp = `${server}/static${comp}`
-  
+   
     ine = datos.archivos[0].Ine
-    ine = `${server}/static${ine}`
     
     rfc = datos.archivos[0].Rfc
-    rfc = `${server}/static${rfc}`
-
     //OPCIONALES
-    ingresos =  datos.archivos[0].Ingresos !== null ? `${server}/static${datos.archivos[0].Ingresos}` : '/static/assets/img/icons/256.png';
-    rl =  datos.archivos[0].Recomendacion_laboral !== null ? `${server}/static${datos.archivos[0].Recomendacion_laboral}` : '/static/assets/img/icons/256.png';
-    extra =  datos.archivos[0].Extras !== null ? `${server}/static${datos.archivos[0].Extras}` : '/static/assets/img/icons/256.png';
+    ingresos =  datos.archivos[0].Ingresos !== null ? datos.archivos[0].Ingresos : '/static/assets/img/icons/256.png';
+    rl =  datos.archivos[0].Recomendacion_laboral !== null ? datos.archivos[0].Recomendacion_laboral : '/static/assets/img/icons/256.png';
+    extra =  datos.archivos[0].Extras !== null ? datos.archivos[0].Extras : '/static/assets/img/icons/256.png';
 
+   
     console.log(comp);
     console.log(ine);
     console.log(rfc);
@@ -731,9 +751,20 @@ function obtenerInquilino(){
 
     document.getElementById("link_extras").href = extra;
     document.getElementById("frame_extras").src = extra;
-
+   
+    if(datos.p_fom == "Persona Fisica"){
+    document.getElementById("div-rl").style.display = ''
     document.getElementById("link_recomendacion_laboral").href = rl;
     document.getElementById("frame_recomendacion_laboral").src = rl;
+    
+    }
+
+    if(datos.p_fom == "Persona Moral"){
+      document.getElementById("div-ac").style.display = ''
+      ac = datos.archivos[0].Acta_constitutiva
+      document.getElementById("link_acta").href = ac;
+      document.getElementById("Acta_constitutiva").value = ac;
+    }
     
    /* var historial_predial = `
                             <button type="button" class="btn btn-success px-3 align-self-center" id="ver_historial_predial" title="Ver historial" data-bs-toggle="tooltip" onclick="ver_historial('${datos.inquilino[0].id}', 'predial')">
@@ -756,6 +787,7 @@ function enviar_datos(formulario){
   
   var e = document.getElementById("Extras")
   var rl = document.getElementById("Recomendacion_laboral")
+  var ac = document.getElementById("Acta_constitutiva")
   console.log("datos viejos",datos)
   console.log("formulario",formulario)
 
@@ -771,52 +803,38 @@ function enviar_datos(formulario){
     datos_nuevos = datos
 
     if(i.files.length == 1){
-      console.log("ine")    
+         
     ine_nueva = respuesta.Ine  
-    ine = ine_nueva.split("/")
-    ine = "/" + ine[3] + "/" + ine[4] + "/" + ine[5] + "/" + ine[6] + "/" + ine[7] + "/" + ine[8] + "/" + ine[9] + "/" 
-    datos_nuevos.archivos[0].Ine = ine
+    datos_nuevos.archivos[0].Ine = ine_nueva
     }
 
     if(cd.files.length == 1){
-      console.log("Comporbante")    
+     
       comp_dom_nueva = respuesta.Comp_dom
-      comp_dom = comp_dom_nueva.split("/")
-      comp_dom = "/" + comp_dom[3] + "/" + comp_dom[4] + "/" + comp_dom[5] + "/" + comp_dom[6] + "/" + comp_dom[7] + "/" + comp_dom[8] + "/" + comp_dom[9] + "/";
-      datos_nuevos.archivos[0].Comp_dom = comp_dom
+      datos_nuevos.archivos[0].Comp_dom = comp_dom_nueva
       }
 
     if(r.files.length == 1){
-      console.log("rfc") 
-      info3 = "RFC"   
+    
       rfc_nueva = respuesta.Rfc 
-      rfc = rfc_nueva.split("/")
-      rfc = "/" + rfc[3] + "/" + rfc[4] + "/" + rfc[5] + "/" + rfc[6] + "/" + rfc[7] + "/" + rfc[8] + "/" + rfc[9] + "/" 
-      datos_nuevos.archivos[0].Rfc = rfc    
+      datos_nuevos.archivos[0].Rfc = rfc_nueva 
       }
   
     if(ingreso.files.length == 1){
-      console.log("ingresos")    
-    ingresos_nueva = respuesta.Ingresos
-    ing = ingresos_nueva.split("/")
-    ing = "/" + ing[3] + "/" + ing[4] + "/" + ing[5] + "/" + ing[6] + "/" + ing[7] + "/" + ing[8] + "/" + ing[9] + "/" 
-    datos_nuevos.archivos[0].Ingresos = ing
-    }
+      
+      ingresos_nueva = respuesta.Ingresos
+      datos_nuevos.archivos[0].Ingresos = ingresos_nueva
+      }
 
     if(e.files.length == 1){
-      console.log("Extras")    
-    e_nueva = respuesta.Extras
-    extra = e_nueva.split("/")
-    extra = "/" + extra[3] + "/" + extra[4] + "/" + extra[5] + "/" + extra[6] + "/" + extra[7] + "/" + extra[8] + "/" + extra[9] + "/" 
-    datos_nuevos.archivos[0].Extras = extra
-    }
+    e_nueva = 
+    datos_nuevos.archivos[0].Extras = e_nueva
+      }
 
     if(rl.files.length == 1){
       console.log("Recomendacion_laboral")    
     rl_nueva = respuesta.Recomendacion_laboral
-    rln = rl_nueva.split("/")
-    rln = "/" + rln[3] + "/" + rln[4] + "/" + rln[5] + "/" + rln[6] + "/" + rln[7] + "/" + rln[8] + "/" + rln[9] + "/" 
-    datos_nuevos.archivos[0].Recomendacion_laboral = rln
+   datos_nuevos.archivos[0].Recomendacion_laboral = rl_nueva
     }
 
 localStorage.setItem('data_inquilino', JSON.stringify(datos_nuevos));

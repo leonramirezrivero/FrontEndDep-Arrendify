@@ -834,7 +834,7 @@
                         <hr class="hr" />
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" onChange="javascript:termino();prueba2(this)" value="ACEPTO" style="color:black; text-weight:bold;" id="tyc" name="tyc">
-                            <p style="color:black;padding-left:5px;">Aceptar los <a target="_blank" style="color:blue;" href="/tyc/">Términos y Condiciones</a></p>
+                            <p style="color:black;padding-left:5px;">He leído y acepto los <a target="_blank" style="color:blue;" href="/tyc/">términos y condiciones</a> de uso.</p>
                           </div>
                           
                           
@@ -1265,9 +1265,10 @@ document.getElementById("li1").onload = auten()
 
 // limpiamos el almacenamiento local cuando regresamos de ver los detalles de un inquilino
 localStorage.removeItem('data_inquilino')
+
     var data_inquilinos =[]
 // Configuracion general de axios
-    const server = 'https://arrendify-api.onrender.com';
+    const server = 'http://192.168.2.24:8001'
     const configin = {
         headers: {
           'Content-Type': 'application/json',
@@ -1322,7 +1323,7 @@ document.getElementById("cargar_tabla").onload = tabla()
                 col7.innerHTML = `<span class="fw-normal ">No hay Fiador</span>`
             }else{
                 //condicion cuando el Aval es pf
-                if (res[i].aval[0].fiador_obligado == "Fiador Solidario" || res[i].aval[0].fiador_obligado == "Obligado Solidario Persona Fisica"){
+                if (res[i].aval[0].fiador_obligado == "Fiador Solidario"){
                     col7.innerHTML = `<span class="fw-normal ">${res[i].aval[0].n_fiador + " " +res[i].aval[0].a_fiador + " " + res[i].aval[0].a2_fiador}</span>`
                 }
                 //condicion cuando el Aval es pm

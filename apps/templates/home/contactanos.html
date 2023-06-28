@@ -1,0 +1,130 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+ #redes_sociales {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      margin: 4px;
+    }
+  
+    #redes_sociales .list-inline-item {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    #redes_sociales .btn {
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+    }
+  
+    #redes_sociales .btn:focus {
+      box-shadow: none;
+    }
+
+    #redes_sociales ul {
+      width: 100px; /* Ancho fijo para la lista */
+      background-color: #f8f9fa; /* Color de fondo */
+      padding: 10px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+      <div class="col-md-8 mx-auto">
+          <section class="mb-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h2 class="h1-responsive font-weight-bold text-center my-4">Contactanos</h2>
+                      <p class="text-center w-responsive mx-auto mb-5">¿Tiene usted alguna pregunta? Por favor, no dude en contactarnos directamente. Nuestro equipo le responderá dentro de unas horas para ayudarle.</p>
+                      <div class="row">
+                          <div class="col-md-9 mb-md-0 mb-5">
+                              <form id="formulario_contacto" class="p-2" name="formulario_contacto" action="#" method="POST">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="md-form mb-0">
+                                              <input type="text" id="nombre" name="nombre" class="form-control">
+                                              <label for="nombre" class="">Nombre</label>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="md-form mb-0">
+                                              <input type="text" id="email" name="email" class="form-control">
+                                              <label for="email" class="">Email</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="md-form mb-0">
+                                              <input type="text" id="subject" name="subject" class="form-control">
+                                              <label for="subject" class="">Asunto</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="md-form">
+                                              <textarea type="text" id="mensaje" name="mensaje" rows="2" class="form-control md-textarea"></textarea>
+                                              <label for="mensaje">Mensaje</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </form>
+                              <div class="text-center text-md-left p-2">
+                                  <a class="btn btn-primary" onclick="document.getElementById('formulario_contacto').submit();">Enviar</a>
+                              </div>
+                              <div class="status"></div>
+                          </div>
+                          <div class="col-md-3 text-center">
+                              <ul class="list-unstyled mb-0">
+                                  <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                                      <p>Perif. Blvd. Manuel Ávila Camacho 80-int 204, El Parque, 53398 Naucalpan de Juárez, Méx</p>
+                                  </li>
+                                  <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                                      <p>55 7258 9136</p>
+                                  </li>
+                                  <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                                      <p>polanco@arrendify.com</p>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </section>
+      </div>
+  </div>
+</div>{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="/static/assets/repositorios/loader.js"></script>
+<script>
+    document.getElementById("li2").onload = inicio()
+    function inicio(){
+         console.log("entro inicio")
+        auten()
+    }
+   
+</script>
+
+{% endblock javascripts %}

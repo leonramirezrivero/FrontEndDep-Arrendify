@@ -531,7 +531,7 @@
 
     });
 
-const server = 'https://arrendify-api.onrender.com';
+const server = 'http://192.168.2.24:8001'
 const configin = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -609,46 +609,34 @@ function obtenerInquilino(){
       
       if(datos.fiador_obligado == "Fiador Solidario"){
       document.getElementById("div-ingresos").style.display = 'none'
-      document.getElementById("fiador").value = `${datos.id}`
+      document.getElementById("fiador").value = datos.id
       document.getElementById("fiador_nombre").value = `${datos.n_fiador} ${datos.a_fiador} ${datos.a2_fiador}`
       // ocultar documentos para pf o para pm
 
       }
       if(datos.fiador_obligado == "Obligado Solidario Persona Fisica" || datos.fiador_obligado == "Obligado Solidario Persona Moral"){
           document.getElementById("div-escrituras").style.display = 'none';
-          document.getElementById("fiador").value = `${datos.id}`;
+          document.getElementById("fiador").value = datos.id;
           document.getElementById("fiador_nombre").value =  datos.fiador_obligado == "Obligado Solidario Persona Fisica" ? `${datos.n_fiador} ${datos.a_fiador} ${datos.a2_fiador}` : `${datos.nombre_comercial}`;
       }
     
-    comp_dom_nueva = datos.archivos[0].Comp_dom
-    comp_dom = comp_dom_nueva.split("/")
-    comp_dom = comp_dom[0] + "/"  + comp_dom[1] +"/" + comp_dom[2] + "/static/" + comp_dom[3] + "/" + comp_dom[4] + "/" + comp_dom[5] + "/" + comp_dom[6] + "/" + comp_dom[7] + "/" + comp_dom[8] + "/" + comp_dom[9] + "/" 
-    console.log(comp_dom); 
+    comp_dom = datos.archivos[0].Comp_dom
     document.getElementById("link_cd").href = comp_dom;
     document.getElementById("frame_cd").src = comp_dom;
   
-    ine_nueva = datos.archivos[0].Ine
-    ine = ine_nueva.split("/")
-    ine = ine[0] + "/"  + ine[1] +"/" + ine[2] + "/static/" + ine[3] + "/" + ine[4] + "/" + ine[5] + "/" + ine[6] + "/" + ine[7] + "/" + ine[8] + "/" + ine[9] + "/" + ine[10] + "/"
-    console.log(ine);
+    ine= datos.archivos[0].Ine
     document.getElementById("link_ine").href = ine;
     document.getElementById("frame_ine").src = ine;
 
   //OPCIONALES
     if(datos.archivos[0].Estado_cuenta){
-      ec_nueva = datos.archivos[0].Estado_cuenta
-      ec = ec_nueva.split("/")
-      ec = ec[0] + "/"  + ec[1] +"/" + ec[2] + "/static/" + ec[3] + "/" + ec[4] + "/" + ec[5] + "/" + ec[6] + "/" + ec[7] + "/" + ec[8] + "/" + ec[9] + "/" 
-      console.log(ec);
+      ec = datos.archivos[0].Estado_cuenta
       document.getElementById("link_ingresos").href = ec;
       document.getElementById("frame_ingresos").src = ec;
     }
     
     if(datos.archivos[0].Escrituras){
-      escri_nueva = datos.archivos[0].Escrituras
-      escri = escri_nueva.split("/")
-      escri = escri[0] + "/"  + escri[1] +"/" + escri[2] + "/static/" + escri[3] + "/" + escri[4] + "/" + escri[5] + "/" + escri[6] + "/" + escri[7] + "/" + escri[8] + "/" + escri[9] + "/" 
-      console.log(escri);
+      escri = datos.archivos[0].Escrituras
       document.getElementById("link_escrituras").href = escri;
       document.getElementById("frame_escrituras").src = escri;
     }
@@ -671,9 +659,6 @@ function enviar_datos(formulario){
   var ec = document.getElementById("Estado_cuenta")
 
   var escritura = document.getElementById("Escrituras")
-  console.log("datos viejos",datos)
-  console.log("formulario",formulario)
-
   id = datos.archivos[0].id
 
   // Actualizar un objeto
