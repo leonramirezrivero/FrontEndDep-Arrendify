@@ -5,6 +5,7 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 <link href="/static/assets/css/ms.css" rel="stylesheet"/>
+<link href="/static/assets/css/tabla.css" rel="stylesheet"/>
 {% endblock stylesheets %}
 {% block content %}
 <body id="body_1"/>
@@ -44,7 +45,7 @@
     </div>
 </div>
 <div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
-    <table  class="table user-table table-hover align-items-center mb-5"> <!--id="datatable"-->
+    <table  class="table user-table table-hover align-items-center mb-5 tabla_datos"> <!--id="datatable"-->
         <thead>
             <tr>
                 <th class="border-bottom"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
@@ -55,13 +56,10 @@
                 <th class="border-bottom">Deudor</th>
                 <th class="border-bottom">Documentos</th>
                 <th class="border-bottom">Acción</th>
-                <th class="border-bottom"></th>
             </tr>
         </thead>
         <tbody id="table_body">
-               
         </tbody>
-        
     </table>
     
 </div>
@@ -79,7 +77,7 @@
     <div class="container">
     <div class="card">
         <form id="FormuOF" class="form"  method="POST">
-            {% csrf_token %}
+         
             <div class="left-side">
                 <div class="left-heading">
                     <h3>Introduce la información Solicitada</h3>
@@ -108,7 +106,7 @@
                         
                         <div class="col-md-6 mb-3">
                             <div class="text">
-                                <h2>¿Fiador u Obligado?</h2>
+                                <h2>¿Fiador u Obligado? </h2>
                             </div>
                             <div class="input-div">
                                 <div>
@@ -127,16 +125,16 @@
                         </div>
                         <div class="col-md-6 mb-4">
                             <div class="text">
-                                <h4 >Seleccione A Su Deudor</h4>
+                                <h4 >Seleccione A Su Deudor <span class="obl">*</span></h4>
                             </div>
                             <div class="input-div">
                                 <div class="input-div" >
-                                        <select name="inquilino" id="inquilino"  onChange="javascript:validar_sel();prueba2(this);">
-                                            <option value="---------" selected>---------</option>                                   
-                                      </select>
+                                    <select name="inquilino" id="inquilino"  onChange="javascript:validar_sel();prueba2(this);">
+                                        <option value="---------" selected>---------</option>                                   
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <hr class="hr" />
                  {% comment %} fiador solidarios shadow border-2 p-1 {% endcomment %}     
                     <div class="input text " id="FS" style="Display:none;">
@@ -146,41 +144,48 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input type="text" id="n_fiador" name="n_fiador" title="Nombre del fiador" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)"  equire>
-                                <span>Nombre</span>
+                                <input type="text" id="n_fiador" name="n_fiador" title="Nombre del fiador" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)"  requerido>
+                                <span>Nombre <label class="obl">*</label></span>
                             </div>  
                             <div class="input-div">
-                                <input type="text" id="a_fiador" name="a_fiador" oninput="prueba2(this)"  equire>
-                                <span>Apellido Paterno</span>
+                                <input type="text" id="a_fiador" name="a_fiador" oninput="prueba2(this)"  requerido>
+                                <span>Apellido Paterno <label class="obl">*</label></span>
                             </div>  
                             <div class="input-div">
-                                <input type="text" id="a2_fiador" name="a2_fiador" oninput="prueba2(this)" equire>
-                                <span>Apellido Materno</span>
-                            </div>  
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input type="text" id="rfc_fiador" name="rfc_fiador" minlength="0" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();"  equire>
-                                <span>RFC</span>
-                            </div>  
-                            <div class="input-div">
-                                <input type="text" id="p_fiador" name="p_fiador" title="Parentesco que tiene con el Arrendatario" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)" equire>
-                                <span>Parentesco</span>
+                                <input type="text" id="a2_fiador" name="a2_fiador" oninput="prueba2(this)" requerido>
+                                <span>Apellido Materno <label class="obl">*</label></span>
                             </div>  
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <label class="my-1 me-2" for="estado_civil">Estado Civil</label>
-                                <select class="form-select" id="estado_civil_fiador" name="estado_civil_fiador" onChange="prueba2(this);" aria-label="Default select example">
-                                    <option selected>Estado Civil</option>
-                                    <option value="Soltero">Soltero(a)</option>
-                                    <option value="Casado">Casado(a)</option>
-                                    <option value="Viudo">Viudo(a)</option>
-                                    <option value="Bienes Mancomunados">Bienes Mancomunados</option>
-                                    <option value="Bienes Separados">Bienes Separados</option>
-                                    <option value="Union Libre">Union Libre</option>
-                                </select>
+                                <input type="text" id="nacionalidad" name="nacionalidad" maxlength="18" oninput="prueba2(this)" placeholder="Mexicana">
+                                <span>Nacionalidad <label class="obl">*</label></span>
                             </div>
+                            <div class="input-div">
+                                <input type="text" id="rfc_fiador" name="rfc_fiador" minlength="0" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();"  requerido>
+                                <span>RFC <label class="obl">*</label></span>
+                            </div>  
+                           
+                        </div>
+                        <div class="input-text">
+                            <div class="input-div">
+                                <input type="text" id="p_fiador" name="p_fiador" title="Parentesco que tiene con el Arrendatario" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)" requerido>
+                                <span>Parentesco <label class="obl">*</label></span>
+                            </div> 
+                            <div class="input-div">
+                                    <div class="input-div" style="position: relative; bottom: 23px;">
+                                        <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado Civil <b style="color:red;">*</b></label>
+                                        <select class="form-select" id="estado_civil_fiador" name="estado_civil_fiador" onChange="mostrarOnChange()" oninput="prueba2(this)" placeholder="estado_civil"  aria-label="Default select example" requerido>
+                                            <option selected>Estado Civil</option>
+                                            <option value="Soltero">Soltero(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Viudo">Viudo(a)</option>
+                                            <option value="Bienes Mancomunados">Bienes Mancomunados</option>
+                                            <option value="Bienes Separados">Bienes Separados</option>
+                                            <option value="Union Libre">Union Libre</option>
+                                        </select>
+                                    </div>
+                                </div>
                         </div>     
                     </div>
 
@@ -191,22 +196,22 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input type="text" id="nombre_comercial" name="nombre_comercial" oninput="prueba2(this)"   equire>
-                                <span>Nombre Comercial Empresa o Razon Social</span>
+                                <input type="text" id="nombre_comercial" name="nombre_comercial" oninput="prueba2(this)"   requerido>
+                                <span>Nombre Comercial Empresa o Razon Social <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="rfc_fiador_em" name="rfc_fiador_em" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();"   equire>
-                                <span>RFC</span>
+                                <input type="text" id="rfc_fiador_em" name="rfc_fiador_em" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();"   requerido>
+                                <span>RFC <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="ingreso_fiador_opm" name="ingreso_fiador_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" >
-                                <span>Ingreso Mensual</span>
+                                <input class="form-control" type="tel" maxlength="10" id="ingreso_fiador_opm" name="ingreso_fiador_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" requerido>
+                                <span>Ingreso Mensual <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="antiguedad_opm" name="antiguedad_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" >
-                                <span>Antiguedad</span>
+                                <input class="form-control" type="tel" maxlength="10" id="antiguedad_opm" name="antiguedad_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" requerido>
+                                <span>Antiguedad <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
                                 <input class="form-control" type="tel" maxlength="10" id="tel_opm" name="tel_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);">
@@ -215,16 +220,16 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="cel_opm" name="cel_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" >
-                                <span>Cel</span>
+                                <input class="form-control" type="tel" maxlength="10" id="cel_opm" name="cel_opm" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" requerido>
+                                <span>Cel <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="email_em_opm" name="email_em_opm" oninput="prueba2(this)" equire>
-                                <span>Email</span>
+                                <input type="text" id="email_em_opm" name="email_em_opm" oninput="prueba2(this)" requerido>
+                                <span>Email <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="pagina_web_f" name="pagina_web_f" oninput="prueba2(this)"  equire>
-                                <span>Página Web</span>
+                                <input type="text" id="pagina_web_f" name="pagina_web_f" oninput="prueba2(this)"  requerido>
+                                <span>Página Web <label class="obl">*</label></span>
                             </div>
                         </div>
                         
@@ -251,37 +256,37 @@
                         <div class="input text">
                             <div class="input-text">
                                 <div class="input-div">
-                                    <input type="text" id="calle_fiador" name="calle_fiador" oninput="prueba2(this);" equire>
-                                    <span>Calle</span>
+                                    <input type="text" id="calle_fiador" name="calle_fiador" oninput="prueba2(this);" requerido>
+                                    <span>Calle <label class="obl">*</label></span>
                                  </div>
                             <div class="input-div">
-                                <input class="form-control" type="text" id="n_ext_fiador" name="n_ext_fiador" oninput="prueba2(this);" equire>
-                                <span>Número Ext. </span>
+                                <input class="form-control" type="text" id="n_ext_fiador" name="n_ext_fiador" oninput="prueba2(this);" requerido>
+                                <span>Número Ext. <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input class="form-control" type="number" id="n_int_fiador" name="n_int_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" equire>
+                                <input class="form-control" type="number" id="n_int_fiador" name="n_int_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" >
                                 <span>Número Int. </span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text"id="colonia_fiador" name="colonia_fiador"oninput="prueba2(this);" >
-                                <span>Colonia</span>
+                                <input type="text"id="colonia_fiador" name="colonia_fiador"oninput="prueba2(this);" requerido>
+                                <span>Colonia <label class="obl">*</label></span>
                             </div>
                            
                             <div class="input-div"> 
-                                <input class="form-control" id="cp_fiador" name="cp_fiador" type="tel" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" maxlength="5" >
-                                <span>Código Postal</span>
+                                <input class="form-control" id="cp_fiador" name="cp_fiador" type="tel" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" maxlength="5" requerido>
+                                <span>Código Postal <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="municipio_fiador" name="municipio_fiador" oninput="prueba2(this);">
-                                <span>Municipio/Alcaldia</span>
+                                <input type="text" id="municipio_fiador" name="municipio_fiador" oninput="prueba2(this);" requerido>
+                                <span>Municipio/Alcaldia <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text" id="estado_fiador" name="estado_fiador" oninput="prueba2(this);" >
-                                <span>Estado/Ciudad</span>
+                                <input type="text" id="estado_fiador" name="estado_fiador" oninput="prueba2(this);" requeridod>
+                                <span>Estado/Ciudad <label class="obl">*</label></span>
                             </div> 
                         </div>
                         <div class="buttons button_space">
@@ -300,39 +305,64 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input class="form-control" type="number" id="escritura_publica_ac" name="escritura_publica_ac" oninput="prueba2(this);" equire>
-                                <span>Escritura Número</span>
+                                <input class="form-control" type="number" id="escritura_publica_ac" name="escritura_publica_ac" oninput="prueba2(this);" requerido>
+                                <span>Escritura Número <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input class="form-control" id="fecha_propiedad_ac" name="fecha_propiedad_ac" type="date" oninput="prueba2(this);" equire>  
-                                <span>Fecha Propiedad</span>
+                                <input class="form-control" id="fecha_propiedad_ac" name="fecha_propiedad_ac" type="date" oninput="prueba2(this);" requerido>  
+                                <span>Fecha Propiedad <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input type="text" id="nombre_notario_ac" name="nombre_notario_ac" oninput="prueba2(this);"  equire>
-                                <span>Nombre de Notario</span>
+                                <input type="text" id="nombre_notario_ac" name="nombre_notario_ac" oninput="prueba2(this);"  requerido>
+                                <span>Nombre de Notario <label class="obl">*</label></span>
                             </div>
                         </div>
                         
                         <div class="input-text">
-                            <div class="input-div"> 
-                                <div class="row">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="coe" name="coe" onChange="prueba2(this);" value="CDMX">
-                                        <label class="form-check-label" for="coe">CDMX</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="coe" name="coe" onChange="prueba2(this);" value="Estado de México">
-                                        <label class="form-check-label" for="coe">Estado de México</label>
-                                    </div>                                          
-                            </div>
-                        </div>
+                            <div class="input-div" style="position: relative; bottom: 23px;">
+                             <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado <label class="obl">*</label></label>
+                             <select class="form-select LetraSelect" id="coe" name="coe" aria-label="Floating label select example" requerido>
+                                 <option value="CDMX" selected>CDMX</option>
+                                 <option value="México"> México</option>
+                                 <option value="Aguascalientes" > Aguascalientes</option>
+                                 <option value="Baja California"> Baja California</option>
+                                 <option value="Baja California Sur"> Baja California Sur</option>
+                                 <option value="Campeche"> Campeche</option>
+                                 <option value="Coahuila"> Coahuila</option>
+                                 <option value="Colima"> Colima</option>
+                                 <option value="Chiapas"> Chiapas</option>
+                                 <option value="Chihuahua"> Chihuahua</option>
+                                 <option value="Durango"> Durango</option>
+                                 <option value="Guanajuato"> Guanajuato</option>
+                                 <option value="Guerrero"> Guerrero</option>
+                                 <option value="Hidalgo"> Hidalgo</option>
+                                 <option value="Jalisco"> Jalisco</option>
+                                 <option value="Michoacán"> Michoacán</option>
+                                 <option value="Morelos"> Morelos</option>
+                                 <option value="Nayarit"> Nayarit</option>
+                                 <option value="Nuevo León"> Nuevo León</option>
+                                 <option value="Oaxaca"> Oaxaca</option>
+                                 <option value="Puebla"> Puebla</option>
+                                 <option value="Querétaro"> Querétaro</option>
+                                 <option value="Quintana Roo"> Quintana Roo</option>
+                                 <option value="San Luis Potosí"> San Luis Potosí</option>
+                                 <option value="Sinaloa"> Sinaloa</option>
+                                 <option value="Sonora"> Sonora</option>
+                                 <option value="Tabasco"> Tabasco</option>
+                                 <option value="Tamaulipas"> Tamaulipas</option>
+                                 <option value="Tlaxcala"> Tlaxcala</option>
+                                 <option value="Veracruz"> Veracruz</option>
+                                 <option value="Yucatán"> Yucatán</option>
+                                 <option value="Zacatecas"> Zacatecas</option>
+                             </select>                                            
+                         </div>
                     </div> 
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input class="form-control" type="number" id="folio_mercantil" name="folio_mercantil" oninput="prueba2(this);"  equire>
-                            <span>Folio Mercantil</span>
+                            <input class="form-control" type="number" id="folio_mercantil" name="folio_mercantil" oninput="prueba2(this);"  requerido>
+                            <span>Folio Mercantil <label class="obl">*</label></span>
                         </div>
                     </div>
                     
@@ -356,20 +386,20 @@
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input class="form-control" id="tel_fiador" name="tel_fiador" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" equire>
+                            <input class="form-control" id="tel_fiador" name="tel_fiador" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);">
                             <span>Teléfono</span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input class="form-control" id="tel2_fiador" name="tel2_fiador" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" equire>
-                            <span>Celular</span>
+                            <input class="form-control" id="tel2_fiador" name="tel2_fiador" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" requerido>
+                            <span>Celular <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div">
-                            <input class="form-control" type="email" id="email_fiador" name="email_fiador" oninput="prueba2(this);" >
-                            <span>Email</span>
+                            <input class="form-control" type="email" id="email_fiador" name="email_fiador" oninput="prueba2(this);"  requerido>
+                            <span>Email <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="buttons button_space">
@@ -388,37 +418,37 @@
 
                     <div class="input-text">
                         <div class="input-div">
-                            <input type="text" id="calle_em_pm" name="calle_em_pm" oninput="prueba2(this);" equire>
-                            <span>Calle</span>
+                            <input type="text" id="calle_em_pm" name="calle_em_pm" oninput="prueba2(this);" requerido>
+                            <span>Calle <label class="obl">*</label></span>
                         </div>
                         <div class="input-div">
-                            <input class="form-control" type="number" id="n_ext_em_pm" name="n_ext_em_pm" oninput="prueba2(this);" equire>
-                            <span>Número Ext. </span>
+                            <input class="form-control" type="number" id="n_ext_em_pm" name="n_ext_em_pm" oninput="prueba2(this);" requerido>
+                            <span>Número Ext. <label class="obl">*</label></span>
                         </div>
                     <div class="input-div">
-                        <input class="form-control" type="number" id="n_int_em_pm" name="n_int_em_pm" oninput="prueba2(this);" equire>
+                        <input class="form-control" type="number" id="n_int_em_pm" name="n_int_em_pm" oninput="prueba2(this);">
                         <span>Número Int. </span>
                     </div>
                    
                     </div>
                     <div class="input-text">
                     <div class="input-div"> 
-                        <input type="text"id="colonia_em_pm" name="colonia_em_pm" oninput="prueba2(this);">
-                        <span>Colonia</span>
+                        <input type="text"id="colonia_em_pm" name="colonia_em_pm" oninput="prueba2(this);" requerido>
+                        <span>Colonia <label class="obl">*</label></span>
                     </div>
                     <div class="input-div"> 
-                        <input class="form-control" id="cp_em_pm" name="cp_em_pm" type="tel" maxlength="5" oninput="prueba2(this);">
-                        <span>Código Postal</span>
+                        <input class="form-control" id="cp_em_pm" name="cp_em_pm" type="tel" maxlength="5" oninput="prueba2(this);" requerido>
+                        <span>Código Postal <label class="obl">*</label></span>
                     </div>
                     <div class="input-div"> 
-                        <input type="text" id="municipio_em_pm" name="municipio_em_pm" oninput="prueba2(this)"  equire>
-                        <span>Municipio/Alcaldia</span>
+                        <input type="text" id="municipio_em_pm" name="municipio_em_pm" oninput="prueba2(this)"  requerido>
+                        <span>Municipio/Alcaldia <label class="obl">*</label></span>
                     </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input type="text" id="estado_em_pm" name="estado_em_pm" oninput="prueba2(this);">
-                            <span>Estado/Ciudad</span>
+                            <input type="text" id="estado_em_pm" name="estado_em_pm" oninput="prueba2(this);" requerido>
+                            <span>Estado/Ciudad <label class="obl">*</label></span>
                         </div>                       
                     </div>
                     <div class="buttons button_space">
@@ -444,26 +474,26 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input type="text" id="prof_fiador" name="prof_fiador" oninput="prueba2(this);"  equire>
-                                <span>Profesión, Ocupación u Oficio</span>
+                                <input type="text" id="prof_fiador" name="prof_fiador" oninput="prueba2(this);"  requerido>
+                                <span>Profesión, Ocupación u Oficio <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input type="text" id="empresa_fiador" name="empresa_fiador" oninput="prueba2(this);">
-                                <span>Empresa Donde Labora</span>
+                                <input type="text" id="empresa_fiador" name="empresa_fiador" oninput="prueba2(this);" requerido>
+                                <span>Empresa Donde Labora <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="tel_em_fiador" name="tel_em_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" >
-                                <span>Número Teléfono Empresa</span>
+                                <input class="form-control" type="tel" maxlength="10" id="tel_em_fiador" name="tel_em_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" requerido>
+                                <span>Número Teléfono Empresa <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="ingreso_men_fiador" name="ingreso_men_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" placeholder="$" >
-                                <span>Salario Mensual</span>
+                                <input class="form-control" type="tel" maxlength="10" id="ingreso_men_fiador" name="ingreso_men_fiador" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" placeholder="$" requerido>
+                                <span>Salario Mensual <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-div">
-                            <h2 class="h5 mb-1">Recibos Nomina</h2>
+                            <h2 class="h5 mb-1">Recibos Nomina <label class="obl">*</label></h2>
                             <div class="col-md-3 mb-3">
                                 
                                 <div class="form-check">
@@ -490,30 +520,30 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input type="text" id="nombre_rl" name="nombre_rl" oninput="prueba2(this);"  equire>
-                                <span>Nombre</span>
+                                <input type="text" id="nombre_rl" name="nombre_rl" oninput="prueba2(this);"  requerido>
+                                <span>Nombre <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="apellido_rl" name="apellido_rl"  oninput="prueba2(this);"  equire>
-                                <span>Apellido Paterno</span>
+                                <input type="text" id="apellido_rl" name="apellido_rl"  oninput="prueba2(this);"  requerido>
+                                <span>Apellido Paterno <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="apellido1_rl" name="apellido1_rl" oninput="prueba2(this);"  equire>
-                                <span>Apellido Materno</span>
+                                <input type="text" id="apellido1_rl" name="apellido1_rl" oninput="prueba2(this);"  requerido>
+                                <span>Apellido Materno <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10"  id="cel_rl" name="cel_rl" oninput="prueba2(this);"  >
-                                <span>Cel</span>
+                                <input class="form-control" type="tel" maxlength="10"  id="cel_rl" name="cel_rl" oninput="prueba2(this);" requerido>
+                                <span>Cel <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="email_rl" name="email_rl"  oninput="prueba2(this);" equire>
-                                <span>Email</span>
+                                <input type="text" id="email_rl" name="email_rl"  oninput="prueba2(this);" requerido>
+                                <span>Email <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="pagina_rl" name="pagina_rl" oninput="prueba2(this);"  equire>
-                                <span>Página Web</span>
+                                <input type="text" id="pagina_rl" name="pagina_rl" oninput="prueba2(this);"  requerido>
+                                <span>Página Web <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="buttons button_space">
@@ -536,26 +566,26 @@
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input type="text" id="escritura_publica" name="escritura_publica" oninput="prueba2(this);" equire>
-                            <span>Escritura Pública</span>
+                            <input type="text" id="escritura_publica" name="escritura_publica" oninput="prueba2(this);" requerido>
+                            <span>Escritura Pública <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input class="form-control" id="fecha_propiedad" name="fecha_propiedad" type="date" oninput="prueba2(this);" equire>  
-                            <span>Fecha de Propiedad</span>
+                            <input class="form-control" id="fecha_propiedad" name="fecha_propiedad" type="date" oninput="prueba2(this);" requerido>  
+                            <span>Fecha de Propiedad <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input class="form-control" type="number" id="numero_notario" name="numero_notario" oninput="prueba2(this);" equire>
-                            <span>Número de Notario Público</span>
+                            <input class="form-control" type="number" id="numero_notario" name="numero_notario" oninput="prueba2(this);" requerido>
+                            <span>Número de Notario Público <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div">
-                            <input type="text" id="nombre_notario" name="nombre_notario" oninput="prueba2(this);" equire>
-                            <span>Nombre de Notario Público</span>
+                            <input type="text" id="nombre_notario" name="nombre_notario" oninput="prueba2(this);" requerido>
+                            <span>Nombre de Notario Público <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="buttons button_space">
@@ -569,7 +599,7 @@
                     <div class="input-text">
                         <div class="text">
                             <h2>Ya casi terminas!!</h2>
-                            <h3>Porfavor Dale click en FINALIZAR</h3>
+                            <h3>Por favor Dale clic en FINALIZAR</h3>
                             <h3>Para concluir tu registro.</h3>
                             
                         </div>
@@ -590,36 +620,36 @@
                     <div class="input text">
                         <div class="input-text">
                             <div class="input-div">
-                                <input type="text" id="calle_rl" name="calle_rl" oninput="prueba2(this);" equire>
-                                <span>Calle</span>
+                                <input type="text" id="calle_rl" name="calle_rl" oninput="prueba2(this);" requerido>
+                                <span>Calle <label class="obl">*</label></span>
                         </div>
                         <div class="input-div">
-                            <input class="form-control" type="number" id="n_ext_rl" name="n_ext_rl" oninput="prueba2(this);" equire>
-                            <span>Número Ext. </span>
+                            <input class="form-control" type="number" id="n_ext_rl" name="n_ext_rl" oninput="prueba2(this);" requerido>
+                            <span>Número Ext. <label class="obl">*</label></span>
                         </div>
                         <div class="input-div">
-                            <input class="form-control" type="number" id="n_int_rl" name="n_int_rl" oninput="prueba2(this);" equire>
+                            <input class="form-control" type="number" id="n_int_rl" name="n_int_rl" oninput="prueba2(this);" >
                             <span>Número Int. </span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input type="text"id="colonia_rl" name="colonia_rl" oninput="prueba2(this);">
-                            <span>Colonia</span>
+                            <input type="text"id="colonia_rl" name="colonia_rl" oninput="prueba2(this);" requerido>
+                            <span>Colonia <label class="obl">*</label></span>
                         </div>
                         <div class="input-div"> 
-                            <input class="form-control" id="cp_rl" name="cp_rl" type="tel" maxlength="5" oninput="prueba2(this);">
-                            <span>Código Postal</span>
+                            <input class="form-control" id="cp_rl" name="cp_rl" type="tel" maxlength="5" oninput="prueba2(this);" requerido>
+                            <span>Código Postal <label class="obl">*</label></span>
                         </div>
                         <div class="input-div"> 
-                            <input type="text" id="municipio_rl" name="municipio_rl" oninput="prueba2(this);" >
-                            <span>Municipio/Alcaldia</span>
+                            <input type="text" id="municipio_rl" name="municipio_rl" oninput="prueba2(this);" requerido>
+                            <span>Municipio/Alcaldia <label class="obl">*</label></span>
                         </div>
                     </div>
                     <div class="input-text">
                         <div class="input-div"> 
-                            <input type="text" id="estado_rl" name="estado_rl" oninput="prueba2(this);" >
-                            <span>Estado/Ciudad</span>
+                            <input type="text" id="estado_rl" name="estado_rl" oninput="prueba2(this);" requerido>
+                            <span>Estado/Ciudad <label class="obl">*</label></span>
                         </div>
                     </div>
                 </div>
@@ -639,16 +669,46 @@
                           </svg>
                     </small>
                     <div id="final1" style="Display:none;">
-                        <div class="input-text">
-                            <div class="text">
-                                <h2>Ya casi terminas!!</h2>
-                                <h3>Porfavor Dale click en FINALIZAR</h3>
-                                <h3>Para concluir tu registro.</h3>
-                                
+                        <div class="text">
+                            <h2>Domicilio Escrituras</h2>
+                            <p>Por favor introduce la dirección tal cual aparece en las escrituras del inmueble que quedara como garantía.</p>
+                        </div>
+                        <div class="input text">
+                            <div class="input-text">
+                                <div class="input-div">
+                                    <input type="text" id="calle_escrituras" name="calle_escrituras" oninput="prueba2(this);" requerido>
+                                    <span>Calle <label class="obl">*</label></span>
+                            </div>
+                            <div class="input-div">
+                                <input class="form-control" type="number" id="num_ext_escrituras" name="num_ext_escrituras" oninput="prueba2(this);" requerido>
+                                <span>Número Ext. <label class="obl">*</label></span>
+                            </div>
+                            <div class="input-div">
+                                <input class="form-control" type="number" id="num_int_escrituras" name="num_int_escrituras" oninput="prueba2(this);" >
+                                <span>Número Int. </span>
                             </div>
                         </div>
-                        <img src="https://i.pinimg.com/originals/b6/fd/18/b6fd1893a54478eb393d13c5d1994ef7.gif" style="width:350px; height:250px; margin-top:-20px;"></img>
-                    
+                        <div class="input-text">
+                            <div class="input-div"> 
+                                <input type="text"id="colonia_escrituras" name="colonia_escrituras" oninput="prueba2(this);" requerido>
+                                <span>Colonia <label class="obl">*</label></span>
+                            </div>
+                            <div class="input-div"> 
+                                <input class="form-control" id="cp_escrituras" name="cp_escrituras" type="tel" maxlength="5" oninput="prueba2(this);" requerido>
+                                <span>Código Postal <label class="obl">*</label></span>
+                            </div>
+                            <div class="input-div"> 
+                                <input type="text" id="municipio_escrituras" name="municipio_escrituras" oninput="prueba2(this);" requerido>
+                                <span>Municipio/Alcaldia <label class="obl">*</label></span>
+                            </div>
+                        </div>
+                        <div class="input-text">
+                            <div class="input-div"> 
+                                <input type="text" id="estado_escrituras" name="estado_escrituras" oninput="prueba2(this);" requerido>
+                                <span>Estado/Ciudad <label class="obl">*</label></span>
+                            </div>
+                        </div>
+                        </div>
                         <div class="buttons button_space">
                             <button type="button" class="btn btn-outline-dark back_button">Atras</button>
                             <button class="submit_button next_button" id="finalizar2" >Finalizar</button>
@@ -664,7 +724,10 @@
                        <div class="text congrats">
                            <h2>¡Listo!</h2>
                            <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha enviado con éxito para futuras referencias.</p> <strong>Pronto nos pondremos en contacto con usted. </strong>
-                           <img src="https://opengameart.org/sites/default/files/aaaaaaaaaaa01.gif" style="width:350px; height:250px;"></img>
+                           <div class="mt-4"> 
+                            <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                        </div>
+                            <div style="" class="message">Cargando Datos...</div>
                        </div>
                     
                    </div>
@@ -675,40 +738,40 @@
                             <h2 id="ecac">Referencias De La Empresa</h2>
                                 <p>Por favor introduce la referencias solicitadas.</p>
                         </div>
-                        <span>Referencia 1</span>
+                        <span>Referencia 1 </span>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text" id="nombre_empresa" name="nombre_empresa" oninput="prueba2(this);" equire>
-                                <span>Nombre De Empresa</span>
+                                <input type="text" id="nombre_empresa" name="nombre_empresa" oninput="prueba2(this);" requerido>
+                                <span>Nombre De Empresa <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="nombre_contacto" name="nombre_contacto" oninput="prueba2(this);" equire>
-                                <span>Nombre Del Contacto</span>
+                                <input type="text" id="nombre_contacto" name="nombre_contacto" oninput="prueba2(this);" requerido>
+                                <span>Nombre Del Contacto <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="tiempo_relacion" name="tiempo_relacion" placeholder="ej. 6 años o 3 meses" oninput="prueba2(this);" equire>
-                                <span>Tiempo De Relación</span>
+                                <input type="text" id="tiempo_relacion" name="tiempo_relacion" placeholder="ej. 6 años o 3 meses" oninput="prueba2(this);" requerido>
+                                <span>Tiempo De Relación <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="tel_ref" name="tel_ref" oninput="prueba2(this);" >
-                                <span>Tel</span>
+                                <input class="form-control" type="tel" maxlength="10" id="tel_ref" name="tel_ref" oninput="prueba2(this);">
+                                <span>Tel </span>
                             </div>
                             <div class="input-div"> 
-                                <input class="form-control" type="email" id="email_ref" name="email_ref" oninput="prueba2(this);"  equire>
-                                <span>Email</span>
+                                <input class="form-control" type="email" id="email_ref" name="email_ref" oninput="prueba2(this);"  requerido>
+                                <span>Email <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="cel_ref" name="cel_ref" oninput="prueba2(this);">
-                                <span>Cel</span>
+                                <input class="form-control" type="tel" maxlength="10" id="cel_ref" name="cel_ref" oninput="prueba2(this);" requerido>
+                                <span>Cel <label class="obl">*</label></span>
                             </div>
                         </div>
                         
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text" id="relacion_comercial" name="relacion_comercial" oninput="prueba2(this);" equire>
-                                <span>Relación Comercial</span>
+                                <input type="text" id="relacion_comercial" name="relacion_comercial" oninput="prueba2(this);" requerido>
+                                <span>Relación Comercial <label class="obl">*</label></span>
                             </div>
                         </div>
 
@@ -717,16 +780,16 @@
                         <span>Referencia 2</span>
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text" id="nombre_empresa2" name="nombre_empresa2" oninput="prueba2(this);" equire>
-                                <span>Nombre De Empresa</span>
+                                <input type="text" id="nombre_empresa2" name="nombre_empresa2" oninput="prueba2(this);" requerido>
+                                <span>Nombre De Empresa <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="nombre_contacto2" name="nombre_contacto2" oninput="prueba2(this);" equire>
-                                <span>Nombre Del Contacto</span>
+                                <input type="text" id="nombre_contacto2" name="nombre_contacto2" oninput="prueba2(this);" requerido>
+                                <span>Nombre Del Contacto <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
-                                <input type="text" id="tiempo_relacion2" name="tiempo_relacion2" placeholder="ej. 6 años o 3 meses" oninput="prueba2(this);" equire>
-                                <span>Tiempo De Relación</span>
+                                <input type="text" id="tiempo_relacion2" name="tiempo_relacion2" placeholder="ej. 6 años o 3 meses" oninput="prueba2(this);" requerido>
+                                <span>Tiempo De Relación <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
@@ -735,19 +798,19 @@
                                 <span>Tel</span>
                             </div>
                             <div class="input-div"> 
-                                <input class="form-control" type="email" id="email_ref2" name="email_ref2" oninput="prueba2(this);"  equire>
-                                <span>Email</span>
+                                <input class="form-control" type="email" id="email_ref2" name="email_ref2" oninput="prueba2(this);"  requerido>
+                                <span>Email <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
-                                <input class="form-control" type="tel" maxlength="10" id="cel_ref2" name="cel_ref2" oninput="prueba2(this);">
-                                <span>Cel</span>
+                                <input class="form-control" type="tel" maxlength="10" id="cel_ref2" name="cel_ref2" oninput="prueba2(this);" requerido>
+                                <span>Cel <label class="obl">*</label></span>
                             </div>
                         </div>
                         
                         <div class="input-text">
                             <div class="input-div"> 
-                                <input type="text" id="relacion_comercial2" name="relacion_comercial2" oninput="prueba2(this);" equire>
-                                <span>Relación Comercial</span>
+                                <input type="text" id="relacion_comercial2" name="relacion_comercial2" oninput="prueba2(this);" requerido>
+                                <span>Relación Comercial <label class="obl">*</label></span>
                             </div>
                         </div>                        
                     <div class="buttons button_space">
@@ -766,7 +829,10 @@
                     <div class="text congrats">
                         <h2>¡Listo!</h2>
                         <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha enviado con éxito para futuras referencias.</p> <strong>Pronto nos pondremos en contacto con usted. </strong>
-                        <img src="https://opengameart.org/sites/default/files/aaaaaaaaaaa01.gif" style="width:350px; height:250px;"></img>
+                        <div class="mt-4"> 
+                            <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                        </div>
+                            <div style="" class="message">Cargando Datos...</div>
                     </div>
                 </div>
 
@@ -788,7 +854,7 @@
 
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %} 
-<script src="/static/assets/js/ms_arr.js"></script>
+<script src="/static/assets/js/ms_foo.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/static/assets/js/ocultadorespf.js"></script>
@@ -914,7 +980,7 @@
       console.log(radio.id)
       switch (radio.id)
       {
-         case "fiador_obligado1":
+    case "fiador_obligado1":
          $( "#FS" ).fadeOut( "fast" );
          $( "#datos_empresa" ).fadeOut( "fast" );
          p1.textContent = "Por favor introduce datos de tu Fiador Solidario";
@@ -942,47 +1008,50 @@
          ospf_fin.style.display='none';
          sigpf.style.display='none';
 
-         // diables
-       var des = document.getElementById("acpm").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-       var des = document.getElementById("datos_dom_empresa").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-       var des = document.getElementById("datos_rep").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
+            // diables
+        var des = document.getElementById("datos_empresa").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }  
+        var des = document.getElementById("acpm").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = document.getElementById("datos_dom_empresa").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = document.getElementById("datos_rep").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
 
-       var des = document.getElementById("dom_representante").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-       var des = document.getElementById("referencias_empresa").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-       var des = document.getElementById("paso_final_opm").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-       var des = document.getElementById("sigpf").getElementsByTagName('*');
-       for (var node of des) {
-           node.disabled = true;
-           node.removeAttribute("require");
-       }
-
-
-         $( "#FS" ).fadeIn( "fast" );
-         break;
+        var des = document.getElementById("dom_representante").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = document.getElementById("referencias_empresa").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = document.getElementById("paso_final_opm").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = document.getElementById("sigpf").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        $( "#FS" ).fadeIn( "fast" );
+    break;
          
     case "fiador_obligado2":
          $( "#FS" ).fadeOut( "fast" );
@@ -1014,9 +1083,58 @@
          final1.style.display='none';
          document.getElementById("icono_paso6").style.display='none';
          $( "#FS" ).fadeIn( "fast" );
-         break;
 
-         case "fiador_obligado3":
+          // diables
+        var des = document.getElementById("datos_empresa").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        } 
+
+        var des = acpm.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = dat_dom_em.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = dat_rep.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        
+        var des = dat_esc.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = dom_rep.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = ref_emp.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        var des = final1.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+    break;
+
+    case "fiador_obligado3":
          $( "#FS" ).fadeOut( "fast" );
          $( "#datos_empresa" ).fadeOut( "fast" );
          div_bot.style.display='';
@@ -1043,7 +1161,50 @@
          ospf_fin.style.display='none';
          $( "#datos_empresa" ).fadeIn( "slow" );
          // ocultar  sigpf.style.display=''
-         break;
+
+         // diables
+        var des = document.getElementById("FS").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        } 
+
+        var des = document.getElementById("datos_dom_pf").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        
+        var des = document.getElementById("datos_contacto").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = document.getElementById("datos_empleo").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+        
+        var des = document.getElementById("sigpf").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = document.getElementById("datos_escrituras").getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+
+        var des = final1.getElementsByTagName('*');
+        for (var node of des) {
+            node.disabled = true;
+            node.removeAttribute("requerido");
+        }
+    break;
 
       }
   }
@@ -1073,7 +1234,6 @@ function prueba2(val){
     let k2 = document.getElementById(arr2);
     k2.style.borderColor="green"
     k2.classList.remove('warning')
-    
     console.log(arr)
 }
 
@@ -1081,7 +1241,7 @@ function prueba2(val){
 localStorage.removeItem('data_fiador')
     var data_fiador = []
 // Configuracion general de axios
-    const server = 'http://192.168.2.24:8001'
+    const server = 'https://arrendify-api.onrender.com'
     const configin = {
         headers: {
           'Content-Type': 'application/json',
@@ -1110,9 +1270,15 @@ document.getElementById("inquilino").onload = obtenerInquilinos()
             let res = response.data
             if(res.length > 0 ){
             console.log("res",res)
-    
+            var deudorid = []
+            deudorid = res.map(function (r)  {
+                let obj = {"id":r.id}; 
+                return obj}
+            );
+            console.log(deudorid)
             for(let i = 0; i < res.length;i++)
         {
+            
             let tr = document.createElement('tr')
             let col1 = document.createElement('td')
             let col2 = document.createElement('td')
@@ -1275,7 +1441,7 @@ function editar(id){
 // function registro boton2
     btnSubmit2.addEventListener("click", function (event) {
         event.preventDefault();
-
+        recopilar()
         console.log("ojojojo")
         formulario = JSON.parse(localStorage.getItem('datos'));
         console.log("viewform",formulario)
@@ -1340,7 +1506,7 @@ function obtenerInquilinos(){
         },
       }; 
   
-    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    axios.get(`${server}/inquilinos_fiadores/`,configin)
     .then(function (response) {
       // Manejar la respuesta exitosa del servidor
       var datos = response.data;

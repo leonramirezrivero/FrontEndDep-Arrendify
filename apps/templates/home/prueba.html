@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        @keyframes rotate {from {transform: rotate(0deg);}
+        to {transform: rotate(360deg);}}
+        @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}}
+
+        .cargador{
+            -webkit-animation: 3s rotate linear infinite;
+            animation: 3s rotate linear infinite;
+            -webkit-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        .message {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .modal-body{
+            background-color:;
+
+        }
+    </style>
+</head>
+<body>
+    <button type="button" onClick="modalchido()" class="btn btn-primary">
+        Generar cotización
+    </button>
+
+    <!-- Modal -->
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+            aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" >
+                        {% comment %} <div class="loader"></div> {% endcomment %}
+                        <div>
+                            <img class="cargador" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                        <div>
+                        <div class="message">Generando cotización, por favor espere...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Modal -->
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+<div class="row">
+   
+</div>
+<script>
+    function modalchido(){
+        timer = false
+        console.log(timer)
+        $('#loadingModal').modal('show');
+        setTimeout(() => {
+            console.log("Retrasado por 1 segundo.");
+            $('#loadingModal').modal('hide');
+           
+          }, "1500");
+        
+         
+        
+    }
+</script>

@@ -25,7 +25,7 @@
                 <span class="sidebar-icon">
                     <img src="/static/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
                 </span>
-                <span class="mt-1 sidebar-text">Sistema Arrendify</span>
+                <span class="mt-1 sidebar-text"> Sistema Arrendify</span>
                 </a>
             </li>
     
@@ -38,7 +38,7 @@
                             <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                           </svg>
                     </span>
-                    <span class="sidebar-text">INQUILINOS</span>
+                    <span class="sidebar-text"> &nbsp INQUILINOS</span>
                 </span>
                 <span class="link-arrow">
                     <svg class="icon icon-sm" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
@@ -52,7 +52,6 @@
                                 <span class="sidebar-icon">
                                     <svg class="icon icon-xs me-2" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                                 </span>
-                                {% comment %} <span class="sidebar-text">Registro P. Fisica</span> {% endcomment %}
                                 <span class="sidebar-text">Inquilino</span>
                                 </span>
                             </a>
@@ -112,17 +111,16 @@
     </div>
 </li>
 <!--Termina -->         
-            {% comment %} <li class="nav-item {% if 'cot_per.html' in segment %} active {% endif %}">
-                <a href="/cot_per.html" class="nav-link">
+            <li class="nav-item {% if 'cotizacion.html' in segment %} active {% endif %}">
+                <a href="/cotizacion/" class="nav-link">
                 <span class="sidebar-icon">
-                    <svg class=" icon icon-xs me-2 bi bi-list-check" fill="gray"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
-                      </svg>
-                
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="gray" class="bi bi-calculator-fill" viewBox="0 0 20 20">
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5zm0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zM7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5h-1z"/>
+                    </svg>
                 </span>
-                <span class="sidebar-text">Cotizaciones</span>
+                <span class="sidebar-text">&nbsp COTIZACIÓN</span>
                 </a>
-            </li>{% endcomment %}
+            </li>
     
             {% comment %} <li class="nav-item {% if 'user_list.html' in segment %} active {% endif %}">
                 <a href="/user_list.html" class="nav-link">
@@ -172,27 +170,66 @@
             
                 </a>
             </li>
+            <!-- Descomentar despues ya que aun no ocupamos estos apartados-->
+            {% comment %} <li class="nav-item {% if 'arrendador.html' in segment %} active {% endif %}">
+                <a href="/datos_arrendamiento/" class="nav-link d-flex align-items-center justify-content-between">
+                    <span>
+                        <span class="sidebar-icon">
+                            <svg class="icon icon-xs me-2" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        </span>
+                        <span class="sidebar-text">Datos arrendamiento</span>
+                    </span>
+                </a>
+            </li>
+            <li class="nav-item {% if 'arrendador.html' in segment %} active {% endif %}">
+                <a href="/investigacion_arrendadores/" class="nav-link d-flex align-items-center justify-content-between">
+                    <span>
+                    <span class="sidebar-icon">
+                        <svg class="icon icon-xs me-2" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                    </span>
+                    <span class="sidebar-text">Investigacion</span>
+                    </span>
+                </a>
+            </li> {% endcomment %}
+            <li class="nav-item {% if 'arrendador.html' in segment %} active {% endif %}">
+                <a href="/preguntas_frecuentes/" class="nav-link">
+                <span class="sidebar-icon">
+                    <svg class=" icon icon-xs me-2 bi bi-list-check" fill="gray"  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3.854 2.146a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 3.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 1 1 .708-.708L2 7.293l1.146-1.147a.5.5 0 0 1 .708 0zm0 4a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0l-.5-.5a.5.5 0 0 1 .708-.708l.146.147 1.146-1.147a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                </span>
+                <span class="sidebar-text">FAQ</span>
+                </a>
+            </li>
+            <li class="nav-item {% if 'contacto.html' in segment %} active {% endif %}">
+                <a href="/contactanos/" class="nav-link">
+                <span class="sidebar-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                        <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2H2Zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671Z"/>
+                        <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034v.21Zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
+                      </svg>
+                </span>
+                <span class="sidebar-text">&nbsp CONTÁCTANOS</span>
+                </a>
+            </li>
+            <li class="nav-item {% if 'comentarios.html' in segment %} active {% endif %}">
+                <a href="/comentarios/" class="nav-link">
+                <span class="sidebar-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray" class="bi bi-file-earmark-post-fill" viewBox="0 0 16 16">
+                        <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-5-.5H7a.5.5 0 0 1 0 1H4.5a.5.5 0 0 1 0-1zm0 3h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5z"/>
+                      </svg>
+                </span>
+                <span class="sidebar-text">&nbsp COMENTARIOS</span>
+                </a>
+            </li>
+      
             </ul>
         </div>
     </nav>
+<script src="/static/assets/repositorios/sidebar.js"></script>
 <script>
     let tok = localStorage.getItem('token')
     let us =  JSON.parse(localStorage.getItem('usuario'));  
         document.getElementById("nav1").onload = usurero()
-    function usurero()
-    {
-        if(us.username == "Arrendatario1" || us.username == "Legal" || us.username == "Ventas"){
-            
-            let inve = document.getElementById("inv");
-            inve.innerHTML = ` <li class="nav-item {% if 'user_list.html' in segment %} active {% endif %}">
-                <a href="/investigacion/" class="nav-link">
-                <span class="sidebar-icon">
-                    <svg class="icon icon-xs me-2" fill="gray" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path></svg>
-                </span>
-                <span class="sidebar-text">INVESTIGACIÓN</span>
-                </a>
-            </li>`
-
-        }
-    }
+   
 </script>

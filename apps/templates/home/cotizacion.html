@@ -1,20 +1,19 @@
 {% extends "layouts/base.html" %}
-{% csrf_token %}
 {% block title %} Cotizador personalizado {% endblock %} 
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
-<link href="/static/assets/css/estilos.css" rel="stylesheet"/>
+
 {% endblock stylesheets %}
 
 {% block content %}
 
-<form method='POST' action="#" class="mt-4">
 
   <!-- Segundo modo -->
-        <section style="background:gray" class="card card-body border-0 shadow mb-4">
-            <div  class="container ">
-                <div class="row justify-content-md-center">
+  
+        <section style='background-image: url("https://c4.wallpaperflare.com/wallpaper/740/782/324/misc-unknown-robot-sci-fi-wallpaper-preview.jpg"); ' class="card card-body border-0 shadow mb-4">
+            <div id="cf"  class="container ">
+                <div id="cf2" class="row justify-content-md-center">
                     <div class="col-12 col-lg-5">
                         
                         <svg style=" margin-left:200px; margin-bottom:5px; padding-right:100px width:100%; height:50px; background:#231942ff " xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-coin border border-primary rounded-circle" viewBox="0 0 16 16">
@@ -26,343 +25,1052 @@
                         <h2 style=" padding-left:60px; z-index:1; color:white" class="h2 fw-bold mb-3 ">Crear cotización</h2>
                         </div>
                     </div>
-                    <section class="card card-body border-0 shadow mb-4 mt-4">
-                        <div class="container ">
-                            <div class="row justify-content-md-center">
-                                
-                                <div class="row">
+                    <section style="background:;" class="card card-body border-0 shadow mb-4 mt-4">
+                        <div  class="container ">
+                            <div  class="row justify-content-md-center">
+                                <div  class="row ">
                                     <div class="col">
-                                        <button style="background-color:#231942ff; color:white; margin-left:270px" type="button" class="btn btn-primary btn-lg " disabled>generar cotización</button> 
+                                        <button style="background: #b59b21; color:white; display:block; margin-left:auto; margin-right:auto;" onClick="planes()" type="button" class="btn btn-primary btn-lg">Nuetras Pólizas</button>
                                     </div>     
                                     <div class="col">
-                                        <button style="background-color: #000000 ; color:white;" type="button" class="btn btn-secondary btn-lg" disabled>calculadora rapida</button>
-                                    </div>                                   
+                                        <button style="background-color: #000000 ; color:white; display:block; margin-left:auto; margin-right:auto;" onclick="cal_rap()" type="button" class="btn btn-secondary btn-lg">Calculadora rapida</button>
+                                    </div>      
+                                        <div class="col">
+                                            <label>Ejecutivo Comercial</label>
+                                            <select class="form-select" id="agentify" name="agentify" onChange="prueba2(this)" aria-label="Default select example">
+                                                <option selected>Ejecutivo Comercial </option>
+                                                <option value="1">Miriam</option>
+                                                <option value="2">Seidy</option>
+                                                <option value="4">Banana</option>
+                                              </select>
+                                        </div>                            
                                 </div>
+
                                 <div class="container">
-                                    <div class="row">
-                                      <div class="col me-3 mt-4">
-                                        <input class="w-100" type="text"  maxlength="8"  alt="..."  placeholder=" Nombre de la cotización"></input>
+                                    <div class="row mt-2">
+                                      <div class="col-4">
+                                        <label>Cotización</label>
+                                        <input class="form-control w-100" id="nombre_cotizacion" name="nombre_cotizacion" type="text"  maxlength="30"  alt="..."  placeholder=" Nombre de la cotización" disabled></input>
                                       </div>
-                                      <div class="col me-2 mt-3">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Inmueble a cotizar</option>
-                                            <option value="1">Opción 1</option>
-                                            <option value="2">Opción 2</option>
-                                            <option value="3">Opción 3</option>
+                                      <div class="col-4">
+                                        <label>Rol del Cliente</label>
+                                        <select class="form-select" id="rol_del_cliente" name="rol_del_cliente" onChange="rol()" aria-label="Default select example">
+                                            <option id="rol_cliente" name="rol_cliente" selected>Rol</option>
+                                            <option value="Arrendador">Arrendador</option>
+                                            <option value="Arrendatario">Arrendatario</option>
+                                            <option value="Inmobiliaria">Inmobiliaria</option>
                                           </select>
                                       </div>
+                                      <div class="col-4">
+                                        <label>Cliente</label>
+                                        <select class="form-select" id="sel-cliente" name="" onChange="javascript:prueba2(this); llamar_inmueble(this);" aria-label="Default select example">
+                                            <option id="cliente"  value="--------">--------</option>
+                                        </select>
+
+                                      </div>
+                                      
+                                    </div>
+                                    <div class="row mt-4">
+                                          <div class="col-4" id="div-inmueble" style="display:none;">
+                                            <label>Inmueble a cotizar</label>
+                                            <select class="form-select" id="Inmueble" name="inmueble" onChange="javascript:selecionar_inmueble(this); prueba2(this)" aria-label="Default select example">
+                                                <option value="---------" selected>---------</option>                                                                                
+                                            </select>
+                                          </div>
+                                        
+                                          <div  class="col-4">
+                                            <label title="" data-bs-toggle="tooltip" id="label_renta">Renta:</label>
+                                            <input class="form-control w-100" id="renta" name="renta" type="text" onkeyup="prueba2(this)"  maxlength="8"  alt="..."  placeholder="Renta"></input>
+                                         </div>
+
+                                         <div  class="col-4 ">
+                                            <label>¿Agregamos Impuestos para facturar?</label>
+                                                <select class="form-select" id="impuesto" name="impuesto" onChange="javascript:poliza(); prueba2(this);" aria-label="Default select example">
+                                                    <option selected>Selecciona una opción</option>
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                          </div>
                                     </div>
 
-                                <div class="col-12 col-lg-4">
-                                    <div class="github-big-icon">
-                                            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 17">
-                                                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
-                                              </svg>
-                                          </svg>
-                             </div>
-                            </div>
-                             </div>
+                                    <div class="row mt-4">
+                                        <div  class="col-4">
+                                            <label>Selecciona tu póliza</label>
+                                             <select class="form-select" id="plan" name="tipo_poliza" onChange="javascript:poliza(); prueba2(this)" aria-label="Default select example">
+                                                <option selected>Selecciona tu Póliza</option>
+                                                <option value="Plata">Plata</option>
+                                                <option value="Oro">Oro</option>
+                                                <option value="Platino">Platino</option>
+                                             </select>
+                                        </div>
+                                           <div  class="col-4">
+                                                <label>Taza de Impuestos:</label>
+                                                <input class="form-control w-100" type="text" maxlength="8" alt="..." value="16%"  placeholder=" " disabled></input>
+                                           </div>
+                                           <div  class="col-4">
+                                            <label>¿A cuántos años quiere el servicio?</label>
+                                             <select class="form-select" id="años" name="años_cobertura" onChange="javascript: prueba2(this);" aria-label="Default select example">
+                                                <option value="1" selected>1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                             </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div  class="col-6 ">
+                                            <textarea style="color:black" id="detalles_cotizacion" name="detalles_cotizacion" oninput="prueba2(this);" class="form-control" placeholder="..." id="textarea" name="comentarios" rows="10">
+                                             
+                                            </textarea>
+                                        </div>
+                                           <div  class="col-6">
+                                            <textarea style="color:black" id="comentarios" name="comentarios" oninput="prueba2(this);" class="form-control" placeholder="..." id="textarea" name="comentarios" rows="10">descripción de la cotización</textarea>
+                                           </div>
+                                    </div>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input" type="checkbox" onChange="javascript:termino();prueba2(this)" value="ACEPTO" style="color:black; text-weight:bold;" id="tyc" name="tyc">
+                                        <p style="padding-left:5px;">Al hacer clic usted está confirmando que a leído los detalles de la cotización y la acepta para iniciar el proceso de contratación.</p>
+                                      </div>
+                                </div>
+                                
+                                <div style="margin-top:10px;" class="row d-inline bg-white border border-2">
+                                    <label style="Display:inline;">¿Tienes un código de descuento? Introducelo aqui =></label>
+                                    <input style="Display:inline; width:250px" class="form-control" type="text"  maxlength="8"  alt="..."  placeholder="Código de descuento"></input>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col">
+                                        <button style="background-color:#231942ff; color:white; display:block; margin-left:auto; margin-right:auto;" onClick="generarPDF()" id="finalizar1" type="button" class="btn btn-primary btn-lg" >Generar cotización</button>
+                                    </div>     
+
+                                </div>
+                                <div class="row" style="display:;">
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="monto" name="monto" type="text"  alt="..."  placeholder="monto"></input>                                    
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="monto_impuesto" name="monto_impuesto" type="text"   alt="..."  placeholder="monto_impuesto"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="monto_total" name="monto_total" type="text"  alt="..."  placeholder="monto_total"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="costos_extra" name="costos_extra" type="text"  alt="..."  placeholder="costos_extra"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="renta_segura" name="renta_segura" type="text"  alt="..."  placeholder="arrendify renta_segura"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="seguro_rc" name="seguro_rc" type="text"  alt="..."  placeholder="seguro_responsibilidad Civil"></input>
+                                    </div>
+                                    
+                                    <!-- Modal -->
+                                        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+                                        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body" >
+                                                    {% comment %} <div class="loader"></div> {% endcomment %}
+                                                    <div>
+                                                        <img class="cargador" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                                                    <div>
+                                                    <div class="message">Generando cotización, por favor espere...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <!-- Modal -->
+                                    
+
+                                </div>
+
                     </section>
                 </section>
 
-        
-
-
-
-
-
-        <div style="background-color:white" >
-            <label class="titulo"> Cotizador Personalizado </label>
-        </div>  
-
-{% comment %} aqui empieza el de 4 columnas {% endcomment %}
-<div class="container">
-    <div class="row">
-
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">Inmuebles</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-
-                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Selecciona una opción </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">3</option>
-               </select>
-               
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-        
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">Renta</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-                    <ul class="list-group list-group-flush price-list">
-                        <div style="Display:inline-block" class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">Si</label>
-                            &nbsp;&nbsp;&nbsp;
-                            <div style="Display:inline-block" class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">No</label>
-                            </div>
-                        </div>   
-    </div>
-            </div>
-        </div>
-        <!-- End Content -->
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">Soporte premium</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-                    <ul class="list-group list-group-flush price-list">
-                        <div style="Display:inline-block" class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">Si</label>
-                            &nbsp;&nbsp;&nbsp;
-                            <div style="Display:inline-block" class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">No</label>
-                            </div>
-                        </div>   
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-      <div style="margin-top:15px; Display:inline-block" class="col-3">
-        <div class="card shadow border-2 ">
-            <!-- Header -->
-            <div class="card-header bg-white border-5 pb-0">
-                <span style="margin-top:-20px" class="d-block">
-                    <span class="h2 text-primary fw-bold align-top">Años de cobertura</span>
-                </span>
-            </div>
-            <!-- End Header -->
-            <!-- Content -->
-            <div class="card-body">
-                <div style="Display:inline-block width" class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">1</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">2</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">3</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">4</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">5</label>
-                    </div>
-                </div>   
-            </div>
-            <!-- End Content -->
-        </div> 
-    </div>
-    </div>
-  </div>
 </div>
-{% comment %} aqui acaba el 4 columnas {% endcomment %}
-
-{% comment %} aqui empieza el de 4 columnas {% endcomment %}
-<div class="container">
-    <div class="row">
-
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">Asesoria Juridica</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">Si</label>
-                        &nbsp;&nbsp;&nbsp;
-                        <div style="Display:inline-block" class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">No</label>
-                        </div>
-                    </div>   
-
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-        
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">Tiempo cobertura</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                        <option selected>Selecciona una opción</option>
-                        <option value="1">1 año</option>
-                        <option value="2">2 años</option>
-                        <option value="3">3 años</option>
-                        <option value="4">4 años</option>
-                        <option value="5">5 años</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-        <div style="margin-top:15px; Display:inline-block" class="col-3">
-            <div class="card shadow border-2 ">
-                <!-- Header -->
-                <div class="card-header bg-white border-5 pb-0">
-                    <span style="margin-top:-20px" class="d-block">
-                        <span class="h2 text-primary fw-bold align-top">ETC 2</span>
-                    </span>
-                </div>
-                <!-- End Header -->
-                <!-- Content -->
-                <div class="card-body">
-                    <ul class="list-group list-group-flush price-list">
-                        <div style="Display:inline-block" class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">Si</label>
-                            &nbsp;&nbsp;&nbsp;
-                            <div style="Display:inline-block" class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">No</label>
-                            </div>
-                        </div>   
-                </div>
-            </div>
-        </div>
-        <!-- End Content -->
-      <div style="margin-top:15px; Display:inline-block" class="col-3">
-        <div class="card shadow border-2 ">
-            <!-- Header -->
-            <div class="card-header bg-white border-5 pb-0">
-                <span style="margin-top:-20px" class="d-block">
-                    <span class="h2 text-primary fw-bold align-top">ETC 3</span>
-                </span>
-            </div>
-            <!-- End Header -->
-            <!-- Content -->
-            <div class="card-body">
-                <div style="Display:inline-block" class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">1</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">2</label>
-                        &nbsp;
-                    <div style="Display:inline-block" class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">3</label>
-                        &nbsp;
-                    </div>
-                </div>   
-
-            </div>
-            <!-- End Content -->
-        </div> 
-    </div>
-
-    </div>
-  </div>
-</div>
-{% comment %} aqui acaba el 4 columnas {% endcomment %}
-    <!-- Segundo modo -->
-    <section class="card card-body border-0 shadow mb-4">
-        <div class="container ">
-            <div class="row justify-content-md-center">
-                <div class="col-12 col-lg-8">
-                    <h2 class="h1 fw-bold mb-3 ">Cotizador Personal</h2>
-                </div>
-                
-                <div class="col-12 col-lg-4">
-                    <div class="github-big-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="bi bi-basket3-fill" viewBox="0 0 16 17">
-                                <path d="M5.757 1.071a.5.5 0 0 1 .172.686L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H.5a.5.5 0 0 1-.5-.5v-1A.5.5 0 0 1 .5 6h1.717L5.07 1.243a.5.5 0 0 1 .686-.172zM2.468 15.426.943 9h14.114l-1.525 6.426a.75.75 0 0 1-.729.574H3.197a.75.75 0 0 1-.73-.574z"/>
-                              </svg>
-                          </svg>
-                    </div>
-            </div>
-            <div class="row">
-
-                <div  class="col-6 ">
-                    Selencciona tu paquete
-                       <select class="form-select" aria-label="Default select example">
-                           <option selected>Selecciona tu Plan</option>
-                           <option value="1">Plata</option>
-                           <option value="2">Oro</option>
-                           <option value="3">Platino</option>
-                         </select>
-                   </div>
-                   <div  class="col-6">
-                       Selencciona tu inmueble
-                          <select class="form-select shadow border-1" aria-label="Default selece">
-                              <option selected>Selecciona tu Inmueble</option>
-                              <option value="1">Inmueble 1</option>
-                              <option value="2">Inmueble 2</option>
-                              <option value="3">Inmueble 3</option>
-                            </select>
-                   </div>
-            </div>
-            
-            <div style="margin-top:20px ;">
-                
-                </div>
-                <a style="Display:none" class="btn btn-lg btn-secondary" href="">Haz click aqui</a>
-                <p style="color:#231944; margin-left:1792px; text-align:left;" class="lead mb-4">*Costos no incluyen IVA</p>
-                <p style="color:#231942; margin-left:1677px; margin-top:-30px;" class="lead mb-4">**El pago de la poliza es anual</p>
-                <p style="color:#231942; margin-left:1250px; margin-top:-30px; " class="lead mb-4">***En costros mayores a 25,000 consultar con asesor</p>
-        </div>
-    </section>
-
-</div>
-    
-
-    
+      
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<script>
+    document.getElementById("cf").onload = fac()
+    document.getElementById("cf2").onload = termino()
+    let formulario = {};
+    var arr = {}
+    var rentas = []
+    var renta_inmueble = 0; 
+    const server = "https://arrendify-api.onrender.com"
+    
+    function termino(){
+        tyc = document.getElementById("tyc");
+        boton = document.getElementById("finalizar1");
+     
+        if (tyc.checked){
+            
+            boton.disabled = false;
+            boton.style.backgroundColor="#231942ff";
+        }
+        else{
+            boton.disabled = true;
+            boton.style.backgroundColor="#808080";
+        }
+    }
+    function planes(){
+        Swal.fire({
+            imageUrl: 'https://arrendifystorage.s3.us-east-2.amazonaws.com/Recursos/polizas_cot.jpeg',
+            background: '#5D4585',
+            imageWidth:1400,
+            width:1400,
+            imageHeight:850,
+            height:850,
+            imageAlt: 'Custom image',
+            showCloseButton: true,
+            showConfirmButton: false,
+          })
+   }
+
+   function cal_rap(){
+    Swal.fire({
+        title: '<strong style="color:#FFFFFF"><u>Calculadora rápida</u></strong>',
+        html:
+          '<p class="lead mb-4" style="color:#FFFFFF">¿Cuanto sería el valor de tu renta?</p>  ' +
+          '$<input type="text" style="width: 300px; height: 35px; padding-left: 20px; padding-right: 20px;" maxlength="8" class="rounded-pill" alt="..." id="val1">' 
+          + '<br>'
+          + 
+          `
+            <div class="row mt-4">
+              <div class="col">
+                <label style="color:#FFFFFF">Plata<label>
+                    <input type="text" id="plata" style="width:70px;padding-left: 5px" maxlength="8" class="rounded-pill">
+              </div>
+              <div class="col">
+                <label style="color:#FFFFFF">Oro<label>
+                    <input type="text" id="oro" style="width:70px; padding-left: 5px" maxlength="8" class="rounded-pill">
+              </div>
+              <div class="col">
+                <label style="color:#FFFFFF">Platino<label>
+                    <input type="text" id="platino" style="width:70px; padding-left: 5px" maxlength="8" class="rounded-pill">
+              </div>
+            </div>
+            <button style="background: black; color:white; display:block; margin-left:auto; margin-right:auto;" onclick="sumar()" type="button" class="btn btn-primary btn-lg">Calcular</button>
+            <p style="color:#C7CAC8; class="mt-2" text-align:left;" class="lead mb-4">Nota: Los costos de esta calculadora no incluyen IVA</p>
+          ` 
+        ,
+        showCloseButton: true,
+        showConfirmButton: false,
+        showCancelButton: false,
+        focusConfirm: false,
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down">Cerrar</i>',
+        cancelButtonAriaLabel: 'Thumbs down',
+        background: '#fff url(https://img.freepik.com/vector-premium/fondo-morado-cortado-papel-3d-fondo-horizontal-plantilla-forma-geometrica-minima-abstracta_450469-282.jpg)',
+        color: '#FFFFFF',
+        
+      })
+}
+    function fac(){
+
+        var f = new Date();
+        //let fec = (f.getDate() + "/" + '0' +(f.getMonth() +1) + "/" + f.getFullYear());
+        let fec = (f.getFullYear() + "" + '0' +(f.getMonth() +1) + "-" +  f.getDate() );
+        document.getElementById("nombre_cotizacion").value = fec
+    }
+
+    
+    function obtenerCliente(){
+        let tipo = document.getElementById("rol_del_cliente").value
+        let configin = {
+            headers: {
+              'Authorization': `Token ${localStorage.getItem('token')}`
+            },
+            'params':{tipo: tipo},
+            }; 
+        
+        axios.get(`${server}/Arrendador_Cotizador/`,configin)
+        .then(function (response) {
+          // Manejar la respuesta exitosa del servidor
+          datos = response.data;
+          console.log(datos)
+          // Llenar el elemento select con los datos recibidos
+          var rol = document.getElementById('rol_del_cliente');
+          let select_in = document.getElementById("Inmueble")
+          var select = document.getElementById('sel-cliente');
+          // Limpiamos los select de inmueble y cliente y la renta
+          select.innerHTML = ""
+          select_in.innerHTML = ""
+          document.getElementById('renta').value = ""
+          // agregamos opciones vacias al sel limpiados
+          var defecto = document.createElement('option')
+          var defecto2 = document.createElement('option')
+          defecto.text = "---------"
+          defecto2.text = "---------"
+          select.add(defecto)
+          select_in.add(defecto2)
+          console.log(rol.value)
+          datos.forEach(function(dato) {
+            //creamos el option
+                var option = document.createElement('option');
+                // asignamos valor al texto
+                option.text = (rol.value == "Arrendador")?dato.nombre + " " + dato.apellido + " " + dato.apellido1 : dato.n_inmobiliaria
+                // asignamos valor al al valor
+                option.value = dato.id;
+                //agregamos la opcion al select
+                select.add(option);
+              
+          });
+        })
+        .catch(function (error) {
+          // Manejar el error de la solicitud
+          console.log(error);
+        });
+    }
+ 
+    function selecionar_inmueble(inmueble_id){
+        let variable = rentas.filter(e=>e.id==inmueble_id.value )
+        document.getElementById("renta").value = variable[0].renta
+        renta_inmueble = variable[0].renta
+ }
+
+ function rol(){
+     sel_ren = document.getElementById("renta")
+     label_renta = document.getElementById("label_renta")
+     rol_del_cliente = document.getElementById("rol_del_cliente").value
+     var select = document.getElementById('sel-cliente');
+    
+     if (rol_del_cliente == "Arrendatario"){
+        console.log("soy Arrendatario")
+        document.getElementById("div-inmueble").style.display = 'none';
+        select.name = "inquilino"
+        //tooltip
+        label_renta.title = "";
+        label_renta.setAttribute("data-bs-original-title", "");
+        label_renta.setAttribute("aria-label", ""); 
+        document.getElementById("renta").disabled = false;
+        obtenerInquilinos()
+    }
+
+    if (rol_del_cliente == "Arrendador"){
+        console.log("soy Arrendador")
+        document.getElementById("div-inmueble").style.display = '';
+        select.name = "arrendador"
+        //tooltip
+        document.getElementById("renta").disabled = true;
+        label_renta.title = "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles";
+        label_renta.setAttribute("data-bs-original-title", "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles");
+        label_renta.setAttribute("aria-label", "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles"); 
+        obtenerCliente()
+        
+    }
+
+    if( rol_del_cliente == "Inmobiliaria" ){
+        console.log("soy Inmobiliaria")
+        document.getElementById("div-inmueble").style.display = '';
+        select.name = "arrendador"
+        //tooltip
+        label_renta.title = "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles";
+        label_renta.setAttribute("data-bs-original-title", "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles");
+        label_renta.setAttribute("aria-label", "La renta que se muestra proviene del inmueble, si desea modificarla debe hacerlo en el apartado de inmuebles"); 
+        document.getElementById("renta").disabled = true;
+        obtenerCliente()
+    }
+ }
+
+ function obtenerInquilinos(){
+    const configin = {
+        headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+      }; 
+  
+    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    .then(function (response) {
+      // Manejar la respuesta exitosa del servidor
+      var datos = response.data;
+      // Llenar el elemento select con los datos recibidos
+        let select_in = document.getElementById("Inmueble")
+        var select = document.getElementById('sel-cliente');
+        // Limpiamos los select de inmueble y cliente y la renta
+        select.innerHTML = ""
+        select_in.innerHTML = ""
+        document.getElementById('renta').value = ""
+        // agregamos opciones vacias al sel limpiados
+        var defecto = document.createElement('option')
+        var defecto2 = document.createElement('option')
+        defecto.text = "---------"
+        defecto2.text = "---------"
+        select.add(defecto)
+        select_in.add(defecto2)
+
+      datos.forEach(function(dato) {
+        //creamos el option
+        var option = document.createElement('option');
+        // asignamos valor al texto
+        option.text = dato.nombre+ " " + dato.apellido + " " + dato.apellido1;
+        // asignamos valor al al valor
+        option.value = dato.id;
+        //agregamos la opcion al select
+        select.add(option);
+      });
+    
+    })
+    .catch(function (error) {
+      // Manejar el error de la solicitud
+      console.log(error);
+    });
+}
+
+ function poliza(){
+    rol_del_cliente = document.getElementById("rol_del_cliente").value
+    if(rol_del_cliente == "Arrendatario"){
+        rnt = document.getElementById("renta").value
+    }
+    else{
+        rnt = renta_inmueble
+    }
+    
+    pln = document.getElementById("plan").value
+    agentify = document.getElementById("agentify")
+    var opcion = agentify.options[agentify.selectedIndex];
+    var agente = opcion.textContent;
+
+    impuesto = document.getElementById("impuesto").value
+    monto = document.getElementById("monto")
+    monto_impuesto = document.getElementById("monto_impuesto")
+    monto_total = document.getElementById("monto_total")
+    seguro_rc = document.getElementById("seguro_rc")
+    renta_segura = document.getElementById("renta_segura")
+
+    let plata =  2800
+    let oro = 3500
+    let platino = 7000
+   
+    var f = new Date();
+    let fec = (f.getFullYear() + "" + '0' +(f.getMonth() +1) + "-" +  f.getDate() );
+   
+    if(pln == "Plata"){
+        //colocacion del nombre de la conticacion en base a la poliza
+        document.getElementById("nombre_cotizacion").value = ("PL" + " " + fec)
+        if (rnt<=10000){
+            if (impuesto == "Si"){
+                impu = plata + (plata*0.16) 
+                monto.value = plata
+                monto_impuesto.value = (plata*0.16) 
+                monto_total.value = impu.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Plata es $${impu.toFixed(2)} se aplica un 28% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Plata con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato`
+            }
+            else{
+                monto.value = plata
+                monto_impuesto.value = ""
+                monto_total.value = plata
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Plata es $${plata} se aplica un 28% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Plata con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato`
+            }
+        }
+
+        else{
+            console.log("renta mayor a 10000")
+            if (impuesto == "Si"){
+                total = (rnt * 0.28);
+                impu = (total*0.16) + total 
+                monto.value = total.toFixed(2)
+                monto_impuesto.value = (rnt*0.16) 
+                monto_total.value = impu.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Plata es $${impu.toFixed(2)} se aplica un 28% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Plata con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato`
+            }
+            else{
+                total = (rnt * 0.28);
+                monto.value = total.toFixed(2)
+                monto_impuesto.value = ""
+                monto_total.value = total.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Plata es $${total.toFixed(2)} se aplica un 28% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Plata con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato`
+            }
+        }
+    }
+    
+
+    if(pln == "Oro"){
+        //colocacion del nombre de la conticacion en base a la poliza
+        document.getElementById("nombre_cotizacion").value = ("OR" + " " + fec)
+        if (rnt<=10000){
+            if (impuesto == "Si"){
+                impu2 = oro + (oro*0.16) 
+                monto.value = oro
+                monto_impuesto.value = (oro*0.16) 
+                monto_total.value = impu2.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Oro es $${impu2.toFixed(2)} se aplica un 35% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Oro con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $500,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono`
+            }
+            else{
+                monto.value = oro
+                monto_impuesto.value = ""
+                monto_total.value = oro
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Oro es $${oro} se aplica un 35% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Oro con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $500,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono`
+            }
+        }
+        else{
+            if (impuesto == "Si"){
+                total2 = (rnt * 0.35);
+                impu2 = (total2*0.16) + total2 
+                monto.value = total2.toFixed(2)
+                monto_impuesto.value = (total2*0.16) 
+                monto_total.value = impu2.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Oro es $${impu2.toFixed(2)} se aplica un 35% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Oro con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $500,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono`
+            }
+            else{
+                total2 = (rnt * 0.35);
+                monto.value = total2.toFixed(2)
+                monto_impuesto.value = ""
+                monto_total.value = total2.toFixed(2)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Oro es $${total2.toFixed(2)} se aplica un 35% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Oro con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $500,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono`
+            }
+        }
+    }
+
+    if(pln == "Platino"){
+        //colocacion del nombre de la conticacion en base a la poliza
+        document.getElementById("nombre_cotizacion").value = ("PT" + " " + fec)
+        if (rnt<=10000){
+            if (impuesto == "Si"){
+                impu3 = platino + (platino*0.16) 
+                monto.value = platino
+                monto_impuesto.value = (platino*0.16)
+                monto_total.value = impu3.toFixed(2)
+                renta_segura.value = (rnt * 12)
+                seguro_rc.value = (rnt * 0.25)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Platino es $${impu3.toFixed(2)} se aplica un 70% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Platino con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $1,000,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono
+•Cobranza Renta	
+•Arrendify Renta Segura (Hasta 12 meses de renta) por un valor de $${(rnt * 12)}
+•Covertura de daños por arrendamiento (Sin costo) por un valor de $${(rnt * 0.25)}`
+            }
+            else{
+                monto.value = platino
+                monto_impuesto.value = ""
+                monto_total.value = platino
+                renta_segura.value = (rnt * 12)
+                seguro_rc.value = (rnt * 0.25)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Platino es $${platino} se aplica un 70% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Platino con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $1,000,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono
+•Cobranza Renta	
+•Arrendify Renta Segura (Hasta 12 meses de renta) por un valor de $${(rnt * 12)}
+•Covertura de daños por arrendamiento (Sin costo) por un valor de $${(rnt * 0.25)}`
+            }
+        }
+        else{
+            if (impuesto == "Si"){
+                total3 = (rnt * 0.70);
+                impu3 = (total3*0.16) + total3 
+                monto.value = total3.toFixed(2)
+                monto_impuesto.value = (total3*0.16)
+                monto_total.value = impu3.toFixed(2)
+                renta_segura.value = (rnt * 12)
+                seguro_rc.value = (rnt * 0.25)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Platino es $${impu3.toFixed(2)} se aplica un 70% del valor con iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Platino con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $1,000,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono
+•Cobranza Renta	
+•Arrendify Renta Segura (Hasta 12 meses de renta) por un valor de $${(rnt * 12)}
+•Covertura de daños por arrendamiento (Sin costo) por un valor de $${(rnt * 0.25)}`
+            }
+            else{
+                total3 = (rnt * 0.70);
+                monto.value = total3.toFixed(2)
+                monto_impuesto.value = ""
+                monto_total.value = total3.toFixed(2)
+                renta_segura.value = (rnt * 12)
+                seguro_rc.value = (rnt * 0.25)
+document.getElementById("detalles_cotizacion").textContent = `El valor de la póliza Platino es $${total3.toFixed(2)} se aplica un 70% del valor sin iva
+comicion de vendedor es de :
+tu Ejecutivo Comercial es : ${agente}
+Descuento aplicado: ninguno`
+
+document.getElementById("comentarios").textContent =  `Seleccionaste póliza Platino con los siguientes beneficios:
+
+•Investigación Buró de crédito del arrendatario
+•Investigación en listas negras arrendatario	
+•Investigación de solvencia del arrendatario	
+•Elaboración contrato de arrendamiento	
+•Investigación fiador/obligado solidario	
+•Inventario fotográfico	
+•Elaboración de pagarés	
+•Acompañamiento durante la vida del contrato
+•Honorarios de Conciliación con valor de $1,000,000
+•Monitoreo periódico de la relación de arrendamiento	
+•Extinción de dominio	
+•Recuperación de adeudos vencidos	
+•Cobro extrajudicial de rentas	
+•Recuperación legal en caso de abandono
+•Cobranza Renta	
+•Arrendify Renta Segura (Hasta 12 meses de renta) por un valor de $${(rnt * 12)}
+•Covertura de daños por arrendamiento (Sin costo) por un valor de $${(rnt * 0.25)}`
+            }
+        }
+    }
+ }
+
+function llamar_inmueble(id){
+   let rol = document.getElementById("rol_del_cliente").value
+   if (rol != "Arrendatario")
+   {
+
+    // Llenar el elemento select con los datos recibidos
+    // usar la funcion filter del array permite filtrar las opciones seleccionardas
+   let variable = datos.filter(e=>e.id==id.value)
+   console.log("esta es la variable",variable)
+    
+    if(variable[0].inmuebles_set.length > 0){
+        rentas = variable[0].inmuebles_set
+        select = document.getElementById("Inmueble")
+        select.innerHTML = ""
+        var defecto = document.createElement('option')
+        defecto.text = "---------"
+        select.add(defecto)
+        variable[0].inmuebles_set.forEach(function(dato) {
+            var option = document.createElement('option');
+            option.text = dato.alias_inmueble
+            option.value = dato.id
+            select.add(option);
+          });
+
+         } else{
+      
+        var option = document.createElement('option');
+        option.text = "sin inmuebles"
+        option.value = null;
+        select.add(option);
+    }
+}
+
+}
+
+function prueba2(val){
+    console.log(val.name)
+    arr[""+val.name] = '' +val.value
+    console.log(arr)
+}
+
+function recopilar()
+{
+    // Obtener y Guardar el valor del input en localStorage
+    console.log("estoy en guardar",JSON.stringify(arr))
+    localStorage.setItem('datos_cotizacion', JSON.stringify(arr));
+}
+
+async function generarPDF(){
+    try {
+        recopilar()
+        event.preventDefault();
+        //desde que mostramos modal
+        
+        console.log("cotizacion")
+        poliza = document.getElementById("plan")
+        agentify = document.getElementById("agentify")
+        formulario = JSON.parse(localStorage.getItem('datos_cotizacion'));
+        console.log(poliza.value)
+        console.log(agentify.value)
+
+        if(poliza.value == "Selecciona tu Póliza" || agentify.value == "Ejecutivo Comercial"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Upss...☹️',
+                text: 'Por favor completa todos los campos'
+              })
+        }
+
+        else{
+            $('#loadingModal').modal('show');
+            if(!formulario.hasOwnProperty("nombre_cotizacion")){
+                formulario.nombre_cotizacion = document.getElementById("nombre_cotizacion").value
+                console.log(formulario)
+            }
+
+            if(!formulario.hasOwnProperty("cliente") ){
+                // por checar el funcionamiento del .textContent
+                cli = document.getElementById("sel-cliente")
+                var opcion = cli.options[cli.selectedIndex];
+                var cliente = opcion.textContent;
+                formulario.cliente = cliente
+            }
+
+            if(!formulario.hasOwnProperty("renta") ){
+                formulario.renta = renta_inmueble
+            }
+    
+            if(!formulario.hasOwnProperty("monto") ){
+                formulario.monto = document.getElementById("monto").value
+            }
+    
+            if(!formulario.hasOwnProperty("monto_impuesto") ){
+                formulario.monto_impuesto = document.getElementById("monto_impuesto").value
+            }
+    
+            if(!formulario.hasOwnProperty("monto_total") ){
+                formulario.monto_total = document.getElementById("monto_total").value
+            }
+            if (poliza.value == "Platino")
+            {
+                if(!formulario.hasOwnProperty("renta_segura") ){
+                    formulario.renta_segura = document.getElementById("renta_segura").value
+                }
+    
+                if(!formulario.hasOwnProperty("seguro_rc") ){
+                    formulario.seguro_rc = document.getElementById("seguro_rc").value
+                }
+            }
+            console.log(formulario)
+            probar_modal(formulario)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+
+function probar_modal(formulario){
+    const configin = {
+        headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+        responseType: 'blob',
+      }; 
+  axios.post(`${server}/cotizaciones/`, formulario , configin)
+  .then(function (response) {
+      // manejar respuesta exitosa
+    console.log(response);
+    if (response.status != 204){
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        console.log(url)
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'Cotizacion.pdf');
+        document.body.appendChild(link);
+        //que se cierre modal
+        $('#loadingModal').modal('hide');
+        link.click();
+        localStorage.removeItem('datos_cotizacion');
+    }
+    else{
+        Swal.fire({
+            text: "Haz alcanzado el limite diario para Generar tu cotizacion, intentalo mañana.",
+            icon: 'warning',
+            showCancelButton: false,
+            confirmButtonColor: '#ADD8E6',
+            confirmButtonText: 'OK',
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $('#loadingModal').modal('hide'); 
+            }
+          })
+    }
+
+})
+.catch(function (error) {
+  // manejar error
+  console.log(error);
+  $('#loadingModal').modal('hide');
+  Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Ah ocurrido error'
+  })
+})
+.finally(function () {
+  // siempre sera executado
+});
+}
+
+</script>
+
+<style>
+    @keyframes rotate {from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}}
+
+    @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}}
+
+    .cargador{
+      -webkit-animation: 3s rotate linear infinite;
+      animation: 3s rotate linear infinite;
+      -webkit-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+  }
+  
+  .message {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+  }
+
+ .modal-backdrop{
+   backdrop-filter: blur(5px);
+   background-color: #01223770;
+   transition: 0.1s filter;
+ }
+ .modal-backdrop.in{
+ opacity: 0.1 !important;
+ }
+    
+</style>
+<script >
+
+    function sumar()
+{
+    console.log("HOla")
+var total = 0;
+var total2 = 0;
+var total3 = 0;
+var valor1 = document.getElementById("val1").value;
+console.log(valor1)
+if (valor1<10000)
+{
+    total = 2800;
+    var reg = /\d{1,3}(?=(\d{3})+$)/g;
+
+    var Display = document.getElementById("plata");
+    var Display2 = document.getElementById("oro");
+    var Display3 = document.getElementById("platino");
+    Display.value =  (total + '').replace(reg,'$&,');
+    Display2.value = (3500 + '').replace(reg,'$&,');
+    Display3.value = (7000 + '').replace(reg,'$&,');
+    if (!valor1)
+    {
+        console.log('esta vacio')
+        Display.value = 0;
+        Display2.value = 0;
+        Display3.value = 0;
+    } 
+}
+
+else
+{
+    total = (valor1 * 0.28);
+    total2 = (valor1 * 0.35);
+    total3 = (valor1 * 0.70);
+    var dec = total.toFixed()
+    var dec2 = total2.toFixed()
+    var dec3 = total3.toFixed()
+    var reg = /\d{1,3}(?=(\d{3})+$)/g;
+
+    var Display = document.getElementById("plata");
+    var Display2 = document.getElementById("oro");
+    var Display3 = document.getElementById("platino");
+    Display.value =  (dec + '').replace(reg,'$&,');
+    Display2.value = (dec2 + '').replace(reg,'$&,');
+    Display3.value = (dec3 + '').replace(reg,'$&,');
+    
+    
+}
+}
+</script>
+{% endblock javascripts %}
 

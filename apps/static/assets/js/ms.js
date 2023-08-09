@@ -96,7 +96,7 @@ function validateform(){
    // console.log("email",validate_inputs[9])
     validate_inputs.forEach(function(vaildate_input){
         vaildate_input.classList.remove('warning');
-        if(vaildate_input.hasAttribute('requerido1')){
+        if(vaildate_input.hasAttribute('requerido')){
             console.log("si tengo atributo requerido")
             if(vaildate_input.value.length==0){
                 validate=false;
@@ -110,7 +110,6 @@ function validateform(){
         }
     });
     return validate;
-    
 }
 
 function validarEmail(input) {

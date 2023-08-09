@@ -204,7 +204,7 @@
 
     });
 
-const server = 'https://arrendify-api.onrender.com';
+const server = "https://arrendify-api.onrender.com";
 const configin = {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -212,7 +212,7 @@ const configin = {
     },
   };
 
-const btnSubmit = document.getElementById("finalizar")
+{% comment %} const btnSubmit = document.getElementById("finalizar")
 btnSubmit.addEventListener("click", function (event) {
     event.preventDefault();
 
@@ -239,56 +239,51 @@ btnSubmit.addEventListener("click", function (event) {
     else{
     console.log("Ine esta vacio")
       //
-    }
+    } 
 
-})
+}){% endcomment %}
 
 
 
 function obtenerInquilino(){
-    var datos = JSON.parse(localStorage.getItem('historial_inquilinos'))
-    data_documentos = datos
-    console.log("historial_inquilinos",datos)
+    var datos = JSON.parse( localStorage.getItem('data_inquilino'))
+    historial_documentos = datos.archivos[0].historial_d_inquilinos
+    console.log("historial_inquilinos",datos.archivos[0].historial_d_inquilinos)
    
-    var historial_documentos_inquilino = datos.historial_documentos_inquilinos
-    console.log("Soy datos", historial_documentos_inquilino)
     //console.log("Soy datos previos", historial_documentos_inquilino[0].previo_Ingresos)
     //console.log("JSON.parse(", historial_documentos_arrendador.historial_documentos_arrendador[0].previo_ine)
+    console.log("Tamaño", historial_documentos.length)
     html = ``;
-    if (historial_documentos_inquilino.length > 0){
-        for (var i = 0; i < historial_documentos_inquilino.length; i++){
-
-            if ( historial_documentos_inquilino[i].previo_Ingresos !== null){
-                var url = historial_documentos_inquilino[i].previo_Ingresos;
-                var nuevaUrl = url.replace("8001", "8001/static");
-                var fecha_actualizacion = historial_documentos_inquilino[i].fecha_actualizacion
-                var fa = fecha_actualizacion.split('T')
-                var f_hora =  fa[1].split('.')
-                fecha_actualizacion = fa[0] + " " + "a las " +" "+f_hora[0]
-                //console.log("Fecha actualizacion", fa[0] +" "+ f_hora[0])
-                html += `
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">Ingresos</h5>
-                                <p>${fecha_actualizacion}</p>
-                                <div class="mb-3">
-                                    <a class="mt-1" id="link_cd" href="URL_DEL_ARCHIVO" target="_blank" style="width: 70%; height: 70%; margin-left: auto; margin-right: auto; margin-top: 25px;">
-                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 90%;">
-                                            <iframe src="${nuevaUrl}" class="w-100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
-                                        </div>
-                                        <i class="bi bi-file-pdf" style="font-size: 4rem;"></i>
-                                            <p>Haz clic aquí para abrir el archivo</p>
-                                        <br>
-                                    </a>
-                                    <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
+    if (historial_documentos.length > 0){
+        for (var i = 0; i < historial_documentos.length; i++){
+            var url = historial_documentos[i].previo_Ingresos;
+            var fecha_actualizacion = historial_documentos[i].fecha_actualizacion
+            var fa = fecha_actualizacion.split('T')
+            var f_hora =  fa[1].split('.')
+            fecha_actualizacion = fa[0] + " " + "a las " +" "+f_hora[0]
+            //console.log("Fecha actualizacion", fa[0] +" "+ f_hora[0])
+            html += `
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Ingresos</h5>
+                            <p>${fecha_actualizacion}</p>
+                            <div class="mb-3">
+                                <a class="mt-1" id="link_cd" href="URL_DEL_ARCHIVO" target="_blank" style="width: 70%; height: 70%; margin-left: auto; margin-right: auto; margin-top: 25px;">
+                                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 90%;">
+                                        <iframe src="${url}" class="w-100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                                    </div>
+                                    <i class="bi bi-file-pdf" style="font-size: 4rem;"></i>
+                                        <p>Haz clic aquí para abrir el archivo</p>
+                                    <br>
+                                </a>
+                                <label for="exampleFormControlTextarea1" class="form-label">Comentarios</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                             </div>
                         </div>
                     </div>
-                `
-            }
+                </div>
+            `            
         }
     }else{
        html += `<h5 class="card-title">No hay historial de ingresos</h5>`

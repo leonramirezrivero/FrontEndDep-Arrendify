@@ -25,6 +25,7 @@ urlpatterns = [
     path('det_documentos/<int:id>', views.path_detalles_archivos_fia, name='detalles_archivos_fiador'),
     #TERMINOS
     path('tyc/', views.tyc, name='tyc'),
+    path('cotizacion/', views.cotizacion, name='tyc'),
     #ARRENDADOR
     path('arrendadores/', views.path_arrendador, name='arren'),    
     path('editar_arrendador/<str:slug>/', views.path_arrendador_editar, name='arrendador_editar'),
@@ -40,6 +41,20 @@ urlpatterns = [
     #INVESTIGACION
     path('investigacion/', views.path_investigacion, name='investigacion'),
     path('checklist_investigacion/', views.path_check_investigacion, name='check_investigacion'),
+    # Contraseña
+    path('recuperar_password/', views.path_recuperar_contraseña, name="recuperar_contrasena"),
+    path('guardar_password', views.path_guardar_nueva_contraseña, name="guardar_password/"),
+    # Contactanos
+    path('contactanos/', views.path_contactanos, name="contactanos"),
+    # Preguntas Frecuentes
+    path('preguntas_frecuentes/', views.path_preguntas_frecuentes, name="preguntas_frecuentes"),
+    # Datos de arrendamiento
+    path('datos_arrendamiento/', views.path_datos_arrendamiento, name="datos_arrendamiento"),
+    # Validar arrendador
+    path('validar_investigacion_arrendador/', views.path_validar_arrendador, name='validar_arrendador'),
+    path('investigacion_arrendadores/', views.path_total_arrendadores, name="investigacion_arrendadores"),
+    # Comentarios
+    path('comentarios/', views.path_comentarios, name="comentarios"),
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
 

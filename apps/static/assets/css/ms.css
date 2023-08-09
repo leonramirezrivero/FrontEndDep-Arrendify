@@ -115,8 +115,28 @@
 }
 
 
+/* Animacion cerradura de derecha a izquiera  */
 
+.message {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 20px;
+}
+.deslizar {
+animation: 3s infinite alternate deslizar;
+}
 
+@keyframes deslizar {
+from {
+  margin-right: 100%;
+  width: 120px
+}
+
+to {
+  margin-left: 100%;
+  width: 120px;
+}
+}
 
 
 
@@ -449,3 +469,8 @@ select{
     backdrop-filter: blur(400px); /* Ajusta el valor de desenfoque según tus necesidades */
     background-color: rgba(0, 0, 0, 0.5); /* Ajusta el valor de transparencia según tus necesidades */
   }
+.obl {
+    color:red; 
+    font-size:12px; 
+    font-weight:bold; 
+ }

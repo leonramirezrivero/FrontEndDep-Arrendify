@@ -14,11 +14,7 @@
         <h1 class="h1">Investigación</h1>
         <p class="mb-0">Listado de Prospectos a Investigar</p>
     </div>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <a class="btn btn-primary mb-3 d-inline-flex align-items-center me-2">
-            Guardar Cambios
-        </a>
-    </div>
+   
   </div>
 
 
@@ -54,11 +50,11 @@
                     <span class="fw-bold" id="regimen"></span>
                 </td>
                 <td><span class="fw-normal">
-                        <select id="status" name="status" style="color:orange; font-weight:bold;" class="form-select" onChange="javascript:cambio_status(this); prueba2(this);" aria-label="Default select example">
-                            <option id="valor1" value="" style="color:orange; font-weight:bold;"></option>
+                        <select id="status" name="status" style="color:; font-weight:bold;" class="form-select" onChange="javascript:cambio_status(this); prueba2(this);" aria-label="Default select example">
+                            <option id="valor1" value=""></option>
                             <option value="En espera" style="color:orange; font-weight:bold;">En espera</option>
                             <option value="Aprobado"  style="color:green; font-weight:bold;">Aprobado</option>
-                            <option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option>
+                            <option value="Rechazado" style="color:red; font-weight:bold;">Declinado</option>
                         </select>
                     </span>
                 </td>                        
@@ -136,13 +132,100 @@
                 </td>
 
                 <td id="acciones">
-                    <button type="button" id="guardar" class="btn btn-primary mb-3">Guardar</button>
+                    <button type="button" id="guardar" class="btn btn-primary mb-3" >Guardar</button>
                 </td>
                 
             </tr>
         </tbody>
     </table>
-    
+    <!-- modal-->
+    <div class="modal fade" id="ventana_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Declinado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <label for="formFile" class="form-label">Motivo del rechazo.</label>
+                <textarea id="comentario_rechazo" name="comentario_rechazo" rows="4" cols="50">Escribe por que fue Rechazado el bro</textarea>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Adjunta el archivo del motivo.</label>
+                    <input class="form-control" type="file" id="archivo_rechazo" name="archivo_rechazo">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" id="rechazar" class="btn btn-primary">Rechazar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal-->
+
+      <!-- modal 2-->
+    <div class="modal fade" id="modal_aprobado" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Aprobado</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h2>Inquilino</h2>
+                <hr class="hr" />
+                <label for="formFile" class="form-label">Recibos de nómina o estados de cuenta.</label>
+                <div>
+                    <select id="roe_inquilino" name="roe_inquilino" onChange="prueba2(this);" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option id="select6" value="" selected></option>
+                        <option value="Recibo de nómina">Recibo de nómina</option>
+                        <option value="Estado de cuenta">Estado de cuenta</option>
+                      </select>
+                </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Número de INE.</label>
+                    <input class="form-control" type="text" id="ine_inquilino" name="ine_inquilino">
+                </div>
+                <hr class="hr" />
+                <h2 id="aval">Fiador Solidario</h2>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Número de INE.</label>
+                    <input class="form-control" type="text" id="ine_fiador" name="ine_fiador">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" id="aprobar" class="btn btn-primary">Aprobar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal 2-->
+
+        <!-- modal 3-->
+    <div class="modal fade" id="modal_pemsa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Persona Moral o Sin Aval</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% comment %} <label for="formFile" class="form-label">Datos Pendientes.</label>
+                <textarea id="comentario_pemsa" name="comentario_pemsa" rows="4" cols="50">Escribe lo que se necesite</textarea> {% endcomment %}
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Adjunta el archivo Especial.</label>
+                    <input class="form-control" type="file" id="archivo_especial_pemsa" name="archivo_especial_pemsa">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" id="aprobar_pemsa" class="btn btn-primary">Aprobar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal 3 -->
 </div>
 
 {% endblock content %}
@@ -152,10 +235,18 @@
 <script>
     const arr ={};
     var datos = JSON.parse( localStorage.getItem('data_investigacion'))
-    const server = 'http://192.168.2.24:8001'
+    const server = 'https://arrendify-api.onrender.com'
     const configin = {
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+    }; 
+
+    const configin_rec = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
             'Accept': 'application/json',
             'Authorization': `Token ${localStorage.getItem('token')}`
         },
@@ -174,7 +265,7 @@
             dato.style.color= "red"
         }
         if (dato.value == "Aprobado"){
-            console.log("en espera pa")
+            console.log("Avanzale compa")
             dato.style.color= "green"
         }
 
@@ -189,8 +280,24 @@
         //regimen
         document.getElementById("regimen").textContent = datos.inquilino.p_fom
         //status
-        document.getElementById("valor1").textContent = datos.status
+        stat2 = document.getElementById("status");
+        document.getElementById("valor1").textContent = datos.status 
+
         document.getElementById("valor1").value = datos.status
+        
+        if(datos.status == "Aprobado"){
+            stat2.style.color = "green"
+        }
+        
+        if(datos.status == "Rechazado"){
+            stat2.style.color = "red"
+        }
+        
+        if(datos.status == "En espera"){
+            stat2.style.color = "orange"
+        }
+
+       
         // identificacion
         document.getElementById("select1").textContent = datos.identificacion
         document.getElementById("select1").value = datos.identificacion
@@ -231,27 +338,176 @@ let formulario = {};
 
 btnSubmit.addEventListener("click", function (event) {
     event.preventDefault();
-
-
     console.log("Investigacion")
     recopilar()
     formulario = JSON.parse(localStorage.getItem('data_investigacion'));
     
+    if(formulario.status == "Rechazado")
+    {
+        $('#ventana_modal').modal('show');
+        boton = document.getElementById("rechazar")
+        var archivo = document.getElementById("archivo_rechazo")
+        boton.addEventListener("click", function() {
+            formulario.comentario = document.getElementById("comentario_rechazo").value
+            formulario.doc_rec = archivo.files[0]
+           enviar_datos_rec(formulario)
+            alert("Prospecto Recahzado!");
+           /*  setTimeout(() => {
+                window.location.href="/investigacion/"
+                }, "3000");*/
+          });
+    }
+    
+//AAAAAAAAAAAAAAPROBADOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+    if(formulario.status == "Aprobado")
+    {
+        console.log("entre en aprobado")
+        // comprueba si el regimen fiscal del inquilino
+        if(datos.inquilino.p_fom == "Persona Fisica")
+        {
+            boton = document.getElementById("aprobar")
+            aval = document.getElementById("aval")
+
+            // antes de aprobar comprueba si el inquilino tiene aval o no
+            if (datos.inquilino.aval[0])
+            {
+                if(datos.inquilino.aval[0].fiador_obligado == "Obligado Solidario Persona Fisica")
+                {
+                $('#modal_aprobado').modal('show');
+                aval.textContent = "Obligado Solidario PF"
+                boton.addEventListener("click", function() {
+                    formulario.roe_inquilino = document.getElementById("roe_inquilino").value
+                    formulario.ine_inquilino = document.getElementById("ine_inquilino").value
+                    formulario.ine_fiador = document.getElementById("ine_fiador").value
+    
+                    Swal.fire({
+                        html:
+                            '<img src="https://cdn.dribbble.com/users/546766/screenshots/4790425/progress-circle.gif"></img>'
+                            + '<br>' + '<p style=" text-align: center; font-weight: bold; font-size: 22px;">--Cargando--</p>',
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        showConfirmButton:false,
+                        focusConfirm: false,
+                        })
+    
+                    enviar_datos(formulario)
+                    });
+                }
+
+                else if (datos.inquilino.aval[0].fiador_obligado == "Fiador Solidario"){
+                    $('#modal_aprobado').modal('show');
+                        boton.addEventListener("click", function() {
+                        formulario.roe_inquilino = document.getElementById("roe_inquilino").value
+                        formulario.ine_inquilino = document.getElementById("ine_inquilino").value
+                        formulario.ine_fiador = document.getElementById("ine_fiador").value
+        
+                        Swal.fire({
+                            html:
+                                '<img src="https://cdn.dribbble.com/users/546766/screenshots/4790425/progress-circle.gif"></img>'
+                                + '<br>' + '<p style=" text-align: center; font-weight: bold; font-size: 22px;">--Cargando--</p>',
+                            showCloseButton: false,
+                            showCancelButton: false,
+                            showConfirmButton:false,
+                            focusConfirm: false,
+                            })
+        
+                        enviar_datos(formulario)
+                        });
+    
+                }
+                else{
+                    console.log("es un Obligado solidario Persona Moral, abrir modal especial para enviar estos archivos")
+                        $('#modal_pemsa').modal('show');
+                        boton_pemsa = document.getElementById("aprobar_pemsa")
+                        var archivo = document.getElementById("archivo_especial_pemsa")
+                        boton_pemsa.addEventListener("click", function() {
+                           // formulario.comentario = document.getElementById("comentario_pemsa").value
+                            formulario.doc_rec = archivo.files[0]
+                            enviar_datos_rec(formulario)
+                            alert("Prospecto aprobado!");
+                            /*setTimeout(() => {
+                                window.location.href="/investigacion/"
+                                }, "3000");*/
+                        });
+                        
+                }
+            }
+            // else si no tiene aval
+            else{
+                alert("no tengo aval")
+                $('#modal_pemsa').modal('show');
+                boton_pemsa = document.getElementById("aprobar_pemsa")
+                var archivo_sa = document.getElementById("archivo_especial_pemsa")
+                boton_pemsa.addEventListener("click", function() {
+                   // formulario.comentario = document.getElementById("comentario_pemsa").value
+                    formulario.doc_sa = archivo_sa.files[0]
+                    enviar_datos_rec(formulario)
+                    alert("Prospecto aprobado!");
+                    /*setTimeout(() => {
+                        window.location.href="/investigacion/"
+                        }, "3000");*/
+                });
+            }
+                   
+        }
+        
+        // else por si es persona moral
+        else{
+            console.log("Enviar archivo especial por ser Persona Moral Aprobado ")
+            alert("Enviar archivo especial por ser Persona Moral!");
+            $('#modal_pemsa').modal('show');
+            boton = document.getElementById("aprobar_pemsa")
+            var archivo = document.getElementById("archivo_especial_pemsa")
+            boton.addEventListener("click", function() {
+              //  formulario.comentario = document.getElementById("comentario_rechazo").value
+                formulario.doc_rec = archivo.files[0]
+                enviar_datos_rec(formulario)
+                alert("Prospecto Aprobado!");
+               /* setTimeout(() => {
+                    window.location.href="/investigacion/"
+                    }, "3000");*/
+              });
+        }
+    }
+
+   //EN ESPERA
+    if (formulario.status == "En espera"){
+        enviar_datos(formulario)
+        Swal.fire(
+            'Excelente!',
+            'Cambios realizados correctamente!',
+            'success'
+            )
+        setTimeout(() => {
+        window.location.href="/investigacion/"
+        }, "2500");
+    }
+   
     console.log("viewform",formulario)
     console.log("identificacion",formulario.hasOwnProperty("identificacion"))
-
-    
-    enviar_datos(formulario)
-   
-
-   setTimeout(() => {
-       window.location.href="/investigacion/"
-   }, "2500");
    
 })
 
 async function enviar_datos(formulario){
+    
     const response = await axios.put(`${server}/investigacion/${datos.id}/`,formulario,configin)
+    console.log("response de enviar datos",response)
+    if (response){
+        Swal.fire(
+            'Excelente!',
+            'Cambios realizados correctamente!',
+            'success'
+            )
+        
+            setTimeout(() => {
+                window.location.href="/investigacion/"
+                }, "2500");
+    }
+    
+}
+
+async function enviar_datos_rec(formulario){
+    const response = await axios.put(`${server}/investigacion/${datos.id}/`,formulario,configin_rec)
     console.log("response",response)
     Swal.fire(
     'Excelente!',
@@ -259,7 +515,17 @@ async function enviar_datos(formulario){
     'success'
     )
 }
-
+function cargando(){
+    Swal.fire({
+                html:
+                    '<img src="https://cdn.dribbble.com/users/546766/screenshots/4790425/progress-circle.gif"></img>'
+                    + '<br>' + '<p style=" text-align: center; font-weight: bold; font-size: 22px;">Cargando</p>',
+                showCloseButton: false,
+                showCancelButton: false,
+                showConfirmButton:false,
+                focusConfirm: false,
+                })
+}
 </script>
 
 {% endblock javascripts %}

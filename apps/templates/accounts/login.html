@@ -80,7 +80,10 @@
                                     <button type="submit" name="login" id="btn_sub" class="btn btn-gray-800">Inicia Sesión</button>
                                 </div>
                             </form>
-                            <br />
+                            <br/>
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <a href="/recuperar_password/" type="button" class="btn btn-link text-success">Recuperar contraseña</a>
+                            </div>
                             <div class="d-flex justify-content-center align-items-center mt-4">
                                 <span class="fw-normal">
                                     &copy; all reserved copyright Arrendify
@@ -106,7 +109,7 @@ function mostrarContra(){
           tipo.type = "password";
       }
 }
-const server = 'https://arrendify-api.onrender.com';;
+const server = "https://arrendify-api.onrender.com";
 const configin = {
 headers: {
     'Content-Type': 'application/json',
@@ -133,7 +136,7 @@ btn = document.getElementById("btn_sub")
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('usuario', JSON.stringify(response.data.user));
         console.log("Local:",localStorage)
-        window.location.href = 'https://arrendify.onrender.com/dashboard.html'
+        window.location.href = '/dashboard.html'
 
     })
     .catch(error => {

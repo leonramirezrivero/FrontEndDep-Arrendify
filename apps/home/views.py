@@ -75,6 +75,17 @@ def path_documentos_arrendador_detalles(request):
     return render(request, 'home/archivos_arrendador/detalles_documentos.html',{    
     })
 
+#============= Investigacion Arrendador =============
+def path_total_arrendadores(request):
+    # return render(request, 'home/validacion_arrendador/total_arrendadores_validar.html',{ investigacion 
+    return render(request, 'home/validacion_arrendador/investigacion.html',{   
+})
+
+def path_validar_arrendador(request):
+    return render(request, 'home/validacion_arrendador/validar_investigacion.html',{    
+})
+
+
 
 def path_documentos_arrendador_detalles_nuevo_template(request):
     return render(request, 'home/arrendador/detalles_archivos.html',{    
@@ -109,6 +120,9 @@ def path_detalles_archivos_fia(request,id):
 def tyc(request):
     return render(request, 'home/Terminos.html', {
     })
+def cotizacion(request):
+    return render(request, 'home/cotizacion.html', {
+    })
     
 
 # path inmuebles
@@ -132,6 +146,35 @@ def path_investigacion(request):
 def path_check_investigacion(request):
     return render(request, 'home//Investigacion/investigacion-api.html', {
     })
+
+#============= Recuperar contraseña=============
+def path_recuperar_contraseña(request):
+    return render(request, 'home/recuperar_contraseña/page-forgot-password.html',{    
+})
+
+def path_guardar_nueva_contraseña(request):
+    return render(request, 'home/recuperar_contraseña/page-reset-password.html',{    
+})
+
+#============= Contactanos =============
+def path_contactanos(request):
+    return render(request, 'home/contactanos/contactanos.html',{    
+})
+
+#============= Preguntas Frecuentes =============
+def path_preguntas_frecuentes(request):
+    return render(request, 'home/preguntas_frecuentes/preguntas_frecuentes.html',{    
+})
+
+#============= Datos de arrendamiento =============
+def path_datos_arrendamiento(request):
+    return render(request, 'home/datos_arrendamiento/datos_arren.html',{    
+})
+
+#============= Comentarios =============
+def path_comentarios(request):
+    return render(request, 'home/comentarios/comentarios.html',{    
+})
 
 def pages(request):
     context = {}

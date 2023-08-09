@@ -1,41 +1,30 @@
-
-
-async function auten(){ 
-     await fetch('https://arrendify-api.onrender.com/user_unico/')
-      .then(response => response.json())
-      .then(data => {
-          // Aquí se puede hacer algo con los datos obtenidos, como renderizarlos en una tabla o mostrarlos en una lista
-          try{ 
-   
-            var token = localStorage.getItem('token');
-            var usuario = JSON.parse(localStorage.getItem('usuario')) 
-            if (usuario && token){
-               
-                Userdb = data.user;
-                var usuarioBD = Userdb.find(u => u.username === usuario.username);
-                if (usuarioBD.username == usuario.username){
-                    document.querySelector('.dropdown-fl').style.display = 'block';
-                }
-                 else{
-                    //window.location.replace(`/login/`);
-                    window.location.href = `/login/`
-                  
-                 }
+async function auten(){   
+    await fetch('https://arrendify-api.onrender.com/user_unico/',{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+          },
+    })
+     .then(response => response.json())
+     .then(data => {
+       
+        try{ 
+            if (data.user){
+                document.querySelector('.dropdown-fl').style.display = 'block';
             }
             else{
-               // window.location.replace(`/login/`);
                 window.location.href = `/login/`
-                
+                localStorage.clear();
             }
         }
-        catch{
-            //window.location.replace(`/login/`);
-           // window.location.href = `/login/`
-            
-        }
-    })
-      .catch(error => console.error(error));
+       catch{
+           //window.location.replace(`/login/`);
+          // window.location.href = `/login/`
+           
+       }
+   })
+     .catch(error => console.error(error));
 
-   
-    
 }

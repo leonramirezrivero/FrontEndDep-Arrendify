@@ -1,4 +1,4 @@
-const server = 'https://arrendify-api.onrender.com';
+const server = "https://arrendify-api.onrender.com";
     document.getElementById("cargar_tabla").onload = plantar()
     
     
@@ -40,6 +40,7 @@ function plantar()
     document.getElementById("numeroTel").value = datos.numeroTel
     document.getElementById("numeroTel1").value = datos.numeroTel1
     document.getElementById("rfc").value = datos.rfc
+    document.getElementById("nacionalidad").value = datos.nacionalidad
     document.getElementById("email").value = datos.email
     document.getElementById("estado_civil").value = datos.estado_civil
    
@@ -65,7 +66,7 @@ function plantar()
     document.getElementById("poi4").value =`Nombre: ${datos.n_inquilino4} Parentesco: ${datos.p_inquilino4}`
     document.getElementById("poi5").value =`Nombre: ${datos.n_inquilino5} Parentesco: ${datos.p_inquilino5}`
     
-    for(let i= 23; i< 43;i++)
+    for(let i= 24; i< 44;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         console.log("yo soy k2",k2)
@@ -73,7 +74,7 @@ function plantar()
         console.log("soy k2",k2[0]);
     }
 // segundo for
-    for(let i= 51; i< 57;i++)
+    for(let i= 52; i< 58;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         console.log("yo soy k2 del for2",k2)

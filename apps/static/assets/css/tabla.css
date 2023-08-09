@@ -1,0 +1,31 @@
+.tabla_datos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.tabla_datos caption {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tabla_datos thead {
+    background-color: #231942;
+    color: #fff;
+}
+
+.tabla_datos th,
+.tabla_datos td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+.tabla_datos th {
+    font-weight: bold;
+}
+
+.tabla_datos tbody tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}

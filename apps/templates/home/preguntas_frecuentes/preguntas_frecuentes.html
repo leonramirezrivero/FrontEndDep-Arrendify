@@ -1,0 +1,769 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+#redes_sociales {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin: 4px;
+}
+
+    #redes_sociales .list-inline-item {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    #redes_sociales .btn {
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+    }
+  
+    #redes_sociales .btn:focus {
+      box-shadow: none;
+    }
+
+    #redes_sociales ul {
+      width: 100px; /* Ancho fijo para la lista */
+      background-color: #f8f9fa; /* Color de fondo */
+      padding: 10px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+/* Estilos para el botón cuando está seleccionado o tiene el foco */
+.accordion-button.selected, .accordion-button:focus {
+    background-color: #231942; /* Cambia el color de fondo al seleccionar o tener el foco */
+    color: white; /* Cambia el color del texto al seleccionar o tener el foco */
+}
+
+/* Estilos para el ícono dentro del botón cuando está seleccionado o tiene el foco */
+.accordion-button.selected .fa, .accordion-button:focus .fa {
+    transform: rotate(90deg); /* Rota el ícono 90 grados al seleccionar o tener el foco */
+}
+
+
+body{
+    background-color:;
+}
+
+#navbarSupportedContent{
+     background-color:#f2f4f6;
+}
+
+.accordion-item{
+    background-color:#E6E6FA;
+}
+
+.list-group-item{
+    background-color:#e6e6fa;
+}
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+<section class="card card-body border-0 shadow mb-4" style="background:white">
+    <div class="container mt-4" style="">
+        <div class="row">
+            <h1 class="bg-primary rounded-pill text-center text-white">Preguntas Frecuentes</h1>
+            <div class="col-md-6 mx-auto">
+                <div class="row"> <!-- Agregamos un espacio entre los acordeones -->
+                    <div class="accordion" id="accordionExample">
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_1" aria-expanded="false" aria-controls="p_1">
+                                            ¿Qué es una póliza jurídica?
+                                        </button>
+                                    </h2>
+                                    <div id="p_1" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>Una póliza jurídica es un acuerdo de asistencia legal en el que un despacho o empresa otorga sus servicios profesionales, tanto al propietario como al arrendatario de un inmueble. Lo que da como resultado una garantía que se encarga de proteger al propietario en caso de incumplir con alguna de las obligaciones acordadas en el contrato de arrendamiento.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_2" aria-expanded="false" aria-controls="p_2">
+                                        ¿Cómo tramitar una póliza de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>Para tramitar una póliza jurídica es necesario recabar datos del arrendatario y arrendador para poder realizar el contrato, de esta forma se podrán establecer los derechos y obligaciones que, en caso de incumplimiento, requieran de una cobranza judicial y extrajudicial.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->                        
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_3" aria-expanded="false" aria-controls="p_3">
+                                        Póliza de arrendamiento costo
+                                    </button>
+                                    </h2>
+                                    <div id="p_3" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>En Arrendify, manejamos diferentes costos, de inicio de contrato es entre el 2% y 5% del valor de una renta (contrato anual, primera vez). Para contratos ya hechos se cotizará dependiendo el riesgo y el tiempo que lleve el contrato. El costo de la renovación será de un dependiendo del comportamiento del cliente y se determinará al momento de la renovación.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_4" aria-expanded="false" aria-controls="p_4">
+                                        Póliza jurídica Profeco
+                                    </button>
+                                    </h2>
+                                    <div id="p_4" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>Antes de rentar una vivienda es necesario investigarla para conocer el estado de la misma, los requisitos que se requieren y la garantía a dejar para formalizar el acuerdo. La Procuraduría Federal del Consumidor (Profeco) expone que es importante elegir la zona de acuerdo con el presupuesto y lugar de trabajo, escuela y sitios frecuentados. Precisa que en caso de que el inmueble sea del agrado, se debe pensar en la tranquilidad económica, por lo que sugiere que la renta no rebase la cuarta parte de los ingresos, además de considerar los gastos fijos actuales, ya que vivir ahí generará otros, como aseo, gasolina y mantenimiento.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_5" aria-expanded="false" aria-controls="p_5">
+                                        Póliza jurídica de arrendamiento requisitos
+                                    </button>
+                                    </h2>
+                                    <div id="p_5" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>
+                                                Los requisitos varían dependiendo de la aseguradora que se contrate y si se habla del arrendador, arrendatario o fiador y si son personas morales o físicas.<br><br>
+                                                <ul class="list-group list-group-flush m-0">
+                                                    <li class="list-group-item">
+                                                        <strong>PROPIETARIO (ARRENDADOR)</strong>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Credencial de elector vigente o identificación oficial.</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Acta constitutiva en caso de ser persona moral y poder del representante legal en su caso.</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Comprobante de domicilio (luz, agua o teléfono)</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Datos generales del inmueble.</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Solicitud de arrendamiento elaborada.</span>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="ms-3 d-inline-block">Documento que acredite la propiedad.</span>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-group list-group-flush m-0">
+                                                    <li class="list-group-item">
+                                                        <strong>ARRENDATARIO (INQUILINO)</strong>
+                                                    </li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Credencial de elector vigente o identificación oficial.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Acta constitutiva en caso de ser persona moral y poder del representante legal en su caso.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de ingresos de los últimos tres meses laborables o estados de cuenta.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de domicilio (luz, agua o teléfono)</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Solicitud de arrendamiento elaborada.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Acta constitutiva o poder notarial en caso de ser persona moral.</span></li>
+                                                </ul>
+                                                <ul class="list-group list-group-flush m-0">
+                                                    <li class="list-group-item"><strong>FIADOR (GARANTE)</strong></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Credencial de elector vigente o identificación oficial.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Acta constitutiva en caso de ser persona moral y poder del representante legal en su caso.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Escritura pública o Título de propiedad del inmueble garante.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de domicilio (luz, agua o teléfono)</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Solicitud de arrendamiento elaborada.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Acta de matrimonio.</span></li>
+                                                </ul>
+                                                <ul class="list-group list-group-flush m-0">    
+                                                    <li class="list-group-item"><strong>OBLIGADO SOLIDARIO</strong></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Credencial de elector vigente o identificación oficial.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de ingresos de los últimos tres meses laborables o estados de cuenta.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de domicilio (luz, agua o teléfono).</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Solicitud de arrendamiento elaborada.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Acta constitutiva o poder notarial en caso de ser persona moral.</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_6" aria-expanded="false" aria-controls="p_6">
+                                        ¿Qué es una póliza jurídica con obligado solidario?
+                                    </button>
+                                    </h2>
+                                    <div id="p_6" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>Un obligado solidario es aquella persona que no deja un inmueble en garantía, pero firma el contrato y contrae todas las obligaciones que menciona ese documento.
+                                                En el caso de las operaciones de arrendamiento, es más común que se aplique la figura del obligado solidario cuando el arrendador renta a más de una persona el mismo inmueble. Se establece un esquema de obligados solidarios para poder cobrar de forma indistinta a cualquiera de los arrendatarios. Con esto puede evitarse los problemas de tratar con un deudor principal y uno o más deudores secundarios.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_7" aria-expanded="false" aria-controls="p_7">
+                                        ¿Qué es la póliza jurídica de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_7" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>La póliza jurídica de arrendamiento se basa en un contrato de prestación de servicios legales en el cual el despacho jurídico se obligan  a llevar a cabo una exhaustiva *investigación* de inquilinos, avales y fiadores para poder tomar la decisión correcta de cuál es el mejor inquilino para entregarle tu propiedad en arrendamiento, preparan todos los documentos legales para la firma y proceso correcto.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_8" aria-expanded="false" aria-controls="p_8">
+                                        ¿Quién debe pagar la póliza jurídica?
+                                    </button>
+                                    </h2>
+                                    <div id="p_8" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>El pago será dependiendo lo que quiera el arrendador, es un documento que ampara a las dos personas (Propietario e inquilino). En la mayoría de los casos la póliza jurídica es un requisito de arrendamiento y en este caso el pago le corresponde al arrendatario (inquilino). También puede que el arrendador decida:
+                                                    <ul class="list-group list-group-flush m-0">
+                                                        <li class="list-group-item"><span class="ms-3 d-inline-block">Pagar el 50% del monto total de la póliza jurídica.</span></li>
+                                                        <li class="list-group-item"><span class="ms-3 d-inline-block">Pagar el monto total.</span></li>
+                                                        <li class="list-group-item"><span class="ms-3 d-inline-block">Que el inquilino pague el 100% del monto. (En la mayoría de los casos)</span></li>
+                                                    </ul>
+                                                Depende mucho de la decisión que tome el propietario.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->                    
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_9" aria-expanded="false" aria-controls="p_9">
+                                        Póliza jurídica costo
+                                    </button>
+                                    </h2>
+                                    <div id="p_9" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>El costo de la póliza Jurídica dependerá de la protección legal a contratar su costo estimado es entre el 2% y el 5% del valor de la renta anual, puede variar en cada empresa que ofrezca el servicio, una póliza Jurídica de arrendamiento es una herramienta muy completa que previene problemas futuros entre cualquiera de las partes involucradas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_10" aria-expanded="false" aria-controls="p_10">
+                                        Póliza de arrendamiento
+                                    </button>
+                                    </h2>
+                                    <div id="p_10" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>La Protección Jurídica de Arrendamiento, mejor conocida como Póliza de Arrendamiento es una herramienta que contratas para protegerte, como dueño del inmueble, por la cual puedes obtener desde la protección y recuperación de tu inmueble, pago de rentas y de daños causados, hasta la defensa de tu patrimonio en caso de actividades ilícitas o relacionadas con el crimen organizado.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_11" aria-expanded="false" aria-controls="p_11">
+                                        ¿Qué es la póliza de seguro de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_11" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#p_11">
+                                        <div class="accordion-body">
+                                            <p>Garantía que respalda y le paga al propietario el arriendo, los servicios, la administración y los posibles daños ocasionados al inmueble, en caso de que el inquilino incumpla con alguna de estas obligaciones derivadas del contrato de arrendamiento.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->                        
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_12" aria-expanded="false" aria-controls="p_12">
+                                        Beneficios de las pólizas jurídicas
+                                    </button>
+                                    </h2>
+                                    <div id="p_12" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#p_12">
+                                        <div class="accordion-body">
+                                            <p> 
+                                                <ul class="list-group list-group-flush m-0">
+                                                    <li class="list-group-item">
+                                                        <strong><h6>Protección al arrendador y al arrendatario</h6></strong>
+                                                    </li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Cobranza de adeudos o incumplimiento</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Contrato que rectifica los derechos y obligaciones</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Sustituto de fiador o aval</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Evitar futuros conflictos</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Tranquilidad al rentarle a alguien con antecedentes impecables</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Recuperación judicial del inmueble en caso de ser necesario</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_13" aria-expanded="false" aria-controls="p_13">
+                                        Elementos personales de una póliza jurídica
+                                    </button>
+                                    </h2>
+                                    <div id="p_13" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>El asegurado es la persona que estará protegida por el seguro, pudiendo ser o no la misma que lo contrata.
+                                                    Tomador es la persona física o jurídica que suscribe el contrato, sea o no asegurado y que asume la obligación de pago de la prima y demás obligaciones que legal y contractualmente le corresponden.
+                                                    Asegurador es la compañía que protegerá al asegurado y se hará cargo del riesgo asociado al incidente o causa.
+                                                    El beneficiario es la persona física o jurídica designada por el asegurado para el cobro de la indemnización derivada del siniestro.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_14" aria-expanded="false" aria-controls="p_14">
+                                        ¿Qué investigan en la póliza jurídica?
+                                    </button>
+                                    </h2>
+                                    <div id="p_14" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <p>Se realiza un Estudio de Capacidad de Pago por el cual se investigan distintos criterios del arrendamiento que pueden ir desde el historial crediticio, referencias comerciales, referencias bancarias, etc.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"> <!-- Agregamos un espacio entre los acordeones -->
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_15" aria-expanded="false" aria-controls="p_15">
+                                        Modalidades de contratos
+                                    </button>
+                                    </h2>
+                                    <div id="p_15" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body ">
+                                            <p>
+                                                <ul class="list-group list-group-flush m-0 ">
+                                                    <li class="list-group-item">
+                                                        <strong><h6>Contrato sin fiador ni garantía.</h6></strong>
+                                                    </li>
+                                                    <li class="list-group-item "><span class="ms-3 d-inline-block">Contrato con obligado solidario.</span></li>
+                                                    <li class="list-group-item "><span class="ms-3 d-inline-block">Contrato con fiador y garantía bien mueble.</span></li>
+                                                    <li class="list-group-item "><span class="ms-3 d-inline-block">Contrato con fiador y garantía bien inmueble.</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mx-auto">
+                <div class="row">
+                    <div class="accordion" id="accordionExample2">
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> <!-- Agregamos estilos para centrar el acordeón -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_16" aria-expanded="false" aria-controls="p_16">
+                                        ¿Cuánto vale una póliza jurídica?
+                                        </button>
+                                    </h2>
+                                    <div id="p_16" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>El costo de ambos trámites pueden variar dependiendo de la compañía aseguradora o afianzadora a la que acuda. Toma en cuenta que puede incluirse el cobro del formulario de solicitud de arrendamiento y los derechos de realización del contrato.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_17" aria-expanded="false" aria-controls="p_17">
+                                            ¿Qué se necesita para una póliza jurídica?
+                                        </button>
+                                    </h2>
+                                    <div id="p_17" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                            <ul class="list-group list-group-flush m-0">                          
+                                                <li class="list-group-item"><strong>Requisitos:</strong></li>          
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Arrendador/Propietario: Solicitud e Identificación oficial.</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Arrendatario/Inquilino: Formulario, Identificación oficial y Comprobante de ingresos.</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Obligado Solidario (En caso de aplicar): Identificación oficial y Comprobante de ingresos.</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Fiador (En caso de aplicar): Identificación oficial, Comprobante de domicilio y Acta de Matrimonio.</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Garantía bien mueble (En caso de aplicar): Copia de la factura por ambos lados, Copia tarjeta de circulación (vehículo) y Fotografías de la garantía.</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Garantía bien inmueble (En caso de aplicar): Escrituras públicas de inmueble en garantía y último pago de predial.</span></li>
+                                            </ul>
+                                            <ul class="list-group list-group-flush m-0">
+                                                <li class="list-group-item"><strong>Las partes pueden ser personas físicas o morales. En caso de personas morales en lugar de identificación oficial, deberán de enviar:</strong></li>           
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Acta constitutiva de la persona moral</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Poder del representante legal o apoderado</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Registro Federal de Contribuyentes</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Comprobante de domicilio</span></li>
+                                                <li class="list-group-item"><span class="ms-3 d-inline-block">Identificación oficial del representante legal o apoderado.</span></li>
+                                            </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>           
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_18" aria-expanded="false" aria-controls="p_18">
+                                        ¿Cómo contratar una póliza de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_18" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <ul class="list-group list-group-flush m-0">                          
+                                                    <li class="list-group-item"><strong>Si requieres hacer una póliza segura y que esté bajo el marco legal correctamente, te recomendamos que acudas con un profesional jurídico o en su defecto con compañías aseguradoras que ofrecen estos servicios. Las compañías aseguradoras pueden realizar lo siguiente:</strong></li>                                      
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Tener los datos de la propiedad</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Recabar datos de los involucrados</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Realización del contrato de promesa</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Asesoría complementaria</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Iniciar el proceso judicial en caso de ser necesario</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_19" aria-expanded="false" aria-controls="p_19">
+                                        Póliza jurídica es reembolsable
+                                    </button>
+                                    </h2>
+                                    <div id="p_19" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                La póliza jurídica tiene un costo de investigación, si la investigación es positiva se firma contrato y una vez el inquilino empiece a rentar empezará a correr la póliza jurídica la cuál se aplicará en cualquier incidente que pueda haber entre ambas partes, por lo que no se reembolsará.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_20" aria-expanded="false" aria-controls="p_20">
+                                        Póliza jurídica quien la paga
+                                    </button>
+                                    </h2>
+                                    <div id="p_20" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                La póliza jurídica tiene un costo de investigación, si la investigación es positiva se firma contrato y una vez el inquilino empiece a rentar empezará a correr la póliza jurídica la cuál se aplicará en cualquier incidente que pueda haber entre ambas partes, por lo que no se reembolsará.            
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_21" aria-expanded="false" aria-controls="p_21">
+                                        Póliza jurídica de arrendamiento qué es
+                                    </button>
+                                    </h2>
+                                    <div id="p_21" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>La póliza jurídica de arrendamiento es una garantía escrita que entra en vigor cuando comienza el proceso de renta de un inmueble. Por lo general, es realizado por alguna inmobiliaria, aseguradora u otra empresa de prestigio, que se encargará de investigar al próximo arrendatario y constatar su fiabilidad.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_22" aria-expanded="false" aria-controls="p_22">
+                                        ¿Cuál es el contenido de la póliza de seguro?
+                                    </button>
+                                    </h2>
+                                    <div id="p_22" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <ul class="list-group list-group-flush m-0">                          
+                                                    <li class="list-group-item"><strong>La póliza de seguro de crédito o de caución contendrá, como mínimo, las indicaciones siguientes:</strong></li>                                                                                              
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Nombre y apellidos o denominación social de las partes contratantes y su domicilio, así como la designación del asegurado y beneficiario, en su caso.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">El concepto en el cual se asegura.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Naturaleza del riesgo cubierto, describiendo, de forma clara y comprensible, las garantías y coberturas otorgadas en el contrato, así como respecto a cada una de ellas, los derechos, las exclusiones y limitaciones que les afecten.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Designación de los objetos asegurados y de su situación.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Suma asegurada o alcance de la cobertura.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Importe de la prima, recargos e impuestos.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Vencimiento de las primas, lugar y forma de pago.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Duración del contrato con expresión del día y la hora en que comienzan y terminan sus efectos.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Si interviene un mediador en el contrato, el nombre y tipo de mediador.</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_23" aria-expanded="false" aria-controls="p_23">
+                                        ¿Cuánto cuesta una póliza jurídica de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_23" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>Las pólizas jurídicas tienen un costo aproximado de entre el 2% y el 5% del contrato anual. Suele pagarla el inquilino, como uno de los requisitos para la renta. Sin embargo, al ser un seguro que te beneficia como propietario, se puede dividir el monto.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_24" aria-expanded="false" aria-controls="p_24">
+                                        Póliza jurídica de arrendamiento costo
+                                    </button>
+                                    </h2>
+                                    <div id="p_24" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>Varían mucho dependiendo de la aseguradora que se contrate ya que todas tienen planes y paquetes diferentes con diferente cobertura cada uno, pero varían desde el 2% al 5% de la cuota anual, en diferentes aseguradoras dependiendo del monto de la renta del inmueble.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_25" aria-expanded="false" aria-controls="p_25">
+                                        Póliza jurídica de arrendamiento quién la paga
+                                    </button>
+                                    </h2>
+                                    <div id="p_25" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>La mayoría de las veces es pagada por el propietario del inmueble, sin embargo, en algunos casos llega a ser acordado pagando 50% el arrendador y 50% el arrendatario.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_26" aria-expanded="false" aria-controls="p_26">
+                                        Póliza jurídica sin aval
+                                    </button>
+                                    </h2>
+                                    <div id="p_26" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>Una de las medidas de protección de los arrendadores es solicitar al inquilino un aval que responda en caso de impago y que compruebe que es poseedor de bienes con un valor igual o superior a lo negociado en el contrato. Pero en tiempos modernos, esto ya no es un problema,  ya que existen en el mercado opciones para que los arrendadores y arrendatarios puedan rentar una propiedad sin la necesidad de aval y con la protección de empresas, que en caso de impago; responderán por el inquilino. En el siguiente artículo, te explicaremos a detalle cada una de ellas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_27" aria-expanded="false" aria-controls="p_27">
+                                        ¿Cómo adquirir una póliza de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_27" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <ul class="list-group list-group-flush m-0">                          
+                                                    <li class="list-group-item"><strong>Asesórate</strong></li>                                                                                              
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">En primer lugar, entra en contacto con tu agencia de seguros para recibir toda la asesoría gratuita y acompañamiento en la elección y contratación de tu seguro. Serán ellos los encargados de guiarte en cada paso del camino y presentarte cotizaciones de diferentes compañías de seguros para que puedas comparar las opciones.</span></li>
+                                                    <li class="list-group-item"><strong> Estudio del inquilino</strong></li>                                                                                              
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Después de haber elegido la compañía con la que deseas contratar, el interesado en arrendar el inmueble deberá someterse al estudio de arrendamiento junto con sus codeudores. Esto se realiza para verificar que tenga capacidad de pago de las obligaciones pactadas en el contrato de arrendamiento. Para este estudio se deben enviar algunos documentos y diligenciar y firmar los formularios de solicitud. Como lo vimos anteriormente, es posible que algunas compañías cobren este estudio.</span></li>
+                                                    <li class="list-group-item"><strong>Creación del contrato</strong></li>                                                                                              
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Una vez aprobado el estudio y la solicitud de arrendamiento, la compañía aseguradora procederá con la creación del contrato para la firma de las partes (arrendador, arrendatario y codeudores). En algunas compañías la elaboración del contrato es gratuita, en otras tiene un costo adicional que generalmente es asumido por el arrendatario.</span></li>
+                                                    <li class="list-group-item"><strong> Emisión de la póliza de arrendamiento y pago</strong></li>                                                                                              
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Por último, se genera la póliza de arrendamiento que generalmente tiene un costo del 50% del valor de canon + IVA. Este valor le corresponde al propietario del inmueble o según pacten entre las partes (arrendador y arrendatario).</span></li>                        
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_28" aria-expanded="false" aria-controls="p_28">
+                                        ¿Qué servicios ofrece la póliza jurídica de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_28" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>La investigación de la propiedad antes de que se entregue para su alquiler, investigación del Arrendador para asegurar que es una persona que hará buen uso del inmueble y podrá cubrir sus pagos puntualmente, la realización del contrato de arrendamiento y, en caso de que falta de pago de sus rentas, iniciar el proceso de judicial en contra del inquilino.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_29" aria-expanded="false" aria-controls="p_29">
+                                        ¿Qué es la póliza de seguros?
+                                    </button>
+                                    </h2>
+                                    <div id="p_29" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>Una póliza de seguro es un contrato entre una persona física, un empresario individual o una persona jurídica (Tomador) y una entidad aseguradora, que se vinculan en virtud del mismo y en el cual se especifican las obligaciones y deberes de cada una de las partes (los términos y las condiciones a que están sujetas ambas partes como los ámbitos y la cobertura del seguro).
+                                            La póliza de seguro de crédito o de caución es el documento en el que se formaliza el contrato de seguro, en la que se especifican normas, derechos, deberes y obligaciones de las partes. El asegurador, por su parte, tiene la obligación de aportar la póliza de seguro al asegurado o, en su defecto, un documento de cobertura provisional.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_30" aria-expanded="false" aria-controls="p_30">
+                                        ¿Cuál es la vigencia de la póliza jurídica de arrendamiento?
+                                    </button>
+                                    </h2>
+                                    <div id="p_30" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>La mayoría de pólizas cuentan con una vigencia de un año a partir de la firma del contrato, sin embargo, se puede extender su lapso de vigencia tanto como lo deseen las partes.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-md-12 mx-auto"> 
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#p_31" aria-expanded="false" aria-controls="p_31">
+                                        ¿Qué se investiga del arrendamiento, obligado solidario, fiador y garantía?
+                                    </button>
+                                    </h2>
+                                    <div id="p_31" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                                        <div class="accordion-body">
+                                            <p>
+                                                <ul class="list-group list-group-flush m-0">                                                          
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Buró Judicial y Procesos Legales.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Buró de Crédito y Resumen Crediticio.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Antecedentes criminales, Investigación y Web search.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Delincuencia organizada y Lavado de dinero.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Referencias Personales, Familiares y Laborales.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Análisis de Flujo y Capacidad de pago.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Análisis de Riesgos Generales.</span></li>
+                                                    <li class="list-group-item"><span class="ms-3 d-inline-block">Registro Público de la Propiedad y del Comercio.</span></li>
+                                                </ul>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script src="/static/assets/repositorios/loader.js"></script>
+<script>
+    document.getElementById("li2").onload = inicio()
+    function inicio(){
+         console.log("entro inicio")
+        auten()
+    }
+
+  document.addEventListener("DOMContentLoaded", function() {
+        const accordionButtons = document.querySelectorAll(".accordion-button");
+
+        accordionButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                this.classList.toggle("selected");
+            });
+        });
+    });
+   
+</script>
+
+{% endblock javascripts %}

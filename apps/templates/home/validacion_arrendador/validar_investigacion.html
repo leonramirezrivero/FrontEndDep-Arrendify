@@ -1,0 +1,416 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Investigación {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+/* Estilos para el botón del dropdown */
+.btn-custom {
+  background-color: white;
+  color: black;
+  border-color: #ccc;
+  transition: background-color 0.3s ease;
+}
+
+.btn-custom:hover {
+  background-color: lightgray;
+}
+
+/* Estilos para el icono SVG */
+.btn-custom .dots svg {
+  fill: blue; /* Color deseado para el icono */
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+
+/* Estilos para el dropdown-menu */
+.dropdown-menu-custom {
+  padding: 0.5rem;
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra al dropdown */
+}
+
+.dropdown-menu-custom .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: black;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu-custom .dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.modal-header{
+    background-color:#231942;
+    color: white;
+}
+
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="cargar_tabla" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="background-color:#edede9;">
+    <div class="d-block mb-4 mb-md-0" style="margin-left:10px">
+        <h1 class="h1">Investigación</h1>
+        <p class="mb-0">Listado de Arrendadores Prospectos a Investigar</p>
+    </div>
+    {% comment %} <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-primary mb-3 d-inline-flex align-items-center me-2">
+            Guardar Cambios
+        </a>
+    </div> {% endcomment %}
+  </div>
+
+
+  
+</div>
+<div class="table-settings mb-4">
+  <div class="row justify-content-between align-items-center">
+      <div class="col-9 col-lg-8 d-md-flex mt-2">
+         
+    </div>
+</div>
+<div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
+    <table class="table user-table align-items-center mb-5"> <!--id="datatable"-->
+        <thead>
+            <tr >
+                <th class="border-bottom d-flex justify-content-center" style="background:#231942ff; color:white;">Prospecto</th>
+                <th class="border-bottom justify-content-center" style="background:#231942ff; color:white;">Regimen Fiscal</th>						
+                <th class="border-bottom d-flex justify-content-center" style="background:#231942ff; color:white;">Estatus</th>
+                <th class="border-bottom border-end " style="background:#231942ff; color:white;">Documentos</th>
+               
+                <th scope="col" style="background:#f0bc74; color:black;">¿Cumple?</th>
+                <th scope="col" class="d-flex justify-content-center" style="background:#f0bc74; color:black;">Comentarios</th>
+                <th scope="col" style="background:#f0bc74; color:black;">acciones</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>                
+                <td> <span class="fw-bold" id="prospecto"></span></td>
+                <td>
+                    <span class="fw-bold" id="regimen"></span>
+                </td>
+                <td>
+                    <span class="fw-normal">
+                        <select id="estatus_documentos" name="estatus_documentos" class="form-select" onChange="javascript:cambio_status(this); prueba2(this);" aria-label="Default select example">
+                            <option value="En espera" class="text-warning font-weight-bold">En espera</option>
+                            <option value="Aprobado" class="text-success font-weight-bold">Aprobado</option>
+                            <option value="Rechazado" class="text-danger font-weight-bold">Rechazado</option>
+                        </select>
+                    </span>
+                </td>                        
+                <td class="border-bottom border-end">
+                    <p>Identificación</p>
+                    <p>Comprobante Domicilio</p>
+                    <p>Escrituras</p>
+                    <p>Predial</p>
+                </td>
+                <td class="cumple">
+                    <div class="col mt-2" >
+                        <div class="form-check d-flex justify-content-center" style="position: relative; bottom: 25px;">
+                            <select id="select1" name="validacion_ine" onChange="prueba2(this);" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="Si">Aprovado</option>
+                                <option value="No">Rechazado</option>
+                                <option value="En revision">En revision</option>
+                                <option value="Excepcion">Excepcion</option>
+                              </select>
+                        </div>
+
+                        <div class="form-check d-flex justify-content-center" style="position: relative; bottom: 20px;">
+                            <select id="select2" name="validacion_comprobante_domicilio" onChange="prueba2(this);" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="Si">Aprovado</option>
+                                <option value="No">Rechazado</option>
+                                <option value="En revision">En revision</option>
+                                <option value="Excepcion">Excepcion</option>
+                              </select>
+                        </div>
+
+                        <div class="form-check d-flex justify-content-center" style="position: relative; bottom: 15px;">
+                            <select id="select3" name="validacion_escrituras" onChange="prueba2(this);" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="Si">Aprobado</option>
+                                <option value="No">Rechazado</option>
+                                <option value="En revision">En revision</option>
+                                <option value="Excepcion">Excepcion</option>
+                              </select>
+                        </div>
+
+                        <div class="form-check d-flex justify-content-center" style="position: relative; bottom: 10px;">
+                            <select id="select4" name="validacion_predial" onChange="prueba2(this);" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option value="Si">Aprovado</option>
+                                <option value="No">Rechazado</option>
+                                <option value="En revision">En revision</option>
+                                <option value="Excepcion">Excepcion</option>
+                              </select>
+                        </div>
+                    </div>
+                </td>
+                
+                <td id="div-comentarios">
+                    <div class="input-text">
+                        <textarea id="comentarios" name="comentarios" oninput="prueba2(this);" class="form-control" placeholder="..." rows="10"></textarea>
+                    </div>
+                </td>
+
+                <td id="acciones">
+                    <div class="d-flex align-items-end justify-content-center my-3">
+                        <div class="dropdown">
+                            <button class="btn btn-primary mb-3 dropdown-toggle btn-custom d-flex " type="button" id="dropdownAdjuntar" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="dots">...</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-custom" aria-labelledby="dropdownAdjuntar">
+                                <li>
+                                    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalAdjuntarArchivos">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+                                            <path d="M12 4.18L7.76 8.41a.996.996 0 1 0 1.41 1.41l2.83-2.83V14c0 .55.45 1 1 1s1-.45 1-1V7.59l2.83 2.83a.996.996 0 1 0 1.41-1.41L12 4.18zM20 20H4c-.55 0-1-.45-1-1V9.41l7-7L17.59 7H13c-.55 0-1 .45-1 1s.45 1 1 1h4.59l-4.3 4.29a.996.996 0 1 0 1.41 1.41L21 9.41V19c0 .55-.45 1-1 1z"/>
+                                        </svg> Adjuntar Archivos
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center my-3">
+                        <button type="button" id="guardar" class="btn btn-success mb-3">Guardar</button>
+                    </div>
+                </td>              
+            </tr>
+        </tbody>
+    </table>
+    <div class="modal fade" id="modalAdjuntarArchivos" tabindex="-1" aria-labelledby="modalAdjuntarArchivosLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalAdjuntarArchivosLabel">Adjuntar Archivos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="comentarios_denegado" class="form-label">Comentarios</label>
+                        <textarea class="form-control" id="comentarios_denegado" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pdf_rechazado" class="form-label">Adjuntar archivo</label>
+                        <input class="form-control" type="file" id="pdf_rechazado">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="submit_archivo">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %} 
+<script>
+    const arr ={};
+    var datos = JSON.parse( localStorage.getItem('data_investigacion_arrendador'))
+    const server = 'https://arrendify-api.onrender.com';;
+    const configin = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+    }; 
+    
+    document.getElementById("cargar_tabla").onload = plantar();
+    
+    function cambio_status(dato){
+      
+        if (dato.value == "En espera"){
+            console.log("datos en verde", dato)
+            dato.style.color= "orange"
+        }
+        if (dato.value == "Rechazado"){
+            console.log("en espera pa")
+            dato.style.color= "red"
+        }
+        if (dato.value == "Aprobado"){
+            console.log("en espera pa")
+            dato.style.color= "green"
+        }
+
+    }
+    function seleccionarOpcion(valorSeleccionado, selector) {
+        var opcionSeleccionada = document.querySelector(selector + " option[value='" + valorSeleccionado + "']");
+        opcionSeleccionada.selected = true;
+    }
+    function plantar()
+    {
+        
+        console.log("soy datos",datos)
+        console.log(datos.id)
+        //prospecto
+        var nombre = datos.apellido !== null ? datos.nombre + " " + datos.apellido + " " + datos.apellido1 : datos.n_inmobiliaria;
+        document.getElementById("prospecto").textContent = nombre;
+        //console.log("Datos nom", datos.nombre)
+        //console.log("Datos nom", datos.apellido)
+        //console.log("Datos nom", datos.apellido1)
+
+        //regimen
+        document.getElementById("regimen").textContent = datos.pmoi
+        //status
+
+
+        seleccionarOpcion(datos.estatus_arrendador, "#estatus_documentos");
+        seleccionarOpcion(datos.arrendador_validacion[0].validacion_ine, "#select1");
+        seleccionarOpcion(datos.arrendador_validacion[0].validacion_comprobante_domicilio, "#select2");
+        seleccionarOpcion(datos.arrendador_validacion[0].validacion_escrituras, "#select3");
+        seleccionarOpcion(datos.arrendador_validacion[0].validacion_predial, "#select4");
+
+        // ingresos
+        // comentarios
+        console.log("Soy comentarios", datos.arrendador_validacion[0].comentarios)
+        document.getElementById("comentarios").value = datos.arrendador_validacion[0].comentarios !== undefined ? datos.arrendador_validacion[0].comentarios : "";
+
+        var aprovado = document.getElementById
+    }
+    $(document).ready(function() {
+  // Obtener el elemento select
+  var select = $("#estatus_documentos");
+
+  // Cambiar el estilo de la opción seleccionada al cargar la página
+  cambiarEstiloOpcionSeleccionada();
+
+  // Cambiar el estilo de la opción seleccionada cuando se realiza un cambio
+  select.change(function() {
+    cambiarEstiloOpcionSeleccionada();
+  });
+
+  function cambiarEstiloOpcionSeleccionada() {
+    // Restablecer el estilo de todas las opciones
+    select.find("option").css("color", "");
+
+    // Obtener la opción seleccionada
+    var opcionSeleccionada = select.find("option:selected");
+
+    // Establecer el estilo de la opción seleccionada
+    opcionSeleccionada.css("color", "white");
+
+    // Establecer el color de texto verde para la opción "Aprobado"
+    if (opcionSeleccionada.val() === "Aprobado") {
+      opcionSeleccionada.css("color", "green");
+    }
+
+    // Restablecer el estilo de las opciones no seleccionadas
+    select.find("option").not(":selected").css("color", "");
+  }
+});
+    function prueba2(val){
+        console.log(val.name)
+        arr[""+val.name] = '' +val.value
+        arr2 = val.name;
+        console.log(arr)
+    }
+    {% comment %} function recopilar()
+    {
+    // Obtener y Guardar el valor del input en localStorage
+    console.log("estoy en guardar",JSON.stringify(arr))
+    localStorage.setItem('data_investigacion_arrendador', JSON.stringify(arr));
+    
+    } {% endcomment %}
+// function registro
+const btnSubmit = document.getElementById("guardar")
+let formulario = {};
+
+btnSubmit.addEventListener("click", (event) => {
+    event.preventDefault();
+    guardarDatosValidacion();
+});
+
+const obtenerDatos = () =>{
+    const formData = new FormData();
+    formData.append('estatus_documentos',$('#estatus_documentos').val().trim())
+    formData.append('validacion_ine',$('#select1').val().trim())
+    formData.append('validacion_comprobante_domicilio',$('#select2').val().trim())
+    formData.append('validacion_escrituras',$('#select3').val().trim())
+    formData.append('validacion_predial',$('#select4').val().trim())
+    formData.append('comentarios',$('#comentarios').val().trim())
+    return formData;
+}
+
+const guardarDatosValidacion = async () =>{
+    const formData = obtenerDatos(); 
+    await enviarDatosServidorValidacion(formData);
+        Swal.fire(
+            'Excelente!',
+            'Cambios realizados correctamente!',
+            'success'
+        ).then(()=>{
+            window.location.href="/investigacion_arrendadores/";
+        });
+}
+
+async function enviarDatosServidorValidacion(formulario){
+    try{
+        const response = await axios.put(`${server}/Arrendador_Api/investigacion/${datos.slug}/`,formulario, configin)
+        console.log("response",response)
+    }catch(error){
+        console.log(error);
+    }
+}
+
+const submit_correo = document.getElementById('submit_archivo');
+
+
+
+
+submit_correo.addEventListener('click', function(event){
+    event.preventDefault();
+    enviarCorreoRechazado();
+});
+
+const enviarCorreoRechazado = async () => {
+    try {
+        const config2 = {
+            headers: {
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+        var fileInput = document.getElementById('pdf_rechazado');
+        var file = fileInput.files[0];
+        var data = JSON.parse( localStorage.getItem('data_investigacion_arrendador'))
+
+        var email = data.pmoi === 'Inmobiliaria' ? data.email_in : data.email;
+        var usuario = data.pmoi === 'Inmobiliaria' ? data.n_inmobiliaria : data.nombre + " " + data.apellido + " " + data.apellido1
+        console.log("correo", email)
+        const formData = new FormData();
+        formData.append('pdf', file);
+        formData.append('correo', email);
+        formData.append('usuario', usuario);
+        formData.append('comentario', document.getElementById('comentarios_denegado').value.trim());
+        console.log(formData)
+        const response = await axios.put(`${server}/Arrendador_Api/enviar_pdf/${data.slug}/`, formData, config2);
+        //console.log(response.data);
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+
+
+</script>
+
+{% endblock javascripts %}

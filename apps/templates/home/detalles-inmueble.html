@@ -1,0 +1,427 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Vista Inmueble {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="/static/assets/css/nav.css" rel="stylesheet"/>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div>
+        <a href="/inmuebles/"><button type="button" class="btn btn-secondary " ><svg class="icon icon-xs" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" clip-rule="evenodd"></path></svg>Regresar  
+        </button>
+        </a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12 col-xl">
+        <div class="card card-body border-0 shadow mb-4">
+            <h2 class="h5 mb-3">{{verinmueble.alias_inmueble}}</h2>
+            <div class="row">
+                <div class="col-md-6 card border-0 shadow mb-4 " >
+                    <div class="col-md-7 mb-3" style="margin-left:180px;">                        
+                            <button class="btn btn-secondary mt-2 " type="button" style="width:300px; font-size:15px;font-weight:bold;">Fotos</button>                       
+                    </div>
+                    <div class="d-xl-flex align-items-center mb-3 " >
+                        <div class="col-md-1 " align="center" id="atras">
+                            <button class="btn btn-secondary" type="button"><svg class="icon icon-xs" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"></path></svg></button>
+                        </div>
+                      
+                        
+                        <div class="col-md-10 me-2 image-xl" align="center" >
+                            <img class="rounded " src="/static{{verinmueble.fotos.all.0.imagenes.url}}" alt="img{{verinmueble.fotos.user}}" id="cambio" data-bs-toggle="modal" data-bs-target="#modal-default">
+                        </div>
+                        <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+                                <div class="modal-content ">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">{{verinmueble.alias_inmueble}}</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body" align="center">
+                                        <img class="rounded "  src="/static{{verinmueble.fotos.all.0.imagenes.url}}" id="foto" alt="ima">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 " align="center" id="adel">
+                            <button class="btn btn-secondary" type="button"><svg class="icon icon-xs" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" ></path></svg></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="col-md-12 mb-3">
+                        <label for="n-p-a">Nombre del Propietario Administrador:</label>
+                        <input type="text" id="d-c-a" class="form-control" value="{{ request.user.first_name }} {{ request.user.last_name }}" placeholder="" disabled>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="d-c-a">Arrendador:</label>
+                        <input type="text" id="d-c-a" class="form-control" placeholder="Regimen Fiscal o inmobiliaria" disabled>
+                    </div>     
+                    <div class="row">     
+                        <div class="col-md-4 mb-3">
+                            <label for="renta">Renta:</label>
+                            <input class="form-control" id="renta"  type="text" value="$ {{verinmueble.renta}}" min="0" disabled>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="venta">Venta:</label>
+                            <input class="form-control" id="venta" min="0" type="text" value="$ {{verinmueble.venta}}" disabled>
+                        </div>
+                        <div class="col-md-4 mb-3 " >
+                            <label for="ubicacion" style="font-size:15px">En Renta con opción a Venta:</label>
+                            <input class="form-control" type="text" value="{{verinmueble.op_compra}}"  id="op_compra" disabled>
+                        </div>           
+                    </div>     
+
+                    <div class="col-md-12 mb-3">
+                        <label for="ubicacion">Ubicación:</label>
+                        <input class="form-control-plaintext card shadow border-1 ps-1" type="text" style="font-size:14.5px" value="{{ verinmueble.calle }} {{ verinmueble.numeroExterior }} int. {{ verinmueble.num_int }} Col. {{ verinmueble.colonia }} {{ verinmueble.postal_code }} {{ verinmueble.municipio_alcaldia }}  {{ verinmueble.estado }}" readonly>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="ubicacion">Entre calles:</label>
+                            <input type="text" id="calle" class="form-control" value="{{verinmueble.calle1}} y {{verinmueble.calle2}}" disabled>
+                        </div>
+                        <div class="col-md-6 mb-3 " >
+                            <label for="ubicacion">Referencias:</label>
+                            <input class="form-control" type="text" value="{{verinmueble.referencias}}"  disabled>                           
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="datos_generales_tab" data-bs-toggle="tab" data-bs-target="#datos_generales" type="button" role="tab" aria-controls="datos_generales_tab" aria-selected="true">Datos Generales</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#caracteristicas" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Características</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#amenidades" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Amenidades</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#servicios" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" >Servicios</button>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="datos_generales" role="tabpanel" aria-labelledby="datos_generales_c" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Datos Generales</h2>
+                        <hr class="hr" />   
+                        
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4 mb-3"><!---->
+                                    <label for="estatus">Estatus del Inmueble: </label>
+                                    <input class="form-control" id="estatus" name="estatus" type="text" value="{{verinmueble.estatus_inmueble}}" disabled>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="t_inmueble">Tipo de Inmueble:</label>
+                                    <input class="form-control" id="t_inmueble" name="t_inmueble" type="text" value="{{verinmueble.tipo_inmueble}}" disabled>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label for="u_inmueble">Uso del Inmueble:</label>
+                                    <input class="form-control" id="u_inmueble" name="u_inmueble" type="text" value="{{verinmueble.uso_inmueble}}" disabled>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <label for="v_inmueble">Valor Catastral:</label>
+                                    <input class="form-control" id="v_inmueble" name="v_inmueble" min="0" type="number" value="{{verinmueble.valor_catastral}}" disabled>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <label for="manteniniento">Cuota de Mantenimiento:</label>
+                                    <input class="form-control" id="mantenimiento" name="mantenimiento" type="number" value="{{verinmueble.cuota_mantenimiento}}" min="0" disabled>
+                                </div>  
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane fade" id="caracteristicas" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <h2 class="h5 mb-2 mt-2">Características</h2>
+                        <hr class="hr" />  
+                        
+                        <div class="row">
+                            <div class="col-md-3 mb-3">
+                                <label for="b_medio">Baños Completos:</label>
+                                <input class="form-control" id="b_medio" name="b_medio" type="number" value="{{verinmueble.n_baños}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="b_medio">Medios Baños:</label>
+                                <input class="form-control" id="b_medio" name="b_medio" type="number" value="{{verinmueble.n_medios_baños}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="recamaras">Recamaras:</label>
+                                <input class="form-control" id="recamaras" name="recamaras" type="number" value="{{verinmueble.n_recamaras}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="pisos">Pisos:</label>
+                                <input class="form-control" id="pisos" name="pisos" type="number" value="{{verinmueble.n_pisos}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="cajones">Cajones de Estacionamiento:</label>
+                                <input class="form-control" id="cajones" name="cajones" type="number" value="{{verinmueble.estacionamiento_cajones}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="c_m2">Construidos m2:</label>
+                                <input class="form-control" id="c_m2" name="c_m2" type="number" value="{{verinmueble.terrenoConstruido}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <label for="t_m2">Terreno m2:</label>
+                                <input class="form-control" id="t_m2" name="t_m2" type="number" value="{{verinmueble.terrenoTotal}}" min="0" disabled>
+                            </div>
+                            <div class="col-md-3 mb-4">
+                                <label for="c_año">Año de Construcción:</label>
+                                <input class="form-control" id="c_año" name="c_año" type="number" value="{{verinmueble.año_contruccion}}" min="0" maxlength="4" disabled>
+                            </div>
+                        </div>
+                        
+                    
+                    </div>
+
+                    <div class="tab-pane fade" id="amenidades" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                        <div class="col-md-6 mb-2 ">
+                            <div class="row">
+                                <h2 class="h5 mb-2">Amenidades</h2>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_garage" disabled {% if verinmueble.garage != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_garage">Garage</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="bodega" disabled {% if verinmueble.bodega != Null %} checked {% endif %} name="garage">
+                                    <label class="form-check-label" for="garaje">Bodega</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_terraza" disabled {% if verinmueble.terraza != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_terraza">Terraza</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_alberca" disabled {% if verinmueble.alberca != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_alberca">Alberca</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_cocina" disabled  {% if verinmueble.cocina != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_cocina">Cocina</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_amueblado" disabled {% if verinmueble.amueblado != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_mueblado">Amueblado</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_c_lavado" disabled {% if verinmueble.cuarto_lavado != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_c_lavado">Cuarto de Lavado</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="gym" disabled {% if verinmueble.gym != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="gym">Gym</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="bar" disabled {% if verinmueble.bar != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="bar">Bar</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="r_bar" disabled {% if verinmueble.restaurante_bar != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="r_bar">Restaurante Bar</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="s_cine" disabled {% if verinmueble.sala_cine != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="s_cine">Sala de Cine</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="c_estudios" disabled {% if verinmueble.sala_estudios != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="c_estudios">Cuarto de Estudios</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_comun" disabled {% if verinmueble.area_comun != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_comun">Área comun</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="s_juegos" disabled {% if verinmueble.sala_juegos != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="s_juegos">Sala de Juegos</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="s_eventos" disabled {% if verinmueble.salon_eventos != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="s_eventos">Salón de Eventos</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="c_deportivas" disabled {% if verinmueble.espacio_deportivo != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="c_deportivas">Canchas Deportivas</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="b_center" disabled {% if verinmueble.busisness_center != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="b_center">Busisness Center</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="r_garden" disabled{% if verinmueble.roof_garden != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="r_garden">Roof Garden</label>
+                                </div>
+                                <div class="col-md-4" >
+                                    <input class="form-check-input" type="checkbox" title="Especifique en la descripción" data-bs-toggle="tooltip" data-bs-placement="right" disabled {% if verinmueble.otroA != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="otro" >Otro</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="servicios" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                        <div class="col-md-6 mb-2 ">
+                            <div class="row">
+                                <h2 class="h5 mb-2">Servicios</h2>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="wifi" disabled {% if verinmueble.internet != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="wifi">Internet/Wifi</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="energia" disabled {% if verinmueble.electricidad != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="energia">Energía Eléctrica</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_potable" disabled {% if verinmueble.agua_potable != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_potable">Agua Potable</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="t_cable" disabled {% if verinmueble.televisionCable != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="t_cable">Tele por Cable</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="gas" disabled {% if verinmueble.gas != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="gas">Gas</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="l_telefonica" disabled {% if verinmueble.lineaTelefonica != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="l_telefonica">Línea Telefónica</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="drenaje" disabled {% if verinmueble.drenaje != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="drenaje">Drenaje</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="seguridad" disabled {% if verinmueble.seguridad != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="seguridad">Seguridad</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="c_cerrado" disabled {% if verinmueble.camarasSeguridad != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="c_cerrado">Circuito Cerrado</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-check-input" type="checkbox" id="a_juegos" disabled {% if verinmueble.area_juegos != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="a_juegos">Área de juegos</label>
+                                </div>
+                                <div class="col-md-4" >
+                                    <input class="form-check-input" type="checkbox" value="" id="otro" disabled {% if verinmueble.otroS != Null %} checked {% endif %}>
+                                    <label class="form-check-label" for="otro" >Otro</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="descripcion" class="h5 mb-2">Descripción</label>
+                            <input class="form-control" value="{{verinmueble.descripcion}}" id="descripcion" rows="5" disabled>
+                        </div>
+                    </div>
+                  </div>               
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    function mostrar(dato) {
+        if (dato == "1") {
+          document.getElementById("FS").style.display = "block";
+          document.getElementById("OSPF").style.display = "none";
+        }
+        if (dato == "2") {
+          document.getElementById("FS").style.display = "none";
+          document.getElementById("OSPF").style.display = "block";
+        }
+      }
+      
+</script>
+<script>//Galeria
+    let nclicks = 0;
+    let adelante=document.getElementById("adel");
+    let foto=document.getElementById("foto");
+    let atras=document.getElementById("atras");
+    let imagechange=document.getElementById("cambio");
+    const galery = [
+    {url:"{{verinmueble.fotos.all.0.imagenes.url}}"},
+    {url:"{{verinmueble.fotos.all.1.imagenes.url}}"},
+    {url:"{{verinmueble.fotos.all.2.imagenes.url}}"},
+    {url:"{{verinmueble.fotos.all.3.imagenes.url}}"},
+    {url:"{{verinmueble.fotos.all.4.imagenes.url}}"}
+    ];
+    
+    const n_imag={{verinmueble.fotos.all|length}};
+
+    foto.onclick=function(){
+        console.log(nclicks)
+        nclicks = nclicks + 1;
+        
+      if(nclicks<n_imag){
+        console.log(galery[nclicks].url)
+        imagechange.src='/static'+galery[nclicks].url;
+        foto.src='/static'+galery[nclicks].url;
+      }else if (nclicks=n_imag){
+        nclicks=0
+        imagechange.src='/static'+galery[nclicks].url;
+        foto.src='/static'+galery[nclicks].url;
+        console.log(galery[nclicks].url)
+        
+      }
+      
+  }
+    adelante.onclick=function(){
+        console.log(nclicks)
+        nclicks = nclicks + 1;
+        
+      if(nclicks<n_imag){
+        console.log(galery[nclicks].url)
+        imagechange.src='/static'+galery[nclicks].url;
+        foto.src='/static'+galery[nclicks].url;
+      }else{
+        nclicks=0
+        imagechange.src='/static'+galery[nclicks].url;
+        foto.src='/static'+galery[nclicks].url;
+        console.log(galery[nclicks].url)
+        
+      }
+    }
+
+    atras.onclick=function(){
+        nclicks = nclicks - 1
+
+      console.log(nclicks)
+    if(nclicks<0){
+        nclicks=n_imag-1;
+        console.log("inicial",n_imag)
+        imagechange.src='/static'+galery[nclicks].url;
+        foto.src='/static'+galery[nclicks].url;
+        console.log(galery[nclicks].url)
+    
+      
+    }else{
+      
+      imagechange.src='/static'+galery[nclicks].url;
+      foto.src='/static'+galery[nclicks].url;
+      console.log(galery[nclicks].url)
+      
+    }
+    }
+    
+    
+</script>
+
+{% endblock javascripts %}

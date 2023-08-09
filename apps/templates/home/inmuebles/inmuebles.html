@@ -5,6 +5,60 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 <link href="/static/assets/css/ms_arr.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/css/tabla.css">
+<style>
+
+
+/* Estilos para la etiqueta de texto */
+.form-check-label {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Estilos para el checkbox */
+.form-check-input[type="checkbox"] {
+  margin-top: 6px;
+}
+
+/* Estilos para el select */
+.select-style {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* Estilos para el input de cantidad */
+.form-control {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+/* Estilos para el separador horizontal */
+hr.my-4 {
+  border-top-color: #ccc;
+}
+
+
+
+
+</style>
 {% endblock stylesheets %}
 
 {% block content %}
@@ -57,7 +111,7 @@
     </div>
 </div>
 <div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
-    <table class="table table-striped user-table align-items-center mb-5"> <!--id="datatable"-->
+    <table class="table  user-table align-items-center mb-5 tabla_datos" > <!--id="datatable"-->
         <thead>
             <tr >
                 <th class="border-bottom"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
@@ -66,8 +120,8 @@
                 <th class="border-bottom">Tipo de Inmueble</th>						
                 <th class="border-bottom">Fecha de Registro</th>
                 <th class="border-bottom">Estatus</th>
+                <th class="border-bottom">Mobiliario (Opcional)</th>
                 <th class="border-bottom">Gravamen</th>
-                <th class="border-bottom"></th>
             </tr>
         </thead>
         <tbody id="table_body" style="overflow-x: hidden;">
@@ -76,6 +130,45 @@
     </table>
 </div>
       {% comment %} {% include 'includes/pagination.html' with entity=page_obj %} {% endcomment %}
+{% comment %} <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#total_mobiliario">
+    Mobiliario
+</button>  {% endcomment %}
+
+  <!-- Modal Mobiliario Agregar-->
+<div class="modal fade" id="total_mobiliario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="modal-dialog_agregar">
+        <div class="modal-content" id="modal-content_agregar">
+            <div class="modal-header" id="modal-header_agregar">
+                <h5 class="modal-title" id="titulo_agregar">Estado del mobiliario</h5>
+                <button type="button" id="boton_close_agregar" class="btn-close bg-white " data-bs-dismiss="modal" aria-label="Close"  onclick="recargar_pagina()"></button>
+            </div>
+            <div class="modal-body" id="modal-body_agregar">
+                <form id="form_mobiliario" class="needs-validation form_mobiliario" novalidate>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} Modal mobiliario {% endcomment %}
+<div class="modal fade" id="inventario_mobiliario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content modal-content-mobiliario" id="modal-content-mobiliario">
+            <div class="modal-header modal-header-mobiliario" id="modal-header-mobiliario">
+                <h5 class="modal-title exampleModalLabel-mobiliario" id="exampleModalLabel-mobiliario">Inventario del mobiliario del inmueble</h5>
+                <button type="button" id="cerrar_total_mobiliario" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close" onclick="recargar_pagina()"></button>
+            </div>
+            <div class="modal-body" id="table_mobiliaria">
+
+            </div>
+            <div class="modal-footer">
+                <p>Mobiliario total</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} <input class="btn btn-primary" type="button" value="Input" id="datos_arrendador"> {% endcomment %}
 
    <!-- Modal -->
 <div id="Modal Registro">
@@ -567,7 +660,7 @@
                             <hr class="hr" /> 
                         </div>
                         <label for="reglamento_interno" class="form-label">Reglamento Interno del inmueble</label>
-                            <input class="form-control"  id="reglamento_interno" name="reglamento_interno" type="file" placeholder="URL">
+                            <input class="form-control"  id="reglamento_interno" name="reglamento_interno" type="file" placeholder="URL" accept="application/pdf">
                             <div class="invalid-feedback">
                                 Por favor ingresa un documento valido.
                             </div>
@@ -576,14 +669,14 @@
                             </div>
                           </div>
                         <div class="mb-3">
-                              <label for="mobiliario" class="form-label">Mobiliario (inventario)</label>
+                              {% comment %} <label for="mobiliario" class="form-label">Mobiliario (inventario)</label>
                               <input class="form-control"  id="mobiliario" name="mobiliario" type="file" placeholder="URL">
                               <div class="invalid-feedback">
                                   Por favor ingresa un documento valido.
                               </div>
                           <div class="valid-feedback">
                               Se ve bien!
-                          </div>
+                          </div> {% endcomment %}
                     </div>
                         <div class="text">
                             <h2>Fotos</h2>
@@ -671,19 +764,6 @@ console.log("estoy en guardar",JSON.stringify(arr))
 localStorage.setItem('datos', JSON.stringify(arr));
 }
 
-{% comment %} function plantar()
-{
-    const storedData = JSON.parse(localStorage.getItem('datos'));
-    var k1 = Object.getOwnPropertyNames(storedData);
-    console.log("soy k1",k1)
-    for(let i= 0; i<k1.length;i++)
-    {
-        let k2 = document.getElementsByName(k1[i]);
-        k2[0].value =  storedData[k1[i]];
-        //console.log("soy k2",k2[0]);
-    }
-} {% endcomment %}
-
 
 function prueba2(val){
     console.log(val.name)
@@ -698,24 +778,6 @@ function prueba2(val){
 
 }
 
-$(document).ready(function() {
-    $.ajax({
-        url: 'http://192.168.2.14:8001/arrendadores_campos_establecidos/',
-        type: 'GET',
-        dataType: 'json',
-        headers: {'X-CSRFToken': csrftoken},
-        success: function(data) {
-            console.log("Si llega ")
-            $.each(data, function(index, item) {
-                if (item.nombre === "")
-                    $('#arrendador').append('<option value="' + item.id + '">' + item.custom_field +'</option>');
-                else
-                    $('#arrendador').append('<option value="' + item.id + '">' + item.nombre +" "+ item.apellido + " " + item.apellido1 +'</option>');
-            });
-        }
-    });
-});
-
 </script>
 
 <script>
@@ -725,7 +787,7 @@ localStorage.removeItem('inmuebles')
 
     var data_inmuebles =[]
 // Configuracion general de axios
-    const server = 'https://arrendify-api.onrender.com';
+    const server = 'https://arrendify-api.onrender.com'
     const configin = {
         headers: {
           'Content-Type': 'application/json',
@@ -733,27 +795,51 @@ localStorage.removeItem('inmuebles')
           'Authorization': `Token ${localStorage.getItem('token')}`
         },
       }; 
-      // Despues carcamos la tabla de usuarios
+
+
+function get_Arrendadores(){
+    return axios.get( `${server}/Arrendador_Api/`,configin);
+}
+
+
+get_Arrendadores()
+    .then((response) =>{
+        console.log("Si esta llegando a obtener datos arrendador");
+        var data = response.data;
+        $.each(data, function(index, item){
+            if(item.nombre === "")
+                $('#arrendador').append('<option value="' + item.id + '">' + item.n_inmobiliaria + '</option>');
+            else
+                $('#arrendador').append('<option value="' + item.id + '">' + item.nombre + " "+ item.apellido + " " + item.apellido1 +'</option>');
+        });
+    }).catch((error) =>{
+        console.log(error);
+    })
+
+
+// Despues carcamos la tabla de usuarios
 document.getElementById("cargar_tabla").onload = tabla()
 // Comenzamos funciones
     function tabla(){
         var form = document.getElementById("Formu");
         form.reset()
-        console.log("hola")
+        localStorage.removeItem('inmuebles')
          axios.get(`${server}/inmuebles_viewset/`,configin)
             .then(function (response) { 
             data_inmuebles = response.data
-            // manejar respuesta exitosa
+            // Manejar respuesta exitosa
             for (let i = 0; i < data_inmuebles.length; i++){
                 console.log("for",data_inmuebles[i].user)
-              
             }
-
             var cuerpo = document.getElementById("table_body")
             let res = response.data
             if(res.length > 0 ){
             console.log("res",res)
     
+
+            res.forEach(inmueble =>{
+                console.log(inmueble.id);
+            });
             for(let i = 0; i < res.length;i++)
         {
             let tr = document.createElement('tr')
@@ -764,6 +850,7 @@ document.getElementById("cargar_tabla").onload = tabla()
             let col5 = document.createElement('td')
             let col6 = document.createElement('td')
             let col7 = document.createElement('td')
+            let col8 = document.createElement('td')
             let check = document.createElement("input")
             check.setAttribute("type","checkbox");
             check.setAttribute("class","form-check-input");
@@ -771,15 +858,43 @@ document.getElementById("cargar_tabla").onload = tabla()
             col1.appendChild(check);
             col2.innerHTML = `<span class="fw-normal ">${i + 1}</span>`
             col3.innerHTML = `<a class="d-flex align-items-center">
-                              <div class="d-block">
-                                <span class="fw-bold" onClick="detalles_inmueble('${res[i].slug}')">${res[i].alias_inmueble}</span>
-                                <div class="small text-gray">${res[i].estatus_inmueble}</div>
-                              </div>
+                                <div class="d-block">
+                                    <span class="fw-bold" onClick="detalles_inmueble('${res[i].slug}')">${res[i].alias_inmueble}</span>
+                                </div>
                               </a>`
             col4.innerHTML = `<span class="fw-normal ">${res[i].tipo_inmueble}</span>`
             col5.innerHTML = `<span class="fw-normal ">${res[i].created}</span>`
-            col6.innerHTML = ' <select id="status{{inq.id}}" style="color:green; font-weight:bold;" class="form-select" onChange="cambio_status(this)" aria-label="Default select example"><option value="Activo" selected style="color:green; font-weight:bold;"><span >Activo</span></option><option value="En espera" style="color:orange; font-weight:bold;">En espera</option><option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option></select>'
-            col7.innerHTML =   `<div class="btn-group dropstart">
+            col7.innerHTML = `${res[i] && res[i].inmuebles && res[i].inmuebles[0] ?`
+                                        <div class="button-container d-flex justify-content-center">                                       
+                                                <button type="button" id="ver_inventario" class="btn btn-color same-size-btn" data-bs-toggle="modal" data-bs-target="#inventario_mobiliario" data-tooltip="Ver inventario mobiliario"onClick="ver_mobiliario('${res[i].slug}')";>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                        <path d="M11.854 10.146A5.5 5.5 0 1 1 10 10l-.132.003a.5.5 0 0 1-.372-.837L9.707 8.5A4.5 4.5 0 1 0 8.5 9.707l-.333.333a.5.5 0 0 1-.837-.372L7 10a5.5 5.5 0 0 1 4.854.146zm1.607 4.056a.5.5 0 0 1-.707 0l-3-3a.5.5 0 0 1 0-.708l.354-.353a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-.354.353zM10.5 6A3.5 3.5 0 1 1 7 2.5 3.504 3.504 0 0 1 10.5 6z"/>
+                                                    </svg>
+                                                Ver Docs
+                                                </button>
+                                            </div>
+                                        `: `
+                                        <div class="button-container d-flex justify-content-center">                                       
+                                                <button type="button" id="agregar_inventario" class="btn btn-primary" data-tooltip="Agregar inventario mobiliario" data-bs-toggle="modal" data-bs-target="#total_mobiliario" onClick="MobiliarioModal('${res[i].id}')";>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                                        <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
+                                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
+                                                    </svg>
+                                                Subir
+                                                </button>
+                                            </div>
+                                        `}`;
+
+            col6.innerHTML =  `
+            <div class="custom-select-wrapper" style="width: 70%; margin: 0 auto;">
+                ${res[i].estatus_inmueble === "Disponible" ? `<button  type="button" class="btn btn-success" style="background-color:green; color:white;">${res[i].estatus_inmueble}</button>` 
+                : res[i].estatus_inmueble === 'Rentado' ? `<button type="button" class="btn btn-danger">${res[i].estatus_inmueble}</button>`
+                : `<button type="button" class="btn btn-warning">${ res[i].estatus_inmueble}</button>`}
+            </div> `
+                                
+                            
+
+            col8.innerHTML = `<div class="btn-group dropstart">
                                 <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                                     <span class="visually-hidden">Toggle Dropdown</span>
@@ -792,13 +907,13 @@ document.getElementById("cargar_tabla").onload = tabla()
                                         </svg>&nbsp;Editar
                                     </a>
 
-                                    <a class="dropdown-item d-flex align-items-center" onClick="alert0('${res[i].slug}')">
+                                    <a class="dropdown-item d-flex align-items-center" onClick="eliminarInmueble('${res[i].slug}')">
                                         <svg class="icon icon-xs text-danger ms-1" title="Eliminar" data-bs-toggle="tooltip" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
                                         &nbsp;Borrar
                                     </a>        
                                     
                                 </div>   
-                                </div>`; 
+                                </div>`;
             tr.appendChild(col1);
             tr.appendChild(col2);
             tr.appendChild(col3);
@@ -806,6 +921,7 @@ document.getElementById("cargar_tabla").onload = tabla()
             tr.appendChild(col5);
             tr.appendChild(col6);
             tr.appendChild(col7);
+            tr.appendChild(col8);
             cuerpo.appendChild(tr);
         }
             console.log(response);
@@ -814,13 +930,13 @@ document.getElementById("cargar_tabla").onload = tabla()
             console.log("sin datos")
         } 
         })
-          .catch(function (error) {
-            // manejar error
-            console.log(error);
-          })
-          .finally(function () {
-            // siempre sera executado
-          });
+        .catch(function (error) {
+          // manejar error
+          console.log(error);
+        })
+        .finally(function () {
+          // siempre sera executado
+        });
 }
 
 
@@ -833,146 +949,13 @@ function ver_detalles(id){
     window.location.href = `/detalles_inquilino/${id}`
 }
 
-{% comment %} function editar(slug){
-
-    console.log("data_arrendador",data_arrendador)
-    let info = data_arrendador.filter(arrendador=>arrendador.slug==slug)
-    localStorage.setItem('data_arrendador', JSON.stringify(info[0]));
-    console.log("local",localStorage)
-    console.log("info",info)
-    window.location.href = `/editar_arrendador/${slug}/`
-} {% endcomment %}
-
   // function registro
-const btnSubmit = document.getElementById("finalizar1")
+{% comment %} const btnSubmit = document.getElementById("finalizar1") {% endcomment %}
 let formulario = {};
 
 
-    
-async function enviar_datos(FormData){
-    console.log("Esta entrando a enviar")
-    console.log(FormData)
-        const response = await axios.post(`${server}inmuebles_viewset/`,FormData,configin)
-        console.log("response",response)
-    }
-
-    btnSubmit.addEventListener("click", function (event) {
-        event.preventDefault();
-        //formulario = JSON.parse(localStorage.getItem('datos'));
-        
-        //console.log("viewform",formulario)
-        //console.log("select",formulario.hasOwnProperty("no_inquilinos"))
-    const formData = new FormData();
-    formData.append('imagenes', $('#imagenes')[0].files[0]);
-    formData.append('alias_inmueble',$('#alias_inmueble').val().trim())
-    formData.append('estatus_inmueble',$('#estatus_inmueble').val().trim())
-    formData.append('renta',$('#renta').val().trim())
-    formData.append('venta',$('#venta').val().trim())
-    formData.append('clave_catastral',$('#clave_catastral').val().trim())
-    formData.append('estatus_gravamen',$('#estatus_gravamen').val().trim())
-    formData.append('valor_catastral',$('#valor_catastral').val().trim())
-    formData.append('cuota_mantenimiento',$('#cuota_mantenimiento').val().trim())
-    formData.append('tipo_inmueble',$('#tipo_inmueble').val().trim())
-    formData.append('uso_inmueble',$('#uso_inmueble').val().trim())
-    formData.append('op_compra',$('#op_compra').val().trim())
-    formData.append('municipio_alcaldia',$('#municipio_alcaldia').val().trim())
-    formData.append('colonia',$('#colonia').val().trim())
-    formData.append('postal_code',$('#postal_code').val().trim())
-    formData.append('estado',$('#estado').val().trim())
-    formData.append('calle',$('#calle').val().trim())
-    formData.append('numeroExterior',$('#numeroExterior').val().trim())
-    formData.append('numeroInterior',$('#numeroInterior').val().trim())
-    formData.append('calle1',$('#calle1').val().trim())
-    formData.append('calle2',$('#calle2').val().trim())
-    formData.append('referencias',$('#referencias').val().trim())
-    formData.append('n_baños',$('#n_baños').val().trim())
-    formData.append('n_medios_baños',$('#n_medios_baños').val().trim())
-    formData.append('n_recamaras',$('#n_recamaras').val().trim())
-    formData.append('n_pisos',$('#n_pisos').val().trim())
-    formData.append('estacionamiento_cajones',$('#estacionamiento_cajones').val().trim())
-    formData.append('terrenoConstruido',$('#terrenoConstruido').val().trim())
-    formData.append('terrenoTotal',$('#terrenoTotal').val().trim())
-    formData.append('año_contruccion',$('#año_contruccion').val().trim())
-    formData.append('garage',$('#garage').val().trim())
-    formData.append('bodega',$('#bodega').val().trim())
-    formData.append('terraza',$('#terraza').val().trim())
-    formData.append('alberca',$('#alberca').val().trim())
-    formData.append('cocina',$('#cocina').val().trim())
-    formData.append('amueblado',$('#amueblado').val().trim())
-    formData.append('cuarto_lavado',$('#cuarto_lavado').val().trim())
-    formData.append('gym',$('#gym').val().trim())
-    formData.append('bar',$('#bar').val().trim())
-    formData.append('restaurante_bar',$('#restaurante_bar').val().trim())
-    formData.append('sala_cine',$('#sala_cine').val().trim())
-    formData.append('salon_estudio',$('#salon_estudio').val().trim())
-    formData.append('area_comun',$('#area_comun').val().trim())
-    formData.append('sala_juegos',$('#sala_juegos').val().trim())
-    formData.append('salon_eventos',$('#salon_eventos').val().trim())
-    formData.append('espacio_deportivo',$('#espacio_deportivo').val().trim())
-    formData.append('busisness_center',$('#busisness_center').val().trim())
-    formData.append('roof_garden',$('#roof_garden').val().trim())
-    formData.append('otroA',$('#otroA').val().trim())
-    formData.append('internet',$('#internet').val().trim())
-    formData.append('electricidad',$('#electricidad').val().trim())
-    formData.append('agua_potable',$('#agua_potable').val().trim())
-    formData.append('televisionCable',$('#televisionCable').val().trim())
-    formData.append('gas',$('#gas').val().trim())
-    formData.append('lineaTelefonica',$('#lineaTelefonica').val().trim())
-    formData.append('drenaje',$('#drenaje').val().trim())
-    formData.append('seguridad',$('#seguridad').val().trim())
-    formData.append('camarasSeguridad',$('#camarasSeguridad').val().trim())
-    formData.append('area_juegos',$('#area_juegos').val().trim())
-    formData.append('otroS',$('#otroS').val().trim())
-    formData.append('descripcion',$('#descripcion').val().trim())
-    formData.append('arrendador',$('#arrendador').val().trim())
-    formData.append('reglamento_interno',$('#reglamento_interno')[0].files[0])
-    formData.append('mobiliario',$('#mobiliario')[0].files[0])
-    formData.forEach(function(value, key) {
-        console.log(key + ': ' + value);
-    });
-    //formData.append('arrendador',$('#arrendador').val().trim())
-        console.log("Antes de enviar", formData)
-        //enviar_datos(FormData)
-        localStorage.removeItem('datos')
-        //setTimeout(() => {
-        //    location.reload()
-        //}, "3000");
-
-    $.ajax({
-        type: 'POST',
-        url: `${server}/inmuebles_viewset/`,
-        headers: {
-            'X-CSRFToken': csrftoken,
-            'Authorization': `Token ${localStorage.getItem('token')}`
-        },
-        mode: 'same-origin',
-        data:  formData,
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response); // handle the response from the server
-            //Swal.fire({
-            //            icon: 'success',
-            //            title: '¡Inmueble agregado correctamente!',
-            //            text: 'Se agrego de forma correcta',
-            //            showConfirmButton: false,
-            //            timer: 1300
-            //        }).then(() =>{
-            //        })
-            setTimeout(function(){
-                location.reload()
-            },2200);
-      },
-      error: function(response) {
-            console.log(response); // handle any errors from the server
-      }
-    });
-       
-    })
-
-function alert0(inquilino){
-        console.log("Soy el inquilino",inquilino)
-        Swal.fire({
+const eliminarInmueble = async (inmueble) =>{
+    Swal.fire({
             title: '¿Éstas seguro?',
             text: "No podrás revertir esta acción",
             icon: 'warning',
@@ -982,99 +965,375 @@ function alert0(inquilino){
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, elimina esto',
             cancelButtonText: 'Cancelar'
-        }).then((result) => {
-        if (result.isConfirmed) {
-            setTimeout(function(){
-                console.log("Eliminar inmueble");
-                eliminar(inquilino)
-            }, 1100);
-                Swal.fire({
-                    icon: 'success',
-                    title: '¡Inmueble Eliminado!',
-                    text: 'Se ha eliminado de forma exitosa.',
-                    showConfirmButton: false,
-                    timer: 2200
-                }).then(function (response) {
-                    // manejar respuesta exitosa
-                    location.reload()
-                })
-                .catch(function (error) {
-                    // manejar error
+        }).then( async (result) => {
+            if (result.isConfirmed) {
+                try{
+                    await eliminarInmueble_(inmueble);
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Inmueble Eliminado!',
+                        text: 'Se ha eliminado de forma exitosa.',
+                        showConfirmButton: false,
+                        timer: 2200
+                    }).then(()=>{
+                        location.reload();
+                    }).cath((error)=>{
+                        console.log(error);
+                    })
+                }catch(error){
                     console.log(error);
-                })
+                }
             }
-    })}
+        })
+}
 
-async function eliminar(slug){
-    console.log("data_inmuebles",data_inmuebles)
-    let info = data_inmuebles.filter(inmuebles=>inmuebles.slug==slug)
-    console.log("info",info[0].slug)
-    let clave = {slug:info[0].slug}
-    await axios.delete(`${server}/inmuebles_viewset/${slug}/`,clave,configin)
-   .then(function (response) {
-    // manejar respuesta exitosa
-    console.log("eliminado exitosamente")
-    console.log(response);
-
-  })
-  .catch(function (error) {
-    // manejar error
-    console.log(error);
-  })
-  .finally(function () {
-    // siempre sera executado
-    location.reload()
-  });
-     
+const eliminarInmueble_ = async (slug) =>{
+    try{
+        const response = await axios.delete(`${server}/inmuebles_viewset/${slug}/`,configin);
+        console.log("Inmueble eliminado correctamente");
+    }catch(error){
+        console.log(error)
+    }
 }
 
 </script>
 
 <script>
 
-function editar(slug){
-    $.ajax({
-        type: 'GET',
-        url: `${server}/inmuebles_viewset/${slug}/`,
-        //url: `http://127.0.0.1:8000/Inmuebles/`,
-        headers: {'Authorization': `Token ${localStorage.getItem('token')}`},
-        mode: 'same-origin',
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response);
-            localStorage.setItem('inmuebles', JSON.stringify(response));
-            window.location = `/editar_inmuebles/${slug}/`;
-        },
-        error: function(response) {
-            console.log(response);
-        }
+function editar(slug) {
+    axios.get(`${server}/inmuebles_viewset/${slug}/`, {
+        headers: {'Authorization': `Token ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+        console.log(response.data);
+        localStorage.setItem('inmuebles', JSON.stringify(response.data));
+        window.location = `/editar_inmuebles/${slug}/`;
+    })
+    .catch(error => {
+        console.log(error);
     });
 }
 
-function detalles_inmueble(slug){
-    $.ajax({
-        type: 'GET',
-        url: `${server}/inmuebles_viewset/${slug}/`,
-        //url: `http://127.0.0.1:8000/Inmuebles/`,
-        headers: {'Authorization': `Token ${localStorage.getItem('token')}`},
-        mode: 'same-origin',
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response);
-            localStorage.setItem('inmuebles', JSON.stringify(response));
-            window.location = `/detalles_inmuebles/${slug}/`;
-        },
-      error: function(response) {
+const detalles_inmueble = async (slug) => {
+    try{
+        const response = await detalles_inmueble_(slug);
         console.log(response);
-      }
+        localStorage.setItem('inmuebles', JSON.stringify(response));
+        window.location = `/detalles_inmuebles/${slug}/`;
+    } catch(error){
+        console.log(error)
+    }
+};
+
+const detalles_inmueble_ = (slug) => {
+    return axios.get(`${server}/inmuebles_viewset/${slug}/`, configin)
+        .then(response => response.data)
+        .catch(error => Promise.reject(error));
+}
+
+</script>
+<script>
+// Obtener elementos del DOM
+var form_mobiliario = document.getElementById("form_mobiliario")
+form_mobiliario.reset()
+function MobiliarioModal(id){
+    console.log("Llega a agregar mobiliario")
+    var mobiliario = [ "sofas", "sillones", "mesas", "sillas", "bancos", "camas", "cabeceras", "armarios", "tocadores", "colchones", "almohadas", "vitrina", "escritorios", "comodas", "muebles_de_televisor", "estufas", "refrigerador" ]
+    html = `
+      <input type="text" readonly class="form-control-plaintext" id="inmuebles" name="inmuebles" value="${id}" hidden>`
+    for(var i of mobiliario){
+        console.log("Esta entrando al for")
+        var primeraPalabra = i.split("_")[0]; // Obtener la primera palabra antes del guión bajo
+        var primeraPalabraMayuscula = primeraPalabra.charAt(0).toUpperCase() + primeraPalabra.slice(1);
+        html += `<div class="row justify-content-center">
+                        <div class="col-md-3 border-end  border-start">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <label class="form-check-label" for="mostrar_select_${i}">
+                                        ${i == 'muebles_de_televisor' ? 'Muebles Televisor' : primeraPalabraMayuscula}
+                                    </label>
+                                    <input class="form-check-input" type="checkbox" id="mostrar_select_${i}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 border-end">
+                            <div class="mb-3 d-none" id="select_${i}">
+                                <label for="selectOption_${i}" class="form-label">Estado del ${i}</label>
+                                <select class="form-select " id="${i}" name="${i}">
+                                    <option selected value="">Selecciona una opción</option>
+                                    <option value="Nuevo">Nuevo</option>
+                                    <option value="Seminuevo">Seminuevo</option>
+                                    <option value="Viejo">Viejo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 border-end">
+                            <div class="mb-3 d-none" id="cantidad_${i}">
+                                <label for="cantidad_${i}" class="form-label">Cantidad</label>
+                                <input type="text" class="form-control" id="cantidad_${i}" name="cantidad_${i}" aria-describedby="emailHelp">
+                                <div class="form-text">Cantidad</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="my-4">`
+    }
+    html += `<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="enviar_datos_mobiliario">Enviar</button>
+            </div>`
+
+    $("#form_mobiliario").append(html)
+
+    // Delegar el evento de cambio a todos los elementos con ID que comienza con "mostrar_select_"
+    $(document).on('change', '[id^="mostrar_select_"]', function() {
+        var id = this.id; // Obtener el ID del elemento que desencadenó el evento
+        var selectId = id.replace('mostrar_select_', 'select_'); // Construir el ID del elemento select
+        var cantidadId = id.replace('mostrar_select_', 'cantidad_'); // Construir el ID del elemento cantidad
+
+        var selectElement = document.getElementById(selectId);
+        var cantidadElement = document.getElementById(cantidadId);
+
+        if (this.checked) {
+            selectElement.classList.remove('d-none'); // Mostrar el select
+            cantidadElement.classList.remove('d-none');
+        } else {
+            selectElement.classList.add('d-none'); // Ocultar el select
+            cantidadElement.classList.add('d-none');
+        }
     });
+
+}
+
+
+const formulario_mobiliario_datos = document.getElementById("form_mobiliario");
+formulario_mobiliario_datos.addEventListener("submit", async function(event) {
+  event.preventDefault();
+  var data = $(formulario_mobiliario_datos).serializeArray();
+  console.log("Soy data", data);
+  const formData = new FormData();
+  data.forEach(function(item) {
+    formData.append(item.name, item.value);
+  });
+
+  try {
+    const response = await agregarMobiliario(formData);
+    console.log(response);
+    // Mostrar la alerta de éxito
+    Swal.fire({
+      icon: 'success',
+      title: '¡Agregado correctamente!',
+      text: 'Se agregaron los documentos de forma exitosa.',
+      showConfirmButton: false,
+      timer: 2000
+    });
+
+    // Recargar la página después de 2 segundos
+        setTimeout(function() {
+            location.reload();
+        }, 1500);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+async function agregarMobiliario(data) {
+    try {
+        return await axios.post(`${server}/MobiliarioCantidad/`, data, configin);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+//Envio de datos usando  promesas--------------------------------------------------------------------------------------------
+const submit_post = document.getElementById("finalizar1");
+
+submit_post.addEventListener("click", function (event) {
+    event.preventDefault();
+    enviarSolicitud();
+});
+
+async function enviarSolicitud() {
+    try{
+        const config2 = {
+            headers: {
+                'X-CSRFToken': csrftoken,
+                'Authorization': `Token ${localStorage.getItem('token')}`,
+                'Content-Type': 'multipart/form-data'
+            }
+        };
+        console.log("Esta entrando a enviar datos");
+        const formData = new FormData();
+        formData.append('imagenes', $('#imagenes')[0].files[0]);
+        formData.append('alias_inmueble',$('#alias_inmueble').val().trim())
+        formData.append('estatus_inmueble',$('#estatus_inmueble').val().trim())
+        formData.append('renta',$('#renta').val().trim())
+        formData.append('venta',$('#venta').val().trim())
+        formData.append('clave_catastral',$('#clave_catastral').val().trim())
+        formData.append('estatus_gravamen',$('#estatus_gravamen').val().trim())
+        formData.append('valor_catastral',$('#valor_catastral').val().trim())
+        formData.append('cuota_mantenimiento',$('#cuota_mantenimiento').val().trim())
+        formData.append('tipo_inmueble',$('#tipo_inmueble').val().trim())
+        formData.append('uso_inmueble',$('#uso_inmueble').val().trim())
+        formData.append('op_compra',$('#op_compra').val().trim())
+        formData.append('municipio_alcaldia',$('#municipio_alcaldia').val().trim())
+        formData.append('colonia',$('#colonia').val().trim())
+        formData.append('postal_code',$('#postal_code').val().trim())
+        formData.append('estado',$('#estado').val().trim())
+        formData.append('calle',$('#calle').val().trim())
+        formData.append('numeroExterior',$('#numeroExterior').val().trim())
+        formData.append('numeroInterior',$('#numeroInterior').val().trim())
+        formData.append('calle1',$('#calle1').val().trim())
+        formData.append('calle2',$('#calle2').val().trim())
+        formData.append('referencias',$('#referencias').val().trim())
+        formData.append('n_baños',$('#n_baños').val().trim())
+        formData.append('n_medios_baños',$('#n_medios_baños').val().trim())
+        formData.append('n_recamaras',$('#n_recamaras').val().trim())
+        formData.append('n_pisos',$('#n_pisos').val().trim())
+        formData.append('estacionamiento_cajones',$('#estacionamiento_cajones').val().trim())
+        formData.append('terrenoConstruido',$('#terrenoConstruido').val().trim())
+        formData.append('terrenoTotal',$('#terrenoTotal').val().trim())
+        formData.append('año_contruccion',$('#año_contruccion').val().trim())
+        formData.append('garage',$('#garage').val().trim())
+        formData.append('bodega',$('#bodega').val().trim())
+        formData.append('terraza',$('#terraza').val().trim())
+        formData.append('alberca',$('#alberca').val().trim())
+        formData.append('cocina',$('#cocina').val().trim())
+        formData.append('amueblado',$('#amueblado').val().trim())
+        formData.append('cuarto_lavado',$('#cuarto_lavado').val().trim())
+        formData.append('gym',$('#gym').val().trim())
+        formData.append('bar',$('#bar').val().trim())
+        formData.append('restaurante_bar',$('#restaurante_bar').val().trim())
+        formData.append('sala_cine',$('#sala_cine').val().trim())
+        formData.append('salon_estudio',$('#salon_estudio').val().trim())
+        formData.append('area_comun',$('#area_comun').val().trim())
+        formData.append('sala_juegos',$('#sala_juegos').val().trim())
+        formData.append('salon_eventos',$('#salon_eventos').val().trim())
+        formData.append('espacio_deportivo',$('#espacio_deportivo').val().trim())
+        formData.append('busisness_center',$('#busisness_center').val().trim())
+        formData.append('roof_garden',$('#roof_garden').val().trim())
+        formData.append('otroA',$('#otroA').val().trim())
+        formData.append('internet',$('#internet').val().trim())
+        formData.append('electricidad',$('#electricidad').val().trim())
+        formData.append('agua_potable',$('#agua_potable').val().trim())
+        formData.append('televisionCable',$('#televisionCable').val().trim())
+        formData.append('gas',$('#gas').val().trim())
+        formData.append('lineaTelefonica',$('#lineaTelefonica').val().trim())
+        formData.append('drenaje',$('#drenaje').val().trim())
+        formData.append('seguridad',$('#seguridad').val().trim())
+        formData.append('camarasSeguridad',$('#camarasSeguridad').val().trim())
+        formData.append('area_juegos',$('#area_juegos').val().trim())
+        formData.append('otroS',$('#otroS').val().trim())
+        formData.append('descripcion',$('#descripcion').val().trim())
+        formData.append('arrendador',$('#arrendador').val().trim())
+        formData.append('reglamento_interno',$('#reglamento_interno')[0].files[0])
+
+        //var formData = $('#tuFormulario').serialize();
+        //formData.append('imagenes', $('#imagenes')[0].files[0]);
+        //formData.append('reglamento_interno', $('#reglamento_interno')[0].files[0]);
+
+        try {
+            const response = await axios.post(`${server}/inmuebles_viewset/`, formData, config2);
+            console.log(response.data); // Manejar la respuesta del servidor
+            setTimeout(function() {
+                location.reload();
+            }, 2200);
+        } catch (error) {
+            console.log(error); // Manejar los errores de la solicitud
+        }
+    } catch (error) {
+        console.log(error); // Manejar cualquier otro error que pueda ocurrir
+    }
+
+}
+// ------------------------------------------------------------------------------------------------------
+
+$(document).on('change', 'select.select_status', function() {
+  var slug = $(this).attr('id'); // Obtener el valor del ID del elemento select
+  var value = $(this).val();
+
+    $.ajax({
+        type: 'PUT',
+        url: `${server}/actualizar_status/${slug}/`,
+        headers: { 'Authorization': `Token ${localStorage.getItem('token')}` },
+        data: { estatus_inmueble: value }, // Pasar el valor del ID en los datos de la petición
+        mode: 'same-origin',
+        success: function(response) {
+        // Lógica a realizar en caso de éxito
+        console.log(response);
+        },
+        error: function(xhr, status, error) {
+        // Lógica a realizar en caso de error
+        console.error(error);
+        }
+    });
+});
+    
+
+function recargar_pagina(){
+    location.reload();
+}
+{% comment %} url: `${server}/Arrendador/?tipo_persona=${valor}`, {% endcomment %}
+
+function ver_mobiliario(slug){
+    verMobiliario(slug);
+}
+
+const verMobiliario = async(slug) =>{
+    try{
+        const response = await axios.get(`${server}/inmuebles_viewset/${slug}/`, configin)
+            var res = response.data
+                var mobiliario = res.inmuebles[0].inmuebles
+                console.log("Soy response", mobiliario)
+                var tabla = `<table class="table table-hover" id="table-mobiliario">
+                                <caption>Lista del mobiliario existente</caption>
+                                    <thead id="thead-mobiliario">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Mueble</th>
+                                            <th scope="col">Estado</th>
+                                            <th scope="col">Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody-mobiliario">
+                            `
+                    var contador = 1;
+                    mobiliario.forEach(function(item) {
+                        for (var key in item) {
+                            var value = item[key];
+
+                            if (key.includes('cantidad_') && value !== 0) {
+                                tabla += `
+                                    <td>${value}</td></tr>`;
+                                    contador++;
+                            } else if (!key.includes('id') && !key.includes('inmuebles') && !key.includes('user') && value !== 'Vacio') {
+                                tabla += `
+                                        <tr>
+                                            <th scope="row">${contador}</th>
+                                            <td>${key}</td>
+                                            <td>${value}</td>`;
+                            }
+                        }
+                });
+
+                tabla += `</tbody></table>`;
+                $('#table_mobiliaria').html(tabla);
+    }catch(error){
+        console.log(error);
+    }
+
 }
 
 </script>
 
+{% comment %}   ------------------------------------------- Borrar ----------------------------------------------------------------------- {% endcomment %}
+<script>
 
+// Ejemplo ----------------------------------------------------------
+
+    
+
+
+</script>
 
 {% comment %} <script src="/static/assets/js/inmuebles.js"></script> {% endcomment %}
    

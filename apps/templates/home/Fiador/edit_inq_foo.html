@@ -20,8 +20,8 @@
         </a>
     </div>
   </div>
-
 </div>
+
 <div class="table-settings mt-2 mb-4">
   <div class="row justify-content-between align-items-center">
       <div class="col-9 col-lg-8 d-md-flex">
@@ -148,6 +148,10 @@
                             </div>  
                         </div>
                         <div class="input-text">
+                            <div class="input-div">
+                                <input type="text" id="nacionalidad" name="nacionalidad" maxlength="18" oninput="prueba2(this)" placeholder="Mexicana">
+                                <span>Nacionalidad</span>
+                            </div>
                             <div class="input-div">
                                 <input type="text" id="rfc_fiador" name="rfc_fiador" minlength="0" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();"  equire>
                                 <span>RFC</span>
@@ -618,16 +622,46 @@
                           </svg>
                     </small>
                     <div id="final1" style="Display:none;">
-                        <div class="input-text">
-                            <div class="text">
-                                <h2>Ya casi terminas!!</h2>
-                                <h3>Porfavor Dale click en FINALIZAR</h3>
-                                <h3>Para concluir tu registro.</h3>
-                                
+                        <div class="text">
+                            <h2>Domicilio Escrituras</h2>
+                            <p>Por favor introduce la dirección tal cual aparece en las escrituras del inmueble que quedara como garantía.</p>
+                        </div>
+                        <div class="input text">
+                            <div class="input-text">
+                                <div class="input-div">
+                                    <input type="text" id="calle_escrituras" name="calle_escrituras" oninput="prueba2(this);" >
+                                    <span>Calle </span>
+                            </div>
+                            <div class="input-div">
+                                <input class="form-control" type="number" id="num_ext_escrituras" name="num_ext_escrituras" oninput="prueba2(this);" >
+                                <span>Número Ext. </span>
+                            </div>
+                            <div class="input-div">
+                                <input class="form-control" type="number" id="num_int_escrituras" name="num_int_escrituras" oninput="prueba2(this);" >
+                                <span>Número Int. </span>
                             </div>
                         </div>
-                        <img src="https://i.pinimg.com/originals/b6/fd/18/b6fd1893a54478eb393d13c5d1994ef7.gif" style="width:350px; height:250px; margin-top:-20px;"></img>
-                    
+                        <div class="input-text">
+                            <div class="input-div"> 
+                                <input type="text"id="colonia_escrituras" name="colonia_escrituras" oninput="prueba2(this);" >
+                                <span>Colonia </span>
+                            </div>
+                            <div class="input-div"> 
+                                <input class="form-control" id="cp_escrituras" name="cp_escrituras" type="tel" maxlength="5" oninput="prueba2(this);" >
+                                <span>Código Postal </span>
+                            </div>
+                            <div class="input-div"> 
+                                <input type="text" id="municipio_escrituras" name="municipio_escrituras" oninput="prueba2(this);" >
+                                <span>Municipio/Alcaldia </span>
+                            </div>
+                        </div>
+                        <div class="input-text">
+                            <div class="input-div"> 
+                                <input type="text" id="estado_escrituras" name="estado_escrituras" oninput="prueba2(this);">
+                                <span>Estado/Ciudad </span>
+                            </div>
+                        </div>
+                        </div>
                         <div class="buttons button_space">
                             <button type="button" class="btn btn-outline-dark back_button">Atras</button>
                             <button class="submit_button next_button" id="finalizar2" >Finalizar</button>
@@ -643,7 +677,10 @@
                        <div class="text congrats">
                            <h2>¡Listo!</h2>
                            <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha enviado con éxito para futuras referencias.</p> <strong>Pronto nos pondremos en contacto con usted. </strong>
-                           <img src="https://opengameart.org/sites/default/files/aaaaaaaaaaa01.gif" style="width:350px; height:250px;"></img>
+                           <div class="mt-4"> 
+                            <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                        </div>
+                            <div style="" class="message">Cargando Datos...</div>
                        </div>
                     
                    </div>
@@ -745,7 +782,10 @@
                     <div class="text congrats">
                         <h2>¡Listo!</h2>
                         <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha enviado con éxito para futuras referencias.</p> <strong>Pronto nos pondremos en contacto con usted. </strong>
-                        <img src="https://opengameart.org/sites/default/files/aaaaaaaaaaa01.gif" style="width:350px; height:250px;"></img>
+                        <div class="mt-4"> 
+                            <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                        </div>
+                            <div style="" class="message">Cargando Datos...</div>
                     </div>
                 </div>
 
@@ -796,47 +836,6 @@
 
  // variables globales    
 const arr ={};
-
-
-//document.getElementById("carga_faltantes").onload = faltantes()
-//document.getElementById("estado_civil").onload = mostrarOnChange()
-
-function faltantes()
-{
-    tel = document.getElementById("numeroTel");
-    
-    n2 = document.getElementById("n_inquilino2");
-    n3 = document.getElementById("n_inquilino3");
-    n4 = document.getElementById("n_inquilino4");
-    n5 = document.getElementById("n_inquilino5");
-    p2 = document.getElementById("p_inquilino2");
-    p3 = document.getElementById("p_inquilino3");
-    p4 = document.getElementById("p_inquilino4");
-    p5 = document.getElementById("p_inquilino5");
-    
-   
-    if(tel.value == "None"){
-        console.log("Faltantes");
-        tel.value="";
-    }
-    if(n2.value == "None"){
-        n2.value="";
-        p2.value="";
-    }
-    if(n3.value == "None"){
-        n3.value="";
-        p3.value="";
-    }
-    if(n4.value == "None"){
-        n4.value="";
-        p4.value="";
-    }
-    if(n5.value == "None"){
-        n5.value="";
-        p5.value="";
-    }
-    
-}
 
 function fecha(){
     console.log("FECHAS")
@@ -922,6 +921,11 @@ var ospf_fin = document.getElementById("paso_final_opm")
     sigpf.style.display='none';
 
     // diables
+  var des = document.getElementById("datos_empresa").getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }  
   var des = document.getElementById("acpm").getElementsByTagName('*');
   for (var node of des) {
       node.disabled = true;
@@ -990,9 +994,54 @@ case "Obligado Solidario Persona Fisica":
     dom_rep.style.display='none';
     ref_emp.style.display='none';
     final1.style.display='none';
+
+     // diables
+  var des = document.getElementById("datos_empresa").getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }     
+  var des = acpm.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  var des = dat_dom_em.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  var des = dat_rep.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  
+
+  var des = dat_esc.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  var des = dom_rep.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  var des = ref_emp.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+  var des = final1.getElementsByTagName('*');
+  for (var node of des) {
+      node.disabled = true;
+      node.removeAttribute("require");
+  }
+
     document.getElementById("icono_paso6").style.display='none';
     $( "#FS" ).fadeIn( "fast" );
-    break;
+break;
 
 case "Obligado Solidario Persona Moral":
     $( "#FS" ).fadeOut( "fast" );
@@ -1043,7 +1092,7 @@ function mostrarOnChange() {
 }
 
 
-const server = 'http://192.168.2.24:8001'
+const server = 'https://arrendify-api.onrender.com'
 const configin = {
     headers: {
       'Content-Type': 'application/json',
@@ -1075,10 +1124,30 @@ function prueba2(val){
     localStorage.setItem('datos', JSON.stringify(arr));
     }
 
-const btnSubmit = document.getElementById("finalizar2")
-btnSubmit.addEventListener("click", function (event) {
+const btnSubmit2 = document.getElementById("finalizar2")
+btnSubmit2.addEventListener("click", function (event) {
     event.preventDefault();
     console.log("Editar pf")
+    console.log("esto se va a enviar",datos.nombre)
+    
+    enviar_datos(datos.nombre)
+   
+})
+
+const btnSubmit1 = document.getElementById("finalizar1")
+btnSubmit1.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Editar Obligado Solidario Persona Fisica")
+    console.log("esto se va a enviar",datos.nombre)
+    
+    enviar_datos(datos.nombre)
+   
+})
+
+const btnSubmit3 = document.getElementById("finalizar3")
+btnSubmit3.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log("Editar Obligado Solidario Persona Fisica")
     console.log("esto se va a enviar",datos.nombre)
     
     enviar_datos(datos.nombre)
@@ -1089,7 +1158,7 @@ btnSubmit.addEventListener("click", function (event) {
     
 function plantar()
 {
-    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    axios.get(`${server}/inquilinos_fiadores/`,configin)
         .then(function (response) {
      
           var datos_inq = response.data;
@@ -1115,7 +1184,7 @@ function plantar()
     var k1 = Object.getOwnPropertyNames(datos);
     console.log("soy k1",k1)
     // datos generales
-    for(let i= 4; i<=76;i++)
+    for(let i= 5; i<=78;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
        

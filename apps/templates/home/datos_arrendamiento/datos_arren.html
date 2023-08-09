@@ -1,0 +1,938 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Datos Arredador {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link href="/static/assets/css/ms_arr.css" rel="stylesheet"/>
+<link type="text/css" href="@@path/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-TJBhM3a+gFk0v/CyrFbftZUyUag2pHzx3pZVmOyadJ+SKLfa+nZ/B9ghUzy9D0sfKGLD78dILzYgt63+zwafZQ==" crossorigin="anonymous" />
+
+<style>
+ .border-green {
+    border-color: green !important;
+  }
+
+#tabla_datos_inmuebles {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tabla_datos_inmuebles caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#tabla_datos_inmuebles thead {
+  background-color: #231942;
+  color: #fff;
+}
+
+#tabla_datos_inmuebles th,
+#tabla_datos_inmuebles td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+
+
+#tabla_datos_inmuebles th {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#tabla_datos_inmuebles tbody td:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+/* Estilos adicionales para hacer la tabla más atractiva */
+#tabla_datos_inmuebles {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tabla_datos_inmuebles caption {
+  font-size: 18px;
+}
+
+#tabla_datos_inmuebles thead th {
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#tabla_datos_inmuebles tbody td {
+  padding: 10px;
+}
+
+#tabla_datos_inmuebles tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tabla_datos_inmuebles tbody tr:hover {
+  background-color: #e3e3e3;
+}
+
+
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="cargar_tabla" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="background-color:#edede9;">
+    <div class="d-block mb-4 mb-md-0" style="margin-left:10px">
+        <h1 class="h1">Datos de arrendamiento</h1>
+        <p class="mb-0"></p>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center me-2" id="confirmarBTN" data-bs-toggle="modal" data-bs-target="#datos_arren" value="Agregar datos arrendamiento">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            Datos arrendamiento
+        </a>
+    </div>
+</div>
+<div class="row">
+
+
+<br>
+
+
+    <div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
+        <table class="table user-table table-hover align-items-center mb-5" id="tabla_datos_inmuebles">
+            <thead>
+                <tr >
+                    <th class="border-bottom" id="id_investigacion">ID Investigación</th>
+                    <th class="border-bottom">Costo de la renta</th>
+                    <th class="border-bottom">Tipo de uso</th>						
+                    <th class="border-bottom">Estatus del inmueble</th>
+                    <th class="border-bottom">Regimen fiscal</th>
+                    <th class="border-bottom">Comentarios</th>
+                </tr>
+            </thead>
+            <tbody style="overflow-x: hidden;" id="table_body">
+                                
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        {% comment %} <div class="nav-wrapper position-relative">
+            <ul class="nav nav-pills square nav-fill flex-column vertical-tab">
+                <li class="nav-item">
+                    <a class="nav-link d-inline-flex align-items-center justify-content-center active" data-bs-toggle="modal" data-bs-target="#exampleModal"  href="#">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
+                        Registrar Arrendador
+                    </a>
+                </li>
+                <li class="nav-item d-inline-flex align-items-center justify-content-center">
+                    <a class="nav-link"  data-bs-toggle="modal" data-bs-target="#datos_arren"  href="#">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>
+                        Datos Arrendamiento
+                    </a>
+                </li>
+                <li class="nav-item d-inline-flex align-items-center justify-content-center">
+                    <a class="nav-link" data-bs-toggle="tab" href="#">
+                        <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path><path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path></svg>
+                        Messages
+                    </a>
+                </li>
+            </ul>
+        </div> {% endcomment %}
+
+
+     
+                
+        </div>
+    </div>
+</div>
+  
+  <!-- Modal -->
+<div id="Modal Datos Arrendamiento">
+    <p id="carga_plantar" style="display:none;">
+        <p id="carga_pfom" style="display:none;">
+            <p id="carga_aa" style="display:none;">
+    <div class="modal fade" id="datos_arren" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" style="height:15px" id="exampleModalLabel">Datos Arrendamiento</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="cerrar_formulario"></button>
+            </div>
+            <div class="modal-body" style="padding:0;">
+    <div class="container">
+        <div class="card">
+            {% comment %} action="{% url 'reg_inq' %}" {% endcomment %}
+            <form id="Form_da" class="form needs-validation" novalidate data-toggle="validator" method="POST">
+                <div class="left-side">
+                    <div class="left-heading">
+                        <h3>Introduce la información Solicitada</h3>
+                    </div>
+                    <div class="steps-content" style="margin-bottom:-50px;">
+                        <h3>Paso <span class="step-number">1</span></h3>
+                    </div>
+                    <ul class="progress-bar" style="background:none;">
+                        <li class="active">Datos Arrendamiento</li>
+                        <li>Datos Adicionales</li>
+                        <li>Vigencia</li>
+                        <li>Observaciones</li>
+                        <li>Arrendatario</li>
+                        <li>Final</li>
+                    
+                    </ul>
+                </div>
+                <div class="right-side">
+                    <div id="step1" class="main active">
+                        <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg></small>
+                        <div class="text">
+                            <h2>Datos Del Arrendamiento</h2>
+                        </div>
+                        <hr class="hr" />
+                        <div id="datos_a" style="">
+                            <div class="input-text">
+                                <div class="input-div">
+                                    <label>Importe mensual De La Renta</label>
+                                    <input class="form-control" id="renta" name="renta" type="tel" placeholder="$ Valor de la renta" require required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                                <div class="input-div"> 
+                                    <label for="fecha">Fecha</label>
+                                    <input class="form-control" id="fecha_1" type="date" oninput="prueba2(this)" require required>
+                                    <div class="invalid-feedback">Este campo es obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-6 border-0 shadow">
+                                <label for="uso_inmueble">Uso Del Inmueble</label>
+                                <div class="input-text" style="margin-top:-10px;">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="comercial" name="uso_inmueble" onchange="uso_in(this)" value="Comercial" required>
+                                        <label class="form-check-label fw-bold" for="comercial">Comercial</label>
+                                        <div class="invalid-feedback">Selecciona una opción</div>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" id="habitacional" name="uso_inmueble" onchange="uso_in(this)" value="Habitacional" required>
+                                        <label class="form-check-label fw-bold" for="habitacional">Habitacional</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 border-0 shadow">
+                                <label for="mantenimiento">Mantenimiento</label>
+                                <div class="input-text" style="margin-top:-10px;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="incluido" name="mantenimiento" onchange="mante(this)" value="Incluido" required>
+                                    <label class="form-check-label fw-bold" for="incluido">Incluido</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="no_incluido" name="mantenimiento" onchange="mante(this)" value="No Incluido" required>
+                                    <label class="form-check-label fw-bold" for="no_incluido">No Incluido</label>
+                                </div>
+                                </div>
+                            </div>
+                            </div>                  
+                            <div class="input-text" display="block">
+                                <div class="input-div"> 
+                                    <label class="form-check-label" style="font-weight: bold;">Cuota De Mantenimiento</label>
+                                    <input class="form-control" id="cuota_mantenimiento" name="cuota_mantenimiento" type="text" placeholder="$ Cuota de mantenimiento" oninput="validarInput(this)" oninput="prueba2(this)" require required >
+                                    {% comment %} <span>Cuota De Mantenimiento</span> {% endcomment %}
+                                </div>
+                            </div>      
+                            <div class="input-text">
+                                <div class="input-div">
+                                    <label class="form-check-label" style="font-weight: bold;">Deposito</label>
+                                    <input class="form-control" id="deposito_garantia" name="deposito_garantia" type="text" placeholder="$ Cantidad que deja como garantia"  oninput="validarInput(this)" oninput="prueba2(this)" required require>
+                                    <div class="invalid-feedback">Ingresa un número positivo</div>
+                                    {% comment %} <span>Deposito</span> {% endcomment %}
+                                </div>
+                            </div>                           
+                            <div class="buttons mt-3">
+                            <input class="btn btn-primary next_button" type="button" id="next1" onClick="verificarFormulario()" value="Siguiente">
+                                {% comment %} <input class="btn btn-primary next_button" type="button" id="next1" onClick="recopilar()" value="Siguiente" > {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="step2" class="main">
+                        <small>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5Z"/>
+                            </svg>
+                        </small>
+                        <div class="text">
+                            <h2>Lugar Para Firma</h2>
+                            <hr class="hr" />
+                        </div>
+                        <div class="row">
+                        <hr class="hr" />  
+                        <div class="input-text">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio1" value="Propiedad A Rentar" oninput="prueba2(this)" required/>
+                                <label class="form-check-label" for="inlineRadio1" style="font-weight: bold;">Propiedad A Rentar</label>
+                              </div>
+                              
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio2" value="Oficinas Arrendify" oninput="prueba2(this)" required/>
+                                <label class="form-check-label" for="inlineRadio2" style="font-weight: bold;">Oficinas Arrendify</label>
+                              </div>
+                              
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio3" value="Firma Electronica" oninput="prueba2(this)" required/>
+                                <label class="form-check-label" for="inlineRadio3" style="font-weight: bold;">Firma Electronica</label>
+                              </div>
+                        </div>
+                            <hr class="hr" />
+                        </div>
+                        <div class="input-text">
+                            <div class="input-div">
+                                <label class="form-check-label" for="fecha_firma" style="font-weight: bold;">Fecha firma contrato</label>
+                                <input class="form-control" id="fecha_firma" name="fecha_firma" type="date" oninput="prueba2(this)"required require>  
+                            </div>
+                            <div class="input-div"> 
+                                <label class="form-check-label" for="fecha_firma" style="font-weight: bold;">Hora de la firma de contrato</label>
+                                <input class="form-control" type="time" id="hora_firma" name="hora_firma" oninput="prueba2(this)"required require>
+                            </div>
+                        </div>
+                    
+                        <div class="buttons button_space">
+                            <button type="button" class="btn btn-outline-dark back_button">Atras</button>
+                            <input class="btn btn-primary next_button" type="button" onClick="recopilar()" value="Siguiente">
+                        </div>
+                    </div>
+                    
+                    <div id="step3" class="main">
+                        <small>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-briefcase-fill" viewBox="0 0 16 16">
+                                <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>
+                                <path d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5V6.85L8.129 8.947a.5.5 0 0 1-.258 0L0 6.85v5.65z"/>
+                            </svg>
+                        </small>
+                        <div class="text">
+                            <h2>Datos De Vigencia</h2>
+                        </div>
+                        <hr class="hr" />
+                            <div class="input-text" style="margin-top:-5px;">
+                                <div class="input-div">
+                                    <div>
+                                        <label for="last_name_1FS">Fecha de inicio del contrato</label>
+                                        <input class="form-control" id="fecha_inicio_contrato" name="fecha_inicio_contrato" type="date" required>
+                                    </div>
+                                </div>
+                                <div class="input-div">
+                                    <div>
+                                        <label for="last_name_1FS">Fecha de termino del contrato</label>
+                                        <input class="form-control" id="fecha_fin_contrato" name="fecha_fin_contrato" type="date" required readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-text d-flex align-items-center justify-content-between">
+                                <div class="input-div">
+                                    <div>
+                                        <label for="last_name_1FS">Duración</label>
+                                        <input class="form-control" id="duracion" name="duracion" type="number" required  pattern="[0-9]*" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');">
+                                        <div class="invalid-feedback">Ingrese un número entero positivo</div>
+                                    </div>
+                                </div>
+                                <div class="input-div">
+                                    <div>
+                                        <label for="last_name_1FS">Tiempo</label>
+                                        <select class="form-select" id="tiempo_contrato" name="tiempo_contrato" onChange="vig()" aria-label="Default select example" required>
+                                            <option value="Meses">Meses</option>
+                                            <option value="Años" selected>Años</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-div">
+                               <input class="form-control d-none" id="vigencia" name="vigencia" type="text" readonly>
+                            </div>
+                        <div class="buttons button_space">
+                            <button type="button" class="btn btn-outline-dark back_button">Atras</button>
+                            <input class="btn btn-primary next_button" type="button" onClick="recopilar()" value="Siguiente">
+                        </div>
+                    </div>
+                    
+                    <div id="step4" class="main">
+                        <small>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-building-fill-check" viewBox="0 0 16 16">
+                                <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514Z"/>
+                                <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7.256A4.493 4.493 0 0 0 12.5 8a4.493 4.493 0 0 0-3.59 1.787A.498.498 0 0 0 9 9.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .39-.187A4.476 4.476 0 0 0 8.027 12H6.5a.5.5 0 0 0-.5.5V16H3a1 1 0 0 1-1-1V1Zm2 1.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5Zm3 0v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5Zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM4 5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5ZM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm2.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5ZM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+                            </svg>
+                        </small>
+                        <div class="text">
+                            <h2>Observaciones</h2>
+                            <hr class="hr" />
+                            <p>Por favor introduce tus observaciones.</p>
+                        </div>
+                        <div class="input-text">
+                            <textarea class="form-control" placeholder="..." id="observaciones" name="observaciones" rows="4"></textarea>
+                        </div>
+                        <div class="buttons button_space">
+                            <button type="button" class="btn btn-outline-dark back_button">Atras</button>
+                            <input class="btn btn-primary next_button" type="button" onClick="recopilar()" value="Siguiente">
+                        </div>
+                    </div>
+                   
+                    <div id="step5" class="main">
+                        <small>
+                            <img src="/static/assets/img/icons/aa.png" style="width:25px; height:25px;" alt="icon">
+                        </small>
+                        <div class="row mt-4 border shadow border-2">
+                            <h2>Arrendatario</h2>
+                            <label >El Arrendatario Firma Como Persona:</label>
+                            <div class="input-text">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_persona" id="tipo_arrendatario_fisica" value="Persona Fisica" required/>
+                                <label class="form-check-label" style="margin-right:15px;">Fisica</label>
+                              </div>
+                              
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="tipo_persona" id="tipo_arrendatario_moral" value="Persona Moral"  required/>
+                                <label class="form-check-label">Moral</label>
+                              </div>
+                        </div>
+                    </div>
+                    <hr class="hr" />
+                    <div class="input-text">
+                        <div class="input-div">
+                            <h2>Fecha De Firma Del Contrato:</h2>
+                        </div>
+                    </div>
+                    <div class="input-text" style="margin-top:-20px;">
+                        <div class="input-div">
+                            <input class="form-control" id="fecha_firma_contrato" name="fecha_firma_contrato" type="date" required>
+                        </div>
+                    </div>
+                    <hr class="hr" />
+                    <div class="buttons button_space mt-4">
+                        <button type="button" class="btn btn-outline-dark back_button">Atras</button>
+                        <input class="btn btn-primary next_button"  id="enviar_datos" type="button" onClick="recopilar()" value="Finalizar">
+                        {% comment %} <button type="submit" class=" next_button">Finalizar</button> {% endcomment %}
+                    </div>
+                    </div> 
+                        <div id="final_step" class="main">
+                            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                            </svg>
+                            <div class="text congrats">
+                                <h2>¡Gracias por confiar en nosotros!</h2>
+                                <p> {{ request.user.first_name }} su información se ha enviado con éxito.</p> 
+                                <strong>Esperamos que tu experiencia con <strong style="color:purple;">Arrendify</strong> sea extraordinaria.</strong>
+                                {% comment %} <img src="https://i.pinimg.com/originals/91/8b/c1/918bc135ae83beee618996f17a2ef32a.gif"></img> {% endcomment %}
+                                <img style="width:340; height:250px;" src="https://i.pinimg.com/originals/b0/39/7e/b0397eaf8e7552223fec8268ec43ceb0.gif"></img>
+                            </div>
+                        </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End of Modal -->
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+
+
+{% block javascripts %}
+<script src="/static/assets/js/ms_arr.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script>
+
+    $(function () {
+        $("form").keypress(function (e) {
+            var key;
+            if (window.event)
+                key = window.event.keyCode; //IE
+            else
+                key = e.which; //firefox     
+            return (key != 13);
+        });
+    });
+</script>
+
+<script>
+  
+    function uso_inm(radio) {
+           
+         
+       var dep = document.getElementById("comer");
+      
+   //   console.log(radio.value)
+     console.log(radio.id)
+    
+        if(radio.id=="Comercial") {
+             dep.style.display='';
+             
+            
+         }
+         else{
+             dep.style.display='none'
+              }
+        }
+   
+   function permisos(radio) {
+   
+   
+       var mas = document.getElementById("no_mascotas");
+   
+   
+       //   console.log(radio.value)
+       console.log(radio.id)
+   
+           if(radio.id=="Mascotas_si") {
+               mas.style.display='';
+               
+           }
+           else{
+               mas.style.display='none'
+               }
+   
+       }
+   function permisos2(radio) {
+           
+           var caj = document.getElementById("cajones");
+          
+       //   console.log(radio.value)
+         console.log(radio.id)
+           
+           if(radio.id=="Cajon_si") {
+                 caj.style.display='';
+             }
+             else{
+                 caj.style.display='none'
+                  }
+            }
+   
+   function permisos3(radio) {
+           
+           var bod = document.getElementById("no_bodega");
+          
+       //   console.log(radio.value)
+         console.log(radio.id)
+   
+           if(radio.id=="Bodega_si") {
+                 bod.style.display='';
+                 
+                
+             }
+             else{
+                 bod.style.display='none'
+                  }
+            }
+   
+function vig()
+{
+    var dia = document.getElementById("dia")
+    var tiempo = document.getElementById("tiempo")
+    var vig = document.getElementById("vigencia")
+
+    console.log(vig.value)
+    vig.value = dia.value +" "+tiempo.value
+    console.log(vig.value)
+}
+</script>
+<script>
+ // variables globales    
+const arr ={};
+
+
+function recopilar()
+{
+// Obtener y Guardar el valor del input en localStorage
+console.log("estoy en guardar",JSON.stringify(arr))
+localStorage.setItem('datos', JSON.stringify(arr));
+
+}
+
+function plantar()
+{
+    const storedData = JSON.parse(localStorage.getItem('datos'));
+    var k1 = Object.getOwnPropertyNames(storedData);
+    console.log("soy k1",k1)
+    for(let i= 0; i<k1.length;i++)
+    {
+        let k2 = document.getElementsByName(k1[i]);
+        k2[0].value =  storedData[k1[i]];
+        console.log("soy k2",k2[0]);
+    }
+}
+
+function prueba2(val){
+    console.log(val.name)
+    arr[""+val.name] = '' +val.value
+    console.log(arr)
+}
+
+
+
+</script>
+<script>
+document.getElementById("cargar_tabla").onload = tabla()
+
+function tabla(){
+    var form = document.getElementById("Form_da");
+    form.reset()
+    const server = 'https://arrendify-api.onrender.com';;
+    const configin = {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+    };
+
+        url =  `${server}/DatosArrendamiento/`;
+        console.log("Esta cargando tabla")
+        axios.get(url, configin)
+            .then(function (response) { 
+            data_arrendador = response.data
+            // manejar respuesta exitosa
+            var cuerpo = document.getElementById("table_body")
+            let res = response.data
+            //console.log(re)
+            //iframe.src = res[0].arrendador[0].ine;
+            var num = 1;
+            if(res.length > 0 ){
+                console.log("res",res)
+    
+                for(let i = 0; i < res.length;i++)
+                {
+                    let tr = document.createElement('tr')
+                    let col1 = document.createElement('td')
+                    let col2 = document.createElement('td')
+                    let col3 = document.createElement('td')
+                    let col4 = document.createElement('td')
+                    let col5 = document.createElement('td')
+                    let col6 = document.createElement('td')
+                    let check = document.createElement("input")
+                    check.setAttribute("type","checkbox");
+                    check.setAttribute("class","form-check-input");
+
+                    col1.innerHTML = `<div class="row justify-content-center">
+                                            <div class="col-md-2 text-center">
+                                                <a>${num}</a>
+                                            </div>
+                                        </div>
+                                        `;
+                                                
+                    col2.innerHTML = `<a class="d-flex align-items-center" id="nombre_prospecto">
+                                        <div class="d-block">
+                                            <span class="fw-bold"> ${res[i].renta} </span>
+                                        </div>
+                                    </a>
+                                            `
+                    col3.innerHTML = `<a class="d-flex align-items-center">
+                                        <div class="d-block">
+                                            <span id="span" class="fw-bold"> ${res[i].uso_inmueble} </span>
+                                        </div>
+                                    </a>`
+
+                    col4.innerHTML = `
+                                          <div class="row">
+                                            <div class="col-md-11 d-flex justify-content-center p-1 mx-auto">
+                                                <div class="col-md-12 d-flex justify-content-center p-1">
+                                                    <a class="d-flex align-items-center">
+                                                        <div class="d-block">
+                                                            <span id="span" class="fw-bold"> ${res[i].lugar_firma} </span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        `
+                    col5.innerHTML = `
+                                        <div class="row">
+                                            <div class="col-md-11 d-flex justify-content-center p-1 mx-auto">
+                                                <div class="col-md-12 d-flex justify-content-center p-1">
+                                                    <a class="d-flex align-items-center">
+                                                        ${res[i].tipo_persona}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+
+                    col6.innerHTML = `
+                                    <div class="row">
+                                        <div class="col-md-8 d-flex justify-content-center p-1 mx-auto">
+                                            <div class="form-floating">
+                                                <textarea disabled class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">${res[i].deposito_garantia}</textarea>
+                                                <label for="floatingTextarea2"></label>                                                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                        `
+                    tr.appendChild(col1);
+                    tr.appendChild(col2);
+                    tr.appendChild(col3);
+                    tr.appendChild(col4);
+                    tr.appendChild(col5);
+                    tr.appendChild(col6);
+                    cuerpo.appendChild(tr);
+                    num += 1;
+                }
+                    console.log(response);
+            } else{
+                cuerpo.innerHTML = '<td colspan="7"><center><h1>Sin Registro <img src="https://cdn-icons-png.flaticon.com/512/929/929457.png"style="width:50px;height:50px"></h1></center></td>'
+                console.log("sin datos")
+            } 
+        })
+        .catch(function (error) {
+            // manejar error
+            console.log(error);
+        })
+        .finally(function () {
+            // siempre sera executado
+        });
+}
+
+</script>
+<script>
+
+  function vig() {
+    var fecha_inicio = document.getElementById("fecha_inicio_contrato").value;
+    var duracion = document.getElementById("duracion").value;
+    var tiempo_contrato = document.getElementById("tiempo_contrato").value;
+    
+    if (fecha_inicio && duracion && tiempo_contrato) {
+      fecha_inicio = new Date(fecha_inicio);
+      duracion = parseInt(duracion);
+      
+      if (!isNaN(fecha_inicio.getTime()) && !isNaN(duracion)) {
+        var fechaFin = new Date(fecha_inicio);
+        
+        if (tiempo_contrato === "Meses") {
+          fechaFin.setMonth(fechaFin.getMonth() + duracion);
+        } else if (tiempo_contrato === "Años") {
+          fechaFin.setFullYear(fechaFin.getFullYear() + duracion);
+        }
+        
+        document.getElementById("fecha_fin_contrato").value = fechaFin.toISOString().split("T")[0];
+      }
+    }
+  }
+  
+  // Llamar a la función vig() cuando los campos tengan un valor
+  document.getElementById("fecha_inicio_contrato").addEventListener("input", vig);
+  document.getElementById("duracion").addEventListener("input", vig);
+  document.getElementById("tiempo_contrato").addEventListener("input", vig);
+
+
+
+
+
+const server = 'https://arrendify-api.onrender.com';;
+    const configin = {
+        headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+    };
+
+var enviar_datos_arrendamiento = document.getElementById("enviar_datos");
+
+enviar_datos_arrendamiento.addEventListener("click", function(){
+    event.preventDefault();
+    enviarDatosArrendamiento();
+});
+
+const enviarDatosArrendamiento = async () =>{
+    try{
+        const formData = new FormData(document.getElementById('Form_da'));
+        const response = await axios.post(`${server}/DatosArrendamiento/`, formData, configin);
+        console.log(response);
+        setTimeout(() => {
+                    location.reload()
+                }, 2200);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
+function verificarFormulario() {
+    // Verificar los campos del formulario utilizando Bootstrap
+    var formulario = document.getElementById("Form_da");
+    if (formulario.checkValidity() === false) {
+      // Si los campos no son válidos, muestra los mensajes de error y evita la redirección
+      event.preventDefault();
+      event.stopPropagation();
+      formulario.classList.add("was-validated");
+    } else {
+        $('.form-control').removeClass('warning');
+        $('.form-control').css('border-color', 'green');
+        var paso2 = document.getElementById("step2");
+        paso2.classList.add("active");
+        window.scrollTo(0, paso2.offsetTop);
+    }
+  }
+
+function verificarInputs() {
+    var seleccionado = false; // Variable para verificar si se ha seleccionado algún input
+    
+    $('input[required]').each(function() {
+        var valor = $(this).val();
+        if (valor.trim() !== '' && !$(this).is(':radio')) {
+            $(this).css('border-color', 'green');
+            $(this).removeClass('warning');
+        }
+
+    });
+    
+}
+
+
+    $(document).ready(function() {
+        $('input[required]').on('input', function() {
+            verificarInputs();
+        });
+    }); 
+
+
+
+function validarInput(input) {
+  var valorAnterior = input.value; // Almacenar el valor anterior del campo de entrada
+  input.value = input.value.replace(/[^0-9.]/g, ''); // Eliminar caracteres no numéricos excepto el punto decimal
+
+  // Verificar si hay más de un punto decimal y eliminar los adicionales
+  var partes = input.value.split('.');
+  if (partes.length > 2) {
+    input.value = partes[0] + '.' + partes.slice(1).join('');
+  }
+
+  var numero = parseFloat(input.value);
+
+  if (isNaN(numero) || numero < 0) {
+    input.value = valorAnterior; // Restaurar el valor anterior del campo
+  }
+}
+
+
+
+function validar_cuota_mantenimiento(input){
+    input.value = input.value.replace(/[^0-9.]/g, '');
+    input.value = input.value.replace(/^0+/, '');
+
+    input.value = input.value.replace(/^\./, '0.');
+
+    var partes = input.value.split('.');
+    if(partes.length > 2 ){
+        input.value = partes[0] + '.' + partes[1];
+    }
+    var numero = parseFloat(input.value);
+    if(isNaN(numero) || numero <= 0){
+        input.value = ""
+    }
+}
+
+function validarInput(input) {
+  input.value = input.value.replace(/[^0-9.]/g, ''); // Eliminar caracteres no numéricos excepto el punto decimal
+  input.value = input.value.replace(/^0+/, ''); // Eliminar ceros iniciales
+
+  // Verificar si hay un punto decimal al inicio del número y agregar un cero antes para evitar números como ".5"
+  input.value = input.value.replace(/^\./, '0.');
+
+  // Verificar si hay más de un punto decimal y eliminar los adicionales
+  var partes = input.value.split('.');
+  if (partes.length > 2) {
+    input.value = partes[0] + '.' + partes[1];
+  }
+
+  var numero = parseFloat(input.value);
+
+  if (isNaN(numero) || numero < 0) {
+    input.value = ''; // Limpiar el campo si no es un número real positivo
+  }
+}
+    document.getElementById("cerrar_formulario").addEventListener("click", function() {
+        location.reload();
+    });
+
+
+
+ function suma(arr, n, s) {
+  var sum = 0;
+  var inicio = 0;
+  var fin = 0;
+
+  for (var i = 0; i < n - 1; i++) {
+    inicio = i;
+    sum += arr[i];
+
+    for (var j = i + 1; j < n; j++) {
+      sum += arr[j];
+
+      if (sum === s) {
+        fin = j;
+        break;
+      }
+
+      if (sum > s) {
+        break;
+      }
+    }
+
+    if (sum === s) {
+      break;
+    }
+
+    sum = 0;
+  }
+
+  if (sum !== s) {
+        return -1;
+    } else {
+        return [inicio, fin];
+    }
+}
+
+
+var num2 = 5 
+var num1 = 12
+const arreglito = [1, 2, 3, 7, 5]
+
+var aaa = suma(arreglito, num2, num1)
+console.log(aaa)
+
+
+
+
+
+</script>
+
+
+<script src="@@path/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+{% comment %} <script src="/static/assets/js/ocultadorespf.js"></script> {% endcomment %}
+{% comment %} <script src="/static/assets/js/validacionpf.js"></script> {% endcomment %}
+{% endblock javascripts %}
+

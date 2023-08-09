@@ -132,7 +132,7 @@
     <div class="container">
         <div class="card">
             {% comment %} action="{% url 'createf' %}" {% endcomment %}
-            <form id="Formu" class="form" enctype="multipart/form-data"  method="post"> 
+            <form id="Formu" class="form" enctype="multipart/form-data"  method="put"> 
                 {% csrf_token %}
                 <div class="left-side">
                     <div class="left-heading">
@@ -174,9 +174,8 @@
                             </div>
                             <div class="input-div" style="position: relative; bottom: 23px;">
                                     <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Arrendador</label>
-                                    <select class="form-select LetraSelect" id="arrendador" name="arrendador" aria-label="Floating label select example" require>
+                                    <input class="form-control-plaintext" type="text" id="arrendador" name="arrendador" readonly value="">
 
-                                    </select>
                             </div>
                             <div class="input-text">
                                 <div class="input-div" style="position: relative; bottom: 23px;">
@@ -688,10 +687,14 @@
 {% block javascripts %} 
 <script src="/static/assets/js/ms_arr.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-
-
 <script>
-    const server = 'https://arrendify-api.onrender.com';
+    const server = "https://arrendify-api.onrender.com";
+    const configin = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+      };
 
     $(function () {
         $("form").keypress(function (e) {
@@ -716,40 +719,23 @@ $(document).ready(function() {
 </script>
 
 <script>
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
 
-$(document).ready(function() {
-    $.ajax({
-        url: `${server}/arrendadores_campos_establecidos/`,
-        type: 'GET',
-        dataType: 'json',
-        headers: {'X-CSRFToken': csrftoken},
-        success: function(data) {
-            console.log("Si llega ")
-            $.each(data, function(index, item) {
-                if (item.nombre === "")
-                    $('#arrendador').append('<option value="' + item.id + '">' + item.custom_field +'</option>');
-                else
-                    $('#arrendador').append('<option value="' + item.id + '">' + item.nombre +" "+ item.apellido + " " + item.apellido1 +'</option>');
-            });
-        }
-    });
-});
+
+//const getArrendadores = () => axios.get(`${server}/arrendadores_campos_establecidos/`, configin);
+//
+//getArrendadores()
+//    .then((response) =>{
+//        console.log("Si esta llegando a obtener datos inmueble");
+//        var data = response.data;
+//        $.each(data, function(index, item){
+//            if(item.nombre === "")
+//                $('#arrendador').append('<option value="' + item.id + '">' + item.custom_field + '</option>');
+//            else
+//                $('#arrendador').append('<option value="' + item.id + '">' + item.nombre + " "+ item.apellido + " " + item.apellido1 +'</option>');
+//        });
+//    }).catch((error) =>{
+//        console.log(error);
+//    })
 
 
 $(document).ready(function() {
@@ -807,6 +793,20 @@ var img_eli = {
     console.log("soy datos inmueble",data.inmuebles)
     console.log("soy datos imagen",data.imagen)
     console.log("soy datos cuantas imagenes",data.total_imagenes)
+    var inputArrendador = document.getElementById("arrendador");
+    console.log("data", data)
+    var id_arrendador = data.inmuebles[0].arrendador
+    console.log("id arrendador", id_arrendador)
+    var nombre_arrendador = data.inmuebles[0].arrendador_nombre !== "null" ? data.inmuebles[0].arrendador_nombre + " " + data.inmuebles[0].arrendador_apellido_paterno + " " + data.inmuebles[0].arrendador_apellido_materno : data.inmuebles[0].arrendador_inmobiliaria
+    console.log("nombre_arrendador", data.inmuebles[0].arrendador_nombre)
+
+    // Asignar los valores al input
+    // Establecer el valor en el atributo 'data-value'
+    var valorInput = id_arrendador;
+    inputArrendador.setAttribute("data-value", valorInput);
+     // Establecer el texto en el input
+    var textoAdicional = "Texto adicional";
+    inputArrendador.value = nombre_arrendador;
 
     //console.log(datos.id)
     var full = document.getElementById("nombre_full")
@@ -817,13 +817,13 @@ var img_eli = {
     dato1 = document.getElementsByName("alias_inmueble");
     console.log("Alias inmueble documento", dato1);
     console.log("Soy el valor de el id", data.inmuebles[0]['id'])
-    for(let i= 0; i < 71; i++)
+    for(let i= 0; i < 76; i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         let myElement = document.getElementById(k1[i]);
         console.log("yo soy k2",k2)
         console.log("Nombre del elemnto", myElement)
-            if (k2 !== null && k1[i] !== 'mobiliario' && k1[i] !== 'reglamento_interno'){
+            if (k2 !== null && k1[i] !== 'mobiliario' && k1[i] !== 'reglamento_interno' && k1[i] !== 'arrendador'){
                 if (k2[0] !== undefined)
                     k2[0].value = data.inmuebles[0][k1[i]];
                 //console.log(k2[0].value)
@@ -847,13 +847,13 @@ var img_eli = {
         if(data.total_imagenes == 1)
             im += `<div id="img"class="col-md-4 mb-2">
                 <br>
-                <img src="http://192.168.2.14:8001//static${url}" class="imagen" style="width:50%;height:50%;"" />
+                <img src="${url}" class="imagen" style="width:45%;height:45%;"" />
                 </div>`
         else
             im+=`<div id="img"class="col-md-4 mb-2">
                 <br>
                 <input type="checkbox" name="{{ objin.imagenes }}" value="${id}" />
-                <img src="http://192.168.2.14:8001//static${url}" class="imagen" style="width:50%;height:50%;"" />
+                <img src="${url}" class="imagen" style="width:45%;height:45%;"" />
                 </div>`
     }
 
@@ -918,144 +918,125 @@ $('#img_row').html(im);
 </script>
 
 <script>
-$(document).ready(function() {
-  $('#Formu').submit(function(e) {
-    function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
 
-    e.preventDefault(); // prevent the form from submitting normally
-    //let form_data = $(this).serialize(); // serialize the form data
-    console.log("Esta entrando a enviar Inmueble")    
-    console.log("Agregar")
-    //var data =  $("#Formu").serializeArray();
+const submit_put = document.getElementById("Formu");
+
+submit_put.addEventListener("submit", function (event) {
+    event.preventDefault();
+    editarDatosInmueble();
+});
+
+
+function editarDatosInmueble(){
     const formData = new FormData();
     formData.append('imagenes', $('#imagenes')[0].files[0]);
-    //var imagen_inmueble = $('#imagenes').val();
-    //formData.append('alias_inmueble',$('#alias_inmueble').val().trim())
-    //formData.append('estatus_inmueble',$('#estatus_inmueble').val().trim())
-    //formData.append('clave_catastral',$('#clave_catastral').val().trim())
     formData.append('id',$('#id').val().trim())
-formData.append('alias_inmueble',$('#alias_inmueble').val().trim())
-formData.append('estatus_inmueble',$('#estatus_inmueble').val().trim())
-formData.append('renta',$('#renta').val().trim())
-formData.append('venta',$('#venta').val().trim())
-formData.append('clave_catastral',$('#clave_catastral').val().trim())
-formData.append('estatus_gravamen',$('#estatus_gravamen').val().trim())
-formData.append('valor_catastral',$('#valor_catastral').val().trim())
-formData.append('cuota_mantenimiento',$('#cuota_mantenimiento').val().trim())
-formData.append('tipo_inmueble',$('#tipo_inmueble').val().trim())
-formData.append('uso_inmueble',$('#uso_inmueble').val().trim())
-formData.append('op_compra',$('#op_compra').val().trim())
-formData.append('municipio_alcaldia',$('#municipio_alcaldia').val().trim())
-formData.append('colonia',$('#colonia').val().trim())
-formData.append('postal_code',$('#postal_code').val().trim())
-formData.append('estado',$('#estado').val().trim())
-formData.append('calle',$('#calle').val().trim())
-formData.append('numeroExterior',$('#numeroExterior').val().trim())
-formData.append('numeroInterior',$('#numeroInterior').val().trim())
-formData.append('calle1',$('#calle1').val().trim())
-formData.append('calle2',$('#calle2').val().trim())
-formData.append('referencias',$('#referencias').val().trim())
-formData.append('n_baños',$('#n_baños').val().trim())
-formData.append('n_medios_baños',$('#n_medios_baños').val().trim())
-formData.append('n_recamaras',$('#n_recamaras').val().trim())
-formData.append('n_pisos',$('#n_pisos').val().trim())
-formData.append('estacionamiento_cajones',$('#estacionamiento_cajones').val().trim())
-formData.append('terrenoConstruido',$('#terrenoConstruido').val().trim())
-formData.append('terrenoTotal',$('#terrenoTotal').val().trim())
-formData.append('año_contruccion',$('#año_contruccion').val().trim())
-formData.append('garage',$('#garage').val().trim())
-formData.append('bodega',$('#bodega').val().trim())
-formData.append('terraza',$('#terraza').val().trim())
-formData.append('alberca',$('#alberca').val().trim())
-formData.append('cocina',$('#cocina').val().trim())
-formData.append('amueblado',$('#amueblado').val().trim())
-formData.append('cuarto_lavado',$('#cuarto_lavado').val().trim())
-formData.append('gym',$('#gym').val().trim())
-formData.append('bar',$('#bar').val().trim())
-formData.append('restaurante_bar',$('#restaurante_bar').val().trim())
-formData.append('sala_cine',$('#sala_cine').val().trim())
-formData.append('salon_estudio',$('#salon_estudio').val().trim())
-formData.append('area_comun',$('#area_comun').val().trim())
-formData.append('sala_juegos',$('#sala_juegos').val().trim())
-formData.append('salon_eventos',$('#salon_eventos').val().trim())
-formData.append('espacio_deportivo',$('#espacio_deportivo').val().trim())
-formData.append('busisness_center',$('#busisness_center').val().trim())
-formData.append('roof_garden',$('#roof_garden').val().trim())
-formData.append('otroA',$('#otroA').val().trim())
-formData.append('internet',$('#internet').val().trim())
-formData.append('electricidad',$('#electricidad').val().trim())
-formData.append('agua_potable',$('#agua_potable').val().trim())
-formData.append('televisionCable',$('#televisionCable').val().trim())
-formData.append('gas',$('#gas').val().trim())
-formData.append('lineaTelefonica',$('#lineaTelefonica').val().trim())
-formData.append('drenaje',$('#drenaje').val().trim())
-formData.append('seguridad',$('#seguridad').val().trim())
-formData.append('camarasSeguridad',$('#camarasSeguridad').val().trim())
-formData.append('area_juegos',$('#area_juegos').val().trim())
-formData.append('otroS',$('#otroS').val().trim())
-formData.append('descripcion',$('#descripcion').val().trim())
-slug = document.getElementById("slug").value;
-formData.append('arrendador',$('#arrendador').val().trim())
+    formData.append('alias_inmueble',$('#alias_inmueble').val().trim())
+    formData.append('estatus_inmueble',$('#estatus_inmueble').val().trim())
+    formData.append('renta',$('#renta').val().trim())
+    formData.append('venta',$('#venta').val().trim())
+    formData.append('clave_catastral',$('#clave_catastral').val().trim())
+    formData.append('estatus_gravamen',$('#estatus_gravamen').val().trim())
+    formData.append('valor_catastral',$('#valor_catastral').val().trim())
+    formData.append('cuota_mantenimiento',$('#cuota_mantenimiento').val().trim())
+    formData.append('tipo_inmueble',$('#tipo_inmueble').val().trim())
+    formData.append('uso_inmueble',$('#uso_inmueble').val().trim())
+    formData.append('op_compra',$('#op_compra').val().trim())
+    formData.append('municipio_alcaldia',$('#municipio_alcaldia').val().trim())
+    formData.append('colonia',$('#colonia').val().trim())
+    formData.append('postal_code',$('#postal_code').val().trim())
+    formData.append('estado',$('#estado').val().trim())
+    formData.append('calle',$('#calle').val().trim())
+    formData.append('numeroExterior',$('#numeroExterior').val().trim())
+    formData.append('numeroInterior',$('#numeroInterior').val().trim())
+    formData.append('calle1',$('#calle1').val().trim())
+    formData.append('calle2',$('#calle2').val().trim())
+    formData.append('referencias',$('#referencias').val().trim())
+    formData.append('n_baños',$('#n_baños').val().trim())
+    formData.append('n_medios_baños',$('#n_medios_baños').val().trim())
+    formData.append('n_recamaras',$('#n_recamaras').val().trim())
+    formData.append('n_pisos',$('#n_pisos').val().trim())
+    formData.append('estacionamiento_cajones',$('#estacionamiento_cajones').val().trim())
+    formData.append('terrenoConstruido',$('#terrenoConstruido').val().trim())
+    formData.append('terrenoTotal',$('#terrenoTotal').val().trim())
+    formData.append('año_contruccion',$('#año_contruccion').val().trim())
+    formData.append('garage',$('#garage').val().trim())
+    formData.append('bodega',$('#bodega').val().trim())
+    formData.append('terraza',$('#terraza').val().trim())
+    formData.append('alberca',$('#alberca').val().trim())
+    formData.append('cocina',$('#cocina').val().trim())
+    formData.append('amueblado',$('#amueblado').val().trim())
+    formData.append('cuarto_lavado',$('#cuarto_lavado').val().trim())
+    formData.append('gym',$('#gym').val().trim())
+    formData.append('bar',$('#bar').val().trim())
+    formData.append('restaurante_bar',$('#restaurante_bar').val().trim())
+    formData.append('sala_cine',$('#sala_cine').val().trim())
+    formData.append('salon_estudio',$('#salon_estudio').val().trim())
+    formData.append('area_comun',$('#area_comun').val().trim())
+    formData.append('sala_juegos',$('#sala_juegos').val().trim())
+    formData.append('salon_eventos',$('#salon_eventos').val().trim())
+    formData.append('espacio_deportivo',$('#espacio_deportivo').val().trim())
+    formData.append('busisness_center',$('#busisness_center').val().trim())
+    formData.append('roof_garden',$('#roof_garden').val().trim())
+    formData.append('otroA',$('#otroA').val().trim())
+    formData.append('internet',$('#internet').val().trim())
+    formData.append('electricidad',$('#electricidad').val().trim())
+    formData.append('agua_potable',$('#agua_potable').val().trim())
+    formData.append('televisionCable',$('#televisionCable').val().trim())
+    formData.append('gas',$('#gas').val().trim())
+    formData.append('lineaTelefonica',$('#lineaTelefonica').val().trim())
+    formData.append('drenaje',$('#drenaje').val().trim())
+    formData.append('seguridad',$('#seguridad').val().trim())
+    formData.append('camarasSeguridad',$('#camarasSeguridad').val().trim())
+    formData.append('area_juegos',$('#area_juegos').val().trim())
+    formData.append('otroS',$('#otroS').val().trim())
+    formData.append('descripcion',$('#descripcion').val().trim())
+    slug = document.getElementById("slug").value;
+
+    var inputElement = document.getElementById("arrendador");
+    // Obtener el valor del atributo 'data-value'
+    var valorData = inputElement.getAttribute("data-value");
+    console.log(valorData.trim());  // Imprimir el valor del
+
+    formData.append('arrendador',valorData.trim())
     formData.append('reglamento_interno',$('#reglamento_interno')[0].files[0])
     formData.append('mobiliario',$('#mobiliario')[0].files[0])
-formData.append('id',$('#id').val().trim())
+    formData.append('id',$('#id').val().trim())
 
-console.log($('#arrendador').val().trim())
+    console.log($('#arrendador').val().trim())
+        
+    console.log("Imagenes a eliminar")
+    formData.append('eliminar_imagenes',JSON.stringify(img_eli))
 
-    formData.forEach(function(value, key) {
-        console.log(key + ': ' + value);
-    });
     
-console.log("Imagenes a eliminar")
-      console.log(img_eli)
-formData.append('eliminar_imagenes',JSON.stringify(img_eli))
-      console.log("El valor de img", img_eli)
-      console.log("El valor de la renta es: ", $('#renta').val().trim())
-      console.log("Soy slug", slug)
-    $.ajax({
-        type: 'PUT',
-        url: `${server}/inmuebles_viewset/${slug}/`,
-        //url: `http://127.0.0.1:8000/Inmuebles/`,
-        headers: {'Authorization': `Token ${localStorage.getItem('token')}`},
-        mode: 'same-origin',
-        data:  formData,
-        processData: false,
-        contentType: false,
-      success: function(response) {
-        console.log(response); // handle the response from the server
-        //location.reload()
-        localStorage.removeItem('inmuebles');
-        Swal.fire({
+    editarDatosInmueble_(formData, slug)
+        .then(() => {
+            Swal.fire({
                     icon: 'success',
                     title: '¡Editado correctamente!',
                     text: 'Se edito de forma correcta.',
                     showConfirmButton: false,
                     timer: 1300
-                }).then(() =>{
+                }).then(() => {
+                    localStorage.removeItem('inmuebles');
                     window.location = '/inmuebles/';
                 })
-      },
-      error: function(response) {
-            console.log(response); // handle any errors from the server
-      }
-    });
-  });
-});
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+}
+
+
+const editarDatosInmueble_ = (data, slug) => {
+    const configin2 = {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+          'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+      };
+       return axios.put(`${server}/inmuebles_viewset/${slug}/`, data, configin2);
+}
 
 </script>
 

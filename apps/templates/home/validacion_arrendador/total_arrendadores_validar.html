@@ -1,0 +1,667 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Arrendador {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-TJBhM3a+gFk0v/CyrFbftZUyUag2pHzx3pZVmOyadJ+SKLfa+nZ/B9ghUzy9D0sfKGLD78dILzYgt63+zwafZQ==" crossorigin="anonymous" />
+{% comment %} <link href="/static/assets/css/ms_arr.css" rel="stylesheet"/> {% endcomment %}
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Enlace al archivo CSS de Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+.btn-close-white {
+  color: #fff; /* Establece el color deseado, por ejemplo, blanco */
+}
+.form-control {
+  margin-bottom: 10px; /* Adds spacing between form controls */
+}
+
+label {
+  font-weight: bold; /* Makes the label text bold */
+  margin-bottom: 5px; /* Adds spacing below the label */
+}
+input[type="file"] {
+  border: 1px solid #ccc; /* Adds a border to the file input */
+  padding: 5px; /* Adds padding to the file input */
+  background-color: #f9f9f9; /* Sets a background color for the file input */
+}
+
+.btn-danger {
+  background-color: #dc3545; /* Establece un color de fondo rojo */
+  color: #fff; /* Establece el color del texto en blanco */
+  border: none; /* Quita el borde */
+  padding: 8px 16px; /* Ajusta el relleno interno del botón */
+  border-radius: 4px; /* Agrega esquinas redondeadas */
+  font-weight: bold; /* Hace que el texto sea más audaz */
+}
+
+.btn-success {
+  color: #fff; /* Establece el color del texto en blanco */
+}
+
+.btn-success:hover{
+    color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* Cambia el color de fondo en el hover */
+}
+
+.separacion {
+    height: 0px; /* Ajusta la altura según tu preferencia */
+    background-color: #eee; /* Color de fondo de la separación */
+    margin-top: 7px; /* Espacio superior */
+    margin-bottom: 7px; /* Espacio inferior */
+}
+.custom-modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.custom-close-button {
+  font-size: 15px;
+  margin-left: auto;
+}
+
+.validado_input {
+  border-color: green; /* Cambia el color del borde cuando es válido */
+  box-shadow: 0 0 5px green; /* Agrega una sombra verde cuando es válido */
+}
+
+.btn.btn-elegant {
+  /* Estilos generales del botón */
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid #17a2b8;
+  color: #17a2b8;
+}
+
+.btn.btn-elegant:hover {
+  /* Estilos al pasar el cursor por encima del botón */
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.btn.btn-elegant i {
+  /* Estilos del icono dentro del botón */
+  padding-right: 0.5rem;
+}
+
+{% comment %} Estilos de boton redondo 2 {% endcomment %}
+#ver_documentos {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 0; /* Anula el redondeado del botón */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #003366; 
+  //background-color: #3399ff;/* Color de fondo  azul*/
+   //background-color: #66cc66;/* Color de fondo verde */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+#ver_documentos i {
+  font-size: 17px;
+  color: white;
+}
+
+#ver_documentos:hover {
+   background-color: #003366; /* Color de fondo verde más oscuro al pasar el mouse */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+#ver_documentos::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 150%;
+  transform: translateX(-50%);
+  background-color:  #003366;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  white-space: nowrap;
+}
+
+#ver_documentos:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+     #redes_sociales {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      margin: 4px;
+    }
+  
+    #redes_sociales .list-inline-item {
+      margin: 0;
+      width: 100%;
+      text-align: center;
+    }
+  
+    #redes_sociales .btn {
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      width: 100%;
+    }
+  
+    #redes_sociales .btn:focus {
+      box-shadow: none;
+    }
+
+    #redes_sociales ul {
+      width: 100px; /* Ancho fijo para la lista */
+      background-color: #f8f9fa; /* Color de fondo */
+      padding: 10px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+ {% comment %} .list-group {
+    display: flex; /* Utiliza flexbox para alinear verticalmente los elementos */
+    align-items: stretch; /* Estira los elementos verticalmente para que tengan la misma altura */
+  }
+
+  .list-group-item {
+    flex: 1; /* Distribuye el espacio disponible de manera igualada entre los elementos */
+    display: flex; /* Utiliza flexbox para alinear verticalmente los elementos */
+    align-items: center; /* Centra verticalmente los elementos dentro de su contenedor */
+    padding: 5px; /* Agrega un poco de espacio entre los elementos */
+  }
+
+  .list-group-container {
+    height: 200px; /* Establece la altura deseada para las listas */
+  } {% endcomment %}
+
+#tabla_datos_inmuebles {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tabla_datos_inmuebles caption {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#tabla_datos_inmuebles thead {
+  background-color: #231942;
+  color: #fff;
+}
+
+#tabla_datos_inmuebles th,
+#tabla_datos_inmuebles td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #dee2e6;
+}
+
+#tabla_datos_inmuebles th {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#tabla_datos_inmuebles tbody td:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+/* Estilos adicionales para hacer la tabla más atractiva */
+#tabla_datos_inmuebles {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#tabla_datos_inmuebles caption {
+  font-size: 18px;
+}
+
+#tabla_datos_inmuebles thead th {
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+}
+
+#tabla_datos_inmuebles tbody td {
+  padding: 10px;
+}
+
+#tabla_datos_inmuebles tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#tabla_datos_inmuebles tbody tr:hover {
+  background-color: #e3e3e3;
+}
+
+
+/* ------------------------------------- */
+#validar_documentos {
+  text-decoration: none;
+  color: #ff4500; /* Color del texto - puedes ajustarlo según tus preferencias */
+  transition: color 0.3s;
+}
+
+#validar_documentos:hover {
+  color: #ff8c00; /* Color del texto al pasar el cursor sobre el enlace - puedes ajustarlo según tus preferencias */
+}
+
+#validar_documentos .fw-bold {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+
+
+
+    
+
+
+    #modal-content-mobiliario {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+    }
+
+    /* Estilos para el encabezado del modal */
+    #modal-header-mobiliario {
+        background-color: #231942;
+        color: #fff;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    /* Estilos para el título del modal */
+    #exampleModalLabel-mobiliario {
+        color: #fff;
+    }
+
+#id_investigacion {
+  max-width: 80px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+    
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div id="cargar_tabla" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4" style="background-color:#edede9;">
+    <div id="li1" class="active" class="d-block mb-4 mb-md-0" style="margin-left:10px">
+        <h1 class="h1">Admin</h1>
+        <p class="mb-0">Listado de Arrendadores</p>
+    </div>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-gray-800 d-inline-flex align-items-center me-2" data-bs-toggle="modal" data-bs-target="#reg_arr">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            Nuevo Arrendador
+        </a>
+    </div>
+  </div>
+
+<!-- Botón para abrir el modal -->
+</div>
+<div class="table-settings mt-2 mb-4">
+  <div class="row justify-content-between align-items-center">
+      <div class="col-9 col-lg-8 d-md-flex">
+          <div class="input-group mt me-2 me-lg-3 fmxw-300">
+              <span class="input-group-text">
+                  <svg class="icon icon-xs" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                  </svg>
+              </span>
+              <input type="text" class="form-control" id="usuario_buscar" placeholder="Buscar por Nombre">
+              <button class="btn form-btn" onclick="buscar()">Buscar</button>
+            </div>
+            <select class="form-select fmxw-200 d-none d-md-inline" aria-label="Message select example 2">
+                <option selected>Todos</option>
+              <option value="1">Persona Fisica</option>
+              <option value="1">Persona Moral</option>
+              <option value="2">Inmobiliaria</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
+    <table class="table user-table table-hover align-items-center mb-5" id="tabla_datos_inmuebles">
+        <thead>
+            <tr >
+                <th class="border-bottom" id="id_investigacion">ID Investigación</th>
+                <th class="border-bottom">Nombre del prospecto</th>
+                <th class="border-bottom">Regimen Fiscal</th>						
+                <th class="border-bottom">Estatus del Arrendador</th>
+                <th class="border-bottom">Documentos</th>
+                <th class="border-bottom">Comentarios</th>
+                <th class="border-bottom"></th>
+            </tr>
+        </thead>
+        <tbody style="overflow-x: hidden;" id="table_body">
+            
+        </tbody>
+    </table>
+</div>
+
+
+
+                <div class="position-fixed top-50 end-0 translate-middle-y">
+                    <ul class="list-inline flex-column" id="redes_sociales">
+                    <li class="list-inline-item">
+                        <a class="btn btn-primary" style="background-color: #3b5998; border-color: #3b5998;" href="#!" role="button">
+                        <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-primary" style="background-color: #55acee; border-color: #55acee;" href="#!" role="button">
+                        <i class="fab fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-primary" style="background-color: #bf8040; border-color: #bf8040;" href="#!" role="button">
+                        <i class="fab fa-instagram"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-danger" style="background-color: #ff0000; border-color: #ff0000;" href="#!" role="button">
+                        <i class="fab fa-youtube"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-secondary" style="background-color: #000000; border-color: #000000;" href="https://www.tiktok.com/@arrendify" target="_blank" role="button">
+                            <i class="fab fa-tiktok" style="color: #ffffff;"></i>
+                        </a>
+                        </li>
+                    </ul>
+                </div>
+
+
+{% comment %} Modal documento {% endcomment %}
+
+                <div class="modal fade" id="ver_documento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content" id="modal-content-mobiliario">
+                            <div class="modal-header" id="modal-header-mobiliario">
+                                <h5 class="modal-title" id="exampleModalLabel-mobiliario">Inventario del mobiliario del inmueble</h5>
+                                <button type="button" id="cerrar_total_mobiliario" class="btn-close bg-white" data-bs-dismiss="modal" aria-label="Close" onclick="recargar_pagina()"></button>                                
+                            </div>
+                                <div class="row">
+                                    <div class="col-md-10 d-flex justify-content-center p-1 mx-auto">
+                                        <div style="position: relative; width: 100%; height: 0; padding-bottom: 60%;">
+                                                <iframe src="https://arrendify-api.onrender.com/static/assets/media/arrendador/documentos/Jose%20Leonel%2021%203123/INE/Hola_mundo.pdf" id="iframe_escrituras" class="w-100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"></iframe>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <p>Escrituras</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- End of Modal2 -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %} 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/static/assets/js/ms_arr.js"></script>
+<script src="/static/assets/js/phone.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    function fin()
+{
+    localStorage.removeItem('datos');
+}
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/static/assets/repositorios/loader.js"></script>
+<script>
+
+document.getElementById("li1").onload = auten()
+
+const csrftoken = document.cookie.match(/csrftoken=(\w+)/)[1];
+axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
+localStorage.removeItem('data_arrendador')
+var data_arrendador =[]
+// Configuracion general de axios
+const server = 'https://arrendify-api.onrender.com';
+const configin = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Token ${localStorage.getItem('token')}`
+    },
+  };
+      // Despues carcamos la tabla de usuarios
+
+const headers_globales_ajax = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': `Token ${localStorage.getItem('token')}`
+};
+
+document.getElementById("cargar_tabla").onload = tabla()
+console.log("Esta cargando tabla");
+// Comenzamos funciones
+
+function buscar() {
+    var tablaElemento = document.getElementById("tabla_datos_inmuebles");
+    tablaElemento.innerHTML = `<thead>
+            <tr>
+                <th class="border-bottom" id="id_investigacion">ID Investigación</th>
+                <th class="border-bottom">Nombre del prospecto</th>
+                <th class="border-bottom">Regimen</th>						
+                <th class="border-bottom">Estatus del Arrendador</th>
+                <th class="border-bottom">Documentos</th>
+                <th class="border-bottom">Comentarios</th>
+                <th class="border-bottom"></th>
+            </tr>
+        </thead>
+        <tbody style="overflow-x: hidden;" id="table_body">
+            
+        </tbody>`;
+    var valorBusqueda = document.getElementById("usuario_buscar").value;
+    tabla(valorBusqueda);
+}
+
+    function tabla(usuario){
+        console.log("Soy id", usuario);
+        url = usuario !== undefined ? `${server}/Arrendador_Api/buscar/?search=${usuario}` : `${server}/Arrendador_Api/`;
+        console.log("Soy url", url)   
+        console.log("Esta cargando tabla")
+        axios.get(url, configin)
+            .then(function (response) { 
+            data_arrendador = response.data
+            // manejar respuesta exitosa
+            var cuerpo = document.getElementById("table_body")
+            let res = response.data
+            var iframe = document.getElementById('iframe_escrituras')
+            //console.log(re)
+            //iframe.src = res[0].arrendador[0].ine;
+            var num = 1;
+            if(res.length > 0 ){
+                console.log("res",res)
+    
+                for(let i = 0; i < res.length;i++)
+                {
+                    let tr = document.createElement('tr')
+                    let col1 = document.createElement('td')
+                    let col2 = document.createElement('td')
+                    let col3 = document.createElement('td')
+                    let col4 = document.createElement('td')
+                    let col5 = document.createElement('td')
+                    let col6 = document.createElement('td')
+                    let check = document.createElement("input")
+                    check.setAttribute("type","checkbox");
+                    check.setAttribute("class","form-check-input");
+
+                    col1.innerHTML = `<div class="row justify-content-center">
+                                            <div class="col-md-2 text-center">
+                                                <a>${num}</a>
+                                            </div>
+                                        </div>
+                                        `;
+                                                
+                    col2.innerHTML = `<a class="d-flex align-items-center" id="nombre_prospecto">
+                                        <div class="d-block">
+                                            <span class="fw-bold"> ${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria} </span>
+                                        </div>
+                                    </a>
+                                            `
+                    col3.innerHTML = `<a class="d-flex align-items-center">
+                                        <div class="d-block">
+                                            <span id="span" class="fw-bold"> ${res[i].pmoi} </span>
+                                        </div>
+                                    </a>`
+
+                    col4.innerHTML = `
+                                          <div class="row">
+                                            <div class="col-md-11 d-flex justify-content-center p-1 mx-auto">
+                                                <div class="col-md-12 d-flex justify-content-center p-1">
+                                                    ${res[i].estatus_arrendador === "En espera" ? `<select disabled id="${res.slug}"  style="color:orange; font-weight:bold;" class="form-select select_status" aria-label="Default select example">
+                                                        <option value="Aceptado" selected style="color:green; font-weight:bold;"><span >Aceptado</span></option>
+                                                        <option value="En revision" selected style="color:orange; font-weight:bold;">En revision</option>
+                                                        <option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option>
+                                                        </select>` : (res[i].estatus_arrendador === "Rechazado" ? `<select disabled id="${res.slug}" style="color:green; font-weight:bold;" class="form-select select_status" aria-label="Default select example">
+                                                            <option value="Aceptado"  style="color:green; font-weight:bold;"><span >Aceptado</span></option>
+                                                            <option value="En revision" style="color:orange; font-weight:bold;">En revision</option>
+                                                            <option value="Rechazado" selected style="color:red; font-weight:bold;">Rechazado</option>
+                                                        </select>` : `<select disabled id="${res.slug}"  style="color:green; font-weight:bold;" class="form-select select_status" aria-label="Default select example">
+                                                            <option value="Aceptado" selected style="color:green; font-weight:bold;"><span >Aceptado</span></option>
+                                                            <option value="En revision" style="color:orange; font-weight:bold;">En revision</option>
+                                                            <option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option>
+                                                        </select>`)}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        `
+                    col5.innerHTML = `
+                                        <div class="row">
+                                            <div class="col-md-11 d-flex justify-content-center p-1 mx-auto">
+                                                <div class="col-md-12 d-flex justify-content-center p-1">
+                                                    <a class="d-flex align-items-center" onClick="validar_documentos('${res[i].id}')"; id="validar_documentos">
+                                                        Validar documentos
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+
+                    col6.innerHTML = `
+                                    <div class="row">
+                                        <div class="col-md-8 d-flex justify-content-center p-1 mx-auto">
+                                            <div class="form-floating">
+                                                <textarea disabled class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">${res[i].arrendador_validacion[0] !== undefined ? res[i].arrendador_validacion[0].comentarios !== undefined ? res[i].arrendador_validacion[0].comentarios: "" : ""}</textarea>
+                                                <label for="floatingTextarea2"></label>                                                                         
+                                            </div>
+                                        </div>
+                                    </div>
+                                        `
+                    tr.appendChild(col1);
+                    tr.appendChild(col2);
+                    tr.appendChild(col3);
+                    tr.appendChild(col4);
+                    tr.appendChild(col5);
+                    tr.appendChild(col6);
+                    cuerpo.appendChild(tr);
+                    num += 1;
+                }
+                    console.log(response);
+            } else{
+                cuerpo.innerHTML = '<td colspan="7"><center><h1>Sin Registro <img src="https://cdn-icons-png.flaticon.com/512/929/929457.png"style="width:50px;height:50px"></h1></center></td>'
+                console.log("sin datos")
+            } 
+        })
+        .catch(function (error) {
+            // manejar error
+            console.log(error);
+        })
+        .finally(function () {
+            // siempre sera executado
+        });
+}
+
+</script>
+<script>
+    document.getElementById("li2").onload = inicio()
+    function inicio(){
+        auten()
+    }
+</script>
+<script>
+function validar_documentos(id) {
+    console.log("Está llegando");
+    $.ajax({   
+        type: 'GET',
+        url: `${server}/Arrendador_Api/${id}/`,
+        headers: { 'Authorization': `Token ${localStorage.getItem('token')}` },
+        mode: 'same-origin',
+        processData: false,
+        contentType: false,
+
+        success: function(data) {
+            //localStorage.setItem('validar_documentos', data.data);
+            localStorage.setItem('valida_documento', JSON.stringify(data));
+            console.log(data)
+            window.location = `/validar_arrendadores/`;
+        },
+        error: function(response) {
+            console.log(response);
+        }
+    });
+}
+
+</script>
+{% comment %} <script src="/static/assets/js/ocultadorespf.js"></script> {% endcomment %}
+<script src="/static/assets/js/validacionpf.js"></script>
+{% endblock javascripts %}

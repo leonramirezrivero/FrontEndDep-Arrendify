@@ -10,10 +10,14 @@
 <!-- Enlace al archivo CSS de Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="/static/assets/css/tabla.css">
+
 <style>
-.btn-close-white {
-  color: #fff; /* Establece el color deseado, por ejemplo, blanco */
-}
+.tamanio {
+    width: 100px; /* Ajusta el valor según el tamaño deseado */
+    height: 40px;
+  }
+
 .form-control {
   margin-bottom: 10px; /* Adds spacing between form controls */
 }
@@ -28,12 +32,6 @@ input[type="file"] {
   padding: 5px; /* Adds padding to the file input */
   background-color: #f9f9f9; /* Sets a background color for the file input */
 }
-
-{% comment %} .valid-feedback {
-  display: block; /* Ensures the valid feedback is visible */
-  margin-top: 5px; /* Adds spacing above the valid feedback */
-  color: #4CAF50; /* Sets a color for the valid feedback */
-} {% endcomment %}
 
 .btn-danger {
   background-color: #dc3545; /* Establece un color de fondo rojo */
@@ -103,43 +101,6 @@ input[type="file"] {
   /* Estilos del icono dentro del botón */
   padding-right: 0.5rem;
 }
-
-
-{% comment %} .tooltip-btn {
-  position: relative;
-  overflow: hidden;
-}
-
-.tooltip-btn::before {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200px;
-  padding: 6px 12px;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  text-align: center;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 1.5;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.tooltip-btn:hover::before {
-  opacity: 1;
-}
-
-.tooltip-text {
-  display: none;
-}
-
-.tooltip-btn:hover .tooltip-text {
-  display: block;
-} {% endcomment %}
 
 {% comment %} Estilos de boton redondo 1 {% endcomment %}
 .custom-btn {
@@ -240,19 +201,6 @@ input[type="file"] {
   visibility: visible;
 }
 
-{% comment %} .social-icons {
-      list-style-type: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      position: fixed;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      padding: 0;
-      margin: 0;
-    } {% endcomment %}
      #redes_sociales {
       display: flex;
       flex-direction: column;
@@ -288,6 +236,79 @@ input[type="file"] {
       align-items: center;
     }
 
+{% comment %} Clase loader {% endcomment %}
+
+{% comment %} .loader {
+    position: relative;
+    width: 100px;
+    height: 130px;
+    background: #fff;
+    border-radius: 4px;
+  }
+  .loader:before{
+    content: '';
+    position: absolute;
+    width: 54px;
+    height: 25px;
+    left: 50%;
+    top: 0;
+    background-image:
+    radial-gradient(ellipse at center, #0000 24%,#de3500 25%,#de3500 64%,#0000 65%),
+    linear-gradient(to bottom, #0000 34%,#de3500 35%);
+    background-size: 12px 12px , 100% auto;
+    background-repeat: no-repeat;
+    background-position: center top;
+    transform: translate(-50% , -65%);
+    box-shadow: 0 -3px rgba(0, 0, 0, 0.25) inset;
+  }
+ .loader:after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translateX(-50%);
+    width: 66%;
+    height: 60%;
+    background: linear-gradient(to bottom, #f79577 30%, #0000 31%);
+    background-size: 100% 16px;
+    animation: writeDown 2s ease-out infinite;
+ }
+
+ @keyframes writeDown {
+    0% { height: 0%; opacity: 0;}
+    20%{ height: 0%; opacity: 1;}
+    80% { height: 65%; opacity: 1;}
+    100% { height: 65%; opacity: 0;}
+ }
+      
+
+.modal-body {
+      height: 200px; /* Establece la altura deseada */
+      }
+
+.swal2-container {
+  width: 400px !important; /* Ancho personalizado */
+  height: calc(400px + 2rem) !important; /* Altura igual al ancho más el espacio de los márgenes */
+  position: fixed !important; /* Posición fija para centrar en la ventana */
+  top: 30% !important; /* Centrar verticalmente en la mitad de la ventana */
+  left: 50% !important; /* Centrar horizontalmente en la mitad de la ventana */
+  transform: translate(-50%, -50%) !important; /* Aplicar traslación para centrar */
+  max-height: 80vh !important; /* Altura máxima del 80% de la ventana */
+}
+
+
+
+.modal-content {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.modal-body {
+  padding: 0;
+  background: transparent;
+} {% endcomment %}
+
 
 </style>
 {% endblock stylesheets %}
@@ -305,10 +326,23 @@ input[type="file"] {
             Nuevo Arrendador
         </a>
     </div>
-  </div>
+</div>
+{% comment %} <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loaderModal">
+    Open Modal
+  </button>
+<!-- Modal de Bootstrap -->
+<div class="modal" id="loaderModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body d-flex justify-content-center align-items-center">
+          <span class="loader"></span>
+        </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
 
 <!-- Botón para abrir el modal -->
-</div>
+
 <div class="table-settings mt-2 mb-4">
   <div class="row justify-content-between align-items-center">
       <div class="col-9 col-lg-8 d-md-flex">
@@ -330,18 +364,17 @@ input[type="file"] {
     </div>
 </div>
 <div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
-    <table class="table user-table table-hover align-items-center mb-5"> <!--id="datatable"-->
+    <table class="table user-table table-hover align-items-center mb-5 tabla_datos" > <!--id="datatable"-->
         <thead>
             <tr >
-                <th class="border-bottom"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
+                {% comment %} <th class="border-bottom"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th> {% endcomment %}
                 <th class="border-bottom">ID</th>
                 <th class="border-bottom">Nombre</th>						
                 <th class="border-bottom">Fecha de Registro</th>
-                <th class="border-bottom">RF/Inmobilliaria</th>
+                <th class="border-bottom">Regimen Fiscal</th>
                 <th class="border-bottom">Archivos</th>
                 <th class="border-bottom">Estatus</th>
                 <th class="border-bottom">Acción</th>
-                <th class="border-bottom"></th>
             </tr>
         </thead>
         <tbody style="overflow-x: hidden;" id="table_body">
@@ -386,14 +419,14 @@ input[type="file"] {
 <div class="modal fade" id="archivos_arrendador" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" style="height:15px" id="exampleModalLabel">Archivos Inquilino</h5>
+            <div class="modal-header bg-white">
+                <h5 class="modal-title" style="height:15px" id="exampleModalLabel">Archivos Arrendador</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="location.href='/arrendadores/';" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="background:linear-gradient(0deg, #231942ff, #5e548eff, #9f86c0ff, #be95c4ff, #e0b1cbff);">
+            <div class="modal-body bg-white" style="background:linear-gradient(0deg, #231942ff, #5e548eff, #9f86c0ff, #be95c4ff, #e0b1cbff);">
                 <body>
-                    <div>
-                        <form id ="registro_archivos" class="formchido mt-4 needs-validation bg-white p-4" novalidate method="POST" enctype="multipart/form-data">
+                    <div style="background:linear-gradient(0deg, #231942ff, #5e548eff, #9f86c0ff, #be95c4ff, #e0b1cbff);">
+                        <form id ="registro_archivos" class="formchido mt-4 needs-validation bg-white p-4" novalidate method="POST" enctype="multipart/form-data" style="background:linear-gradient(0deg, #231942ff, #5e548eff, #9f86c0ff, #be95c4ff, #e0b1cbff);">
                             <h2 class="h5 mb-3 mt-4">Por Favor Adjunte Sus Documentos Escaneados.</h2>
                             <div class="row">
                                 <hr class="hr" />
@@ -448,7 +481,7 @@ input[type="file"] {
                                 </div>
                             </div>
                               {% csrf_token %}
-                              <button type="submit" id="finalizar"  class="btn btn-primary">Subir Archivos</button>
+                              <button type="submit" id="finalizar"  class="btn btn-secondary">Subir Archivos</button>
                           </form>
                     </div>
                 </body>
@@ -459,17 +492,17 @@ input[type="file"] {
 
 {% comment %} -------------------------------------------------------------- {% endcomment %}
 <!-- Modal -->
-<div id="Modal Registro Arrendador">
+<div id="Modal Registro Arrendador ">
     <p id="carga_plantar" style="display:none;">
         <p id="carga_pfom" style="display:none;">
             <p id="carga_aa" style="display:none;">
     <div class="modal fade" id="reg_arr" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-white">
             <h5 class="modal-title" style="height:15px" id="exampleModalLabel">Registro Arrendador</h5>
             <button type="button" class="btn-close" onclick="location.href='/arrendadores/';" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+        </div>
             <div class="modal-body" style="padding:0;">
     <div class="container">
         <div class="card">
@@ -516,7 +549,7 @@ input[type="file"] {
                         <div id="persona_moral_registro_1" class="needs-validation" style="Display:none;">
                             <div class="input-text" id="div_dir_ac">
                                 <div class="input-div">
-                                    <input type="text" name="dir_ac" id="dir_ac" oninput="prueba2(this)" 
+                                    <input type="text" name="dir_ac" id="dir_ac" oninput="prueba2(this)"> 
                                     <span>Dirección Registrada en el acta constitutiva:</span>
                                 </div>
                             </div>
@@ -862,20 +895,45 @@ input[type="file"] {
                             </div>
                         </div>
                         
-                        <div class="input-text ">
-                            <div class="input-div"> 
-                                <div class="row" style="margin-left:5px;" required>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="coe" name="coe" value="CDMX" oninput="prueba2(this)">
-                                        <label class="form-check-label" for="coe">CDMX</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" id="coe" name="coe" value="Estado de México" oninput="prueba2(this)">
-                                        <label class="form-check-label" for="coe">Estado de México</label>
-                                    </div>                                         
-                                </div>  
-                            </div>
-                        </div>
+                        <div class="input-text">
+                            <div class="input-div" style="position: relative; bottom: 23px;">
+                             <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado <label class="obl">*</label></label>
+                             <select class="form-select LetraSelect" id="coe" name="coe" aria-label="Floating label select example" require>
+                                 <option value="CDMX" selected>CDMX</option>
+                                 <option value="México"> México</option>
+                                 <option value="Aguascalientes" > Aguascalientes</option>
+                                 <option value="Baja California"> Baja California</option>
+                                 <option value="Baja California Sur"> Baja California Sur</option>
+                                 <option value="Campeche"> Campeche</option>
+                                 <option value="Coahuila"> Coahuila</option>
+                                 <option value="Colima"> Colima</option>
+                                 <option value="Chiapas"> Chiapas</option>
+                                 <option value="Chihuahua"> Chihuahua</option>
+                                 <option value="Durango"> Durango</option>
+                                 <option value="Guanajuato"> Guanajuato</option>
+                                 <option value="Guerrero"> Guerrero</option>
+                                 <option value="Hidalgo"> Hidalgo</option>
+                                 <option value="Jalisco"> Jalisco</option>
+                                 <option value="Michoacán"> Michoacán</option>
+                                 <option value="Morelos"> Morelos</option>
+                                 <option value="Nayarit"> Nayarit</option>
+                                 <option value="Nuevo León"> Nuevo León</option>
+                                 <option value="Oaxaca"> Oaxaca</option>
+                                 <option value="Puebla"> Puebla</option>
+                                 <option value="Querétaro"> Querétaro</option>
+                                 <option value="Quintana Roo"> Quintana Roo</option>
+                                 <option value="San Luis Potosí"> San Luis Potosí</option>
+                                 <option value="Sinaloa"> Sinaloa</option>
+                                 <option value="Sonora"> Sonora</option>
+                                 <option value="Tabasco"> Tabasco</option>
+                                 <option value="Tamaulipas"> Tamaulipas</option>
+                                 <option value="Tlaxcala"> Tlaxcala</option>
+                                 <option value="Veracruz"> Veracruz</option>
+                                 <option value="Yucatán"> Yucatán</option>
+                                 <option value="Zacatecas"> Zacatecas</option>
+                             </select>                                            
+                         </div>
+                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
                                 <input class="form-control" type="number" id="folio_mercantil" name="folio_mercantil" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '');prueba2(this);" required require>
@@ -976,57 +1034,6 @@ input[type="file"] {
                         </div>
                     </div>
 
-                    {% comment %} <div id="step5" class="main">
-                        <small>
-                            <img src="/static/assets/img/icons/ref.png" style="width:25px; height:25px;" alt="icon">
-                        </small>
-                        
-                        <div class="text">
-                            <h2>Datos De Inicio Contrato</h2>
-                            <p>Por favor introduce los datos Solicitados.</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input class="form-control" id="fecha_solicitud" name="fecha_solicitud" type="date" oninput="prueba2(this)" require required>  
-                                <span>Fecha De Solicitud</span>
-                            </div>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input class="form-control" id="fecha_firma" name="fecha_firma" type="date" oninput="prueba2(this)"required require>  
-                                <span>Fecha De Firma De Contrato</span>
-                            </div>
-                            <div class="input-div"> 
-                                <input class="form-control" type="time" id="hora_firma" name="hora_firma" oninput="prueba2(this)"required require>
-                                <span>Hora de Firma</span>
-                            </div>
-                        </div>
-                        <hr class="hr" />  
-                        <h3>Lugar Para Firma </h3>
-                        <hr class="hr" />  
-                        <div class="input-text">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio1" value="Propiedad A Rentar" oninput="prueba2(this)"/>
-                                <label class="form-check-label" for="inlineRadio1" style="font-weight: bold;">Propiedad A Rentar</label>
-                              </div>
-                              
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio2" value="Oficinas Arrendify" oninput="prueba2(this)"/>
-                                <label class="form-check-label" for="inlineRadio2" style="font-weight: bold;">Oficinas Arrendify</label>
-                              </div>
-                              
-                              <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="lugar_firma" id="inlineRadio3" value="Firma Electronica" oninput="prueba2(this)"/>
-                                <label class="form-check-label" for="inlineRadio3" style="font-weight: bold;">Firma Electronica</label>
-                              </div>
-                        </div>
-
-                        <div class="buttons button_space">
-                            <button type="button" class="btn btn-outline-dark back_button">Atras</button>
-                            <input class="btn btn-primary next_button" type="button" value="Siguiente">
-                        </div>
-                    </div> {% endcomment %}
-
                     <div id="step6" class="main">
                         <small>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-calendar-check" viewBox="0 0 16 16">
@@ -1078,8 +1085,8 @@ input[type="file"] {
 <!-- Specific Page JS goes HERE  -->
 {% block javascripts %} 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="/static/assets/js/ms_arr.js"></script>
 <script src="/static/assets/js/phone.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
@@ -1493,7 +1500,7 @@ function mostrarOnChange() {
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
-function alert0(inquilino){
+function eliminarArrendador_(inquilino){
         console.log("soy el inquilino",inquilino)
         Swal.fire({
             title: '¿Éstas seguro?',
@@ -1509,17 +1516,19 @@ function alert0(inquilino){
         if (result.isConfirmed) {
             setTimeout(function(){
                 console.log("Hola Mundo");
-                eliminar(inquilino)
+                eliminarArrendador(inquilino)
             }, 1500);
-            Swal.fire({
+                Swal.fire({
                     icon: 'success',
                     title: '¡Arrendador Eliminado!',
-                    text: 'Se ha elimando de forma exitosa.',
+                    text: 'Se ha eliminando de forma exitosa.',
                     showConfirmButton: false,
                     timer: 1500
                 })
-                }
-            //location.reload()
+                //.then(()=>{
+                //    location.reload();
+                //})
+            }
         })
     }
         function alert1(){
@@ -1569,40 +1578,48 @@ document.getElementById("li1").onload = auten()
 const csrftoken = document.cookie.match(/csrftoken=(\w+)/)[1];
 axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
 localStorage.removeItem('data_arrendador')
-    var data_arrendador =[]
+var data_arrendador =[]
 // Configuracion general de axios
 
 
-const server = 'https://arrendify-api.onrender.com';
+const server = 'https://arrendify-api.onrender.com'
+{% comment %} const server = 'https://arrendify-api.onrender.com' {% endcomment %}
 const configin = {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       'Authorization': `Token ${localStorage.getItem('token')}`
     },
-  };
+};
       // Despues carcamos la tabla de usuarios
 
-const headers_globales_ajax = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json',
-  'Authorization': `Token ${localStorage.getItem('token')}`
+const configin_archivos = {
+    headers: {
+        'Authorization': `Token ${localStorage.getItem('token')}`,
+    },
+    processData: false,
+    contentType: false,
+    timeout: 5000
 };
 
 document.getElementById("cargar_tabla").onload = tabla()
 // Comenzamos funciones
     function tabla(){
+        var url = `${server}/Arrendador_Api/`;
+        
         var option = document.getElementById("opt");
         option.selected = true;
         var form = document.getElementById("Formu");
         form.reset();
         
         console.log("Esta cargando tabla")
-        axios.get(`${server}/listar_documentos/`,configin)
+        axios.get(`${server}/Arrendador_Api/`,configin)
             .then(function (response) { 
             data_arrendador = response.data
             // manejar respuesta exitosa
-            console.log("Respuesta arrendador", response.data)
+            localStorage.removeItem('arrendador');
+            localStorage.setItem('datos_totales', JSON.stringify(response.data));        
+
             for (let i = 0; i < data_arrendador.length; i++)
             {
                 console.log("for",data_arrendador[i].user)
@@ -1623,86 +1640,86 @@ document.getElementById("cargar_tabla").onload = tabla()
                     let col5 = document.createElement('td')
                     let col6 = document.createElement('td')
                     let col7 = document.createElement('td')
-                    let col8 = document.createElement('td')
-                    let check = document.createElement("input")
-                    check.setAttribute("type","checkbox");
-                    check.setAttribute("class","form-check-input");
 
-                    col1.appendChild(check);
-                    col2.innerHTML = `<span class="fw-normal ">${i+1}</span>`
-                    col3.innerHTML = `<a class="d-flex align-items-center">
-                                    <div class="d-block">
-                                        <span class="fw-bold" onClick="detalles_arrendador('${res[i].slug}')"> ${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria} </span>
-                                        {% comment %} <div class="small text-gray">${ res[i].email !== null ? res[i].email : res[i].email_in}</div> {% endcomment %}
-                                    </div>
-                                    </a>`
-                    col4.innerHTML = `<span class="fw-normal ">${res[i].created}</span>`
-                    col5.innerHTML = `<span class="fw-normal ">${res[i].pmoi}</span>`
-                    col6.innerHTML = `${res[i] && res[i].arrendador && res[i].arrendador[0] ? `
-                                        {% comment %} <a id="ver_documentos" class="d-flex align-items-center btn btn-primary" onClick="guardar_datos_data('${res[i].slug}')";>
-                                            Ver documentos
-                                        </a> {% endcomment %}
-                                        {% comment %} <button id="ver_documentos" type="button" class="btn btn-primary px-3 custom-btn" data-tooltip="Ver documentos" onClick="guardar_datos_data('${res[i].slug}')";>
-                                            <i class="far fa-eye"></i>
-                                        </button> {% endcomment %}
-                                        {% comment %} <button type="button" class="btn btn-elegant">
-                                            <i class="material-icons align-middle" style="color: black;">add</i>
-                                            Ver documentos
-                                        </button> {% endcomment %}
-                                        
-                                        {% comment %} <button type="button" class="btn btn-success px-3" title="Ver historial" data-bs-toggle="tooltip" id="btn-tooltip">
-                                            <i class="far fa-eye" aria-hidden="true"></i>
-                                        </button> {% endcomment %}
-                                        {% comment %} <button type="button" class="btn btn-primary rounded-circle px-3 custom-btn">
-                                                <i class="fas fa-upload"></i>
-                                        </button> {% endcomment %}
-                                        <button type="button" class="btn btn-primary" data-tooltip="Ver documentos" onClick="guardar_datos_data('${res[i].slug}')";>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                            <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
-                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
-                                            </svg>
-                                            Ver Docs
-                                        </button>
-                                        
+                    col1.innerHTML = `
+                                    <td class="d-flex justify-content-center">
+                                        <div class="text-center">
+                                            <span class="fw-normal">${i+1}</span>
+                                        </div>
+                                    </td>
+                                    `
+                    col2.innerHTML = `<a class="d-flex align-items-center">
+                        <div class="d-block">
+                            <span class="fw-bold" onClick="detalles_arrendador('${res[i].slug}')"> ${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria} </span>
+                            <div class="small text-gray">${res[i].email === null ? res[i].email_in : res[i].email}</div>
+                        </div>
+                        </a>`
+                    col3.innerHTML = `<span class="fw-normal ">${res[i].created}</span>`
+                    col4.innerHTML = `<span class="fw-normal ">${res[i].pmoi}</span>`
+                    col5.innerHTML = `<div class="text-center">
+                                        ${res[i] && res[i].arrendador && res[i].arrendador[0] ? ` 
+                                            <div class="button-container d-flex justify-content-center">                                       
+                                                <button type="button" class="btn btn-color same-size-btn ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" data-tooltip="Ver documentos" onClick="guardarArrendador('${res[i].slug}')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                                        <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
+                                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
+                                                    </svg>
+                                                Ver Docs
+                                                </button>
+                                            </div>
+                                        </div>                                        
                                     `
                                     : `
-                                        {% comment %} <button type="button" class="btn btn-primary rounded-circle px-3 custom-btn" data-tooltip="Agregar documentos" data-bs-toggle="modal" data-bs-target="#archivos_arrendador" onClick="colocar_id('${res[i].id}', '${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria}')">
-                                            <i class="fas fa-file-upload"></i>
-                                        </button> {% endcomment %}
-                                       <button type="button" class="btn btn-primary" data-tooltip="Agregar documentos" data-bs-toggle="modal" data-bs-target="#archivos_arrendador" onClick="colocar_id('${res[i].id}', '${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria}')">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
-                                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
-                                                </svg>
-                                                Subir
-                                        </button>
+                                        <div class="button-container d-flex justify-content-center"> 
+                                            <button type="button" class="btn btn-primary ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" data-tooltip="Agregar documentos" data-bs-toggle="modal" data-bs-target="#archivos_arrendador" onClick="colocar_id('${res[i].id}', '${res[i].nombre !== "" ? res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1 : res[i].n_inmobiliaria}')">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                                        <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
+                                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
+                                                    </svg>
+                                                    Subir
+                                            </button>
+                                        </div>
                                        
                                        `
                                         }
                                         
                                     `;
 
-                    col7.innerHTML = ' <select id="status{{inq.id}}" style="color:green; font-weight:bold;" class="form-select" onChange="cambio_status(this)" aria-label="Default select example"><option value="Activo" selected style="color:green; font-weight:bold;"><span >Activo</span></option><option value="En espera" style="color:orange; font-weight:bold;">En espera</option><option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option></select>'
-                    col8.innerHTML =   `${res[i] && res[i].arrendador && res[i].arrendador[0] ? `<div class="btn-group dropstart">
-                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    col6.innerHTML = `
+                    {% comment %} <div class="custom-select-wrapper">
+                                        <select id="${res[i].estatus_arrendador}" class="form-select custom-select ${res[i].estatus_arrendador === 'Aprobado' ? 'text-success' : res[i].estatus_arrendador === 'En espera' ? 'text-warning' : 'text-danger'}" disabled aria-label="Default select example">
+                                            <option value="Aprobado" ${res[i].estatus_arrendador === 'Aprobado' ? 'selected' : ''}>Aprobado</option>
+                                            <option value="En espera" ${res[i].estatus_arrendador === 'En espera' ? 'selected' : ''}>En espera</option>
+                                            <option value="Rechazado" ${res[i].estatus_arrendador === 'Rechazado' ? 'selected' : ''}>Rechazado</option>
+                                        </select>
+                                    </div> {% endcomment %}
+                                            <div class="custom-select-wrapper" style="width: 70%; margin: 0 auto;">
+                                                ${res[i].estatus_arrendador === 'Aprobado' ? `<button  type="button" class="btn btn-success tamanio">${res[i].estatus_arrendador}</button>` 
+                                                : res[i].estatus_arrendador === 'Rechazado' ? `<button type="button" class="btn btn-danger tamanio">${res[i].estatus_arrendador}</button>`
+                                                : `<button type="button" class="btn btn-warning tamanio">${res[i].estatus_arrendador}</button>`}
+                                            </div>
+
+                                        `
+                    col7.innerHTML =   `${res[i] && res[i].arrendador && res[i].arrendador[0] ? `<div class="btn-group dropstart">
+                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
                                         
-                                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                                            <a class="dropdown-item d-flex align-items-center" onClick="editar('${res[i].slug}')">
+                                        <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1 ">
+                                            <a class="dropdown-item d-flex align-items-center ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" onClick="editar('${res[i].slug}')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" title="Editar" data-bs-toggle="tooltip" fill="currentColor" fill-rule="evenodd"  class="icon icon-xs bi bi-pencil ms-1" viewBox="0 0 16 16">
                                                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                                 </svg>&nbsp;Editar Arrendador
                                             </a>
 
-                                            <a class="dropdown-item d-flex align-items-center" onClick="alert0('${res[i].slug}')">
+                                            <a class="dropdown-item d-flex align-items-center ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" onClick="eliminarArrendador_('${res[i].slug}')">
                                                 <svg class="icon icon-xs text-danger ms-1" title="Eliminar" data-bs-toggle="tooltip" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
                                                 &nbsp;Borrar Arrendador
                                             </a>  
                                         </div>   
                                         </div>`: `<div class="btn-group dropstart">
-                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split ${res[i].estatus_arrendador === 'Rechazado' ? 'disabled' : 'no_rechazado'}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
                                             <span class="visually-hidden">Toggle Dropdown</span>
                                         </button>
@@ -1714,17 +1731,10 @@ document.getElementById("cargar_tabla").onload = tabla()
                                                 </svg>&nbsp;Editar Arrendador
                                             </a>
 
-                                            <a class="dropdown-item d-flex align-items-center" onClick="alert0('${res[i].slug}')">
+                                            <a class="dropdown-item d-flex align-items-center" onClick="eliminarArrendador_('${res[i].slug}')">
                                                 <svg class="icon icon-xs text-danger ms-1" title="Eliminar" data-bs-toggle="tooltip" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
                                                 &nbsp;Borrar Arrendador
-                                            </a>
-                                            
-                                    {% comment %} <a class="dropdown-item d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick="colocar_id('${res[i].id}')">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-xs" viewBox="0 0 24 24">
-                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2" fill="green"/>
-                                        </svg>
-                                        &nbsp;Añadir documentos
-                                    </a>{% endcomment %}
+                                            </a>                                    
                                         </div>   
                                         </div>`}`; 
                     tr.appendChild(col1);
@@ -1734,7 +1744,7 @@ document.getElementById("cargar_tabla").onload = tabla()
                     tr.appendChild(col5);
                     tr.appendChild(col6);
                     tr.appendChild(col7);
-                    tr.appendChild(col8);
+                    //tr.appendChild(col8);
                     cuerpo.appendChild(tr);
                 }
                     console.log(response);
@@ -1752,42 +1762,16 @@ document.getElementById("cargar_tabla").onload = tabla()
         });
 }
 
-function editar(slug){
-function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
-    $.ajax({
-        type: 'GET',
-        url: `${server}/Arrendador_Api/${slug}/`,
-        //url: `http://127.0.0.1:8000/Inmuebles/`,
-        headers: {'Authorization': `Token ${localStorage.getItem('token')}`},
-        mode: 'same-origin',
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response); // handle the response from the server
-            localStorage.setItem('data_arrendador', JSON.stringify(response));
-            //window.location = `/editar_inmuebles/${slug}/`;
-            window.location.href = `/editar_arrendador/${slug}/`
-        },
-        error: function(response) {
-            console.log(response); // handle any errors from the server
-        }
-    });
+const editar = async (slug) => {
+    return axios.get(`${server}/Arrendador_Api/${slug}/`, configin)
+        .then(response =>{
+            localStorage.setItem('data_arrendador', JSON.stringify(response.data));        
+            window.location.href =  `/editar_arrendador/${slug}/`
+        }).catch(error => {
+            console.log(error);
+        })
 }
+
 
   // function registro
 const btnSubmit = document.getElementById("finalizar1")
@@ -1795,97 +1779,78 @@ let formulario = {};
 
 btnSubmit.addEventListener("click", function (event) {
     event.preventDefault();
-    console.log("ojojojo")
     formulario = JSON.parse(localStorage.getItem('datos'));
-    
-    console.log("viewform",formulario)
-    console.log("select",formulario.hasOwnProperty("no_inquilinos"))
-    
     enviar_datos(formulario)
     localStorage.removeItem('datos')
     setTimeout(() => {
-        //Swal.fire({
-        //                icon: 'success',
-        //                title: '¡Agregado correctamente!',
-        //                text: 'Se agrego de forma correcta',
-        //                showConfirmButton: false,
-        //                timer: 1300
-        //            }).then(() =>{
-        //                location.reload()
-        //            })
         location.reload()
     }, "2000");
        
 })
 
 async function enviar_datos(formulario){
-    const response = await axios.post(`${server}/Arrendador_Api/`,formulario,configin)
+    datos = JSON.parse(localStorage.getItem('datos_totales'))
+    console.log(datos)
+
+    formulario.nombre + formulario.apellido + formulario.apellido1
+    console.log(formulario.nombre);
+    console.log(formulario.apellido);
+    console.log(formulario.apellido1);
+
+    const tieneDuplicado = datos.some(objeto => {
+        const datoConcatenado = objeto.nombre + objeto.apellido + objeto.apellido1;
+        return datoConcatenado === formulario.nombre + formulario.apellido + formulario.apellido1;
+    });
+
+    if (tieneDuplicado) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ya existe un usuario con esos datos',
+        });
+    } else {
+        const response = await axios.post(`${server}/Arrendador_Api/`,formulario,configin);
+        localStorage.removeItem('datos_totales');
+        console.log('El objeto no tiene un dato concatenado duplicado.');
+    }
+
+
     console.log("response",response)
     //location.reload()
 }
 
-
-async function eliminar(slug){
-    console.log("data_arrendador",data_arrendador)
-    let info = data_arrendador.filter(inquilino=>inquilino.slug==slug)
-    console.log("info",info[0].slug)
-    let clave = {slug:info[0].slug}
-    await axios.delete(`${server}/Arrendador_Api/${slug}/`,clave,configin)
-    .then(function (response) {
-            // manejar respuesta exitosa
-            console.log("eliminado exitosamente")
-            console.log(response);
-
-        })
-        .catch(function (error) {
-        // manejar error
+const eliminarArrendador = async (slug) =>{
+    try{
+        const response = await axios.delete(`${server}/Arrendador_Api/${slug}/`, configin);
+        console.log("Arrendador eliminado correctamente");
+        setTimeout(() =>{
+            location.reload();
+        }, 1500);
+    }catch(error){
         console.log(error);
-        })
-        .finally(function () {
-        // siempre sera executado
-        location.reload()
-        });
+    }
+}
+
+const detalles_arrendador = async (slug) => {
+    try{
+        const response = await axios.get(`${server}/Arrendador_Api/${slug}/`,configin);
+        localStorage.setItem('arrendador', JSON.stringify(response.data));
+        window.location = `/detalles_arrendador/${slug}/`;
+    }catch(error){
+        console.log(error);
+    }
 }
 
 
-function detalles_arrendador(slug){
-    $.ajax({
-        type: 'GET',
-        url: `${server}/Arrendador_Api/${slug}/`,
-        headers: headers_globales_ajax,
-        mode: 'same-origin',
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log(response); // handle the response from the server
-            localStorage.setItem('arrendador', JSON.stringify(response));
-            window.location = `/detalles_arrendador/${slug}/`
-        },
-        error: function(response) {
-            console.log(response); // handle any errors from the server
-        }
-    });
-}
-
-
-function guardar_datos_data(slug){
-    console.log("Entro a guardar datos")
-    $.ajax({
-        type: 'GET',
-        url: `${server}/Arrendador_Api/${slug}/`,
-        headers: {'X-CSRFToken': csrftoken},
-        mode: 'same-origin',
-        processData: false,
-        contentType: false,
-        success: function(response) {
-            console.log("Sidebio guardar datos"); // handle the response from the server
-            localStorage.setItem('data_arrendador', JSON.stringify(response));
-            window.location.href = `../documentos_detalles/${slug}/`;
-        },
-        error: function(response) {
-            console.log(response); // handle any errors from the server
-        }
-    });
+const guardarArrendador = async (slug) =>{
+    try{
+        const response = await axios.get(`${server}/Arrendador_Api/${slug}/`, server, configin);
+        console.log("Debio guardar", response);
+        localStorage.setItem('data_arrendador', JSON.stringify(response.data));
+        window.location.href = `../documentos_detalles/${slug}/`;
+    }catch(error){
+        console.log(error);
+    }
 }
 </script>
 
@@ -1903,56 +1868,50 @@ function limpiar_formulario_post(){
 }
 
 const formRegistroArchivos = document.getElementById("registro_archivos");
-
-formRegistroArchivos.addEventListener("submit", function(event) {
-    event.preventDefault(); // Evita el envío del formulario por defecto
-
-    if (formRegistroArchivos.checkValidity()) {
-        // El formulario es válido, puedes enviarlo
-        const formData = new FormData();
-            formData.append('ine', $('#ine')[0].files[0]);
-            formData.append('comp_dom',$('#comp_dom')[0].files[0])
-            formData.append('predial',$('#predial')[0].files[0])
-            formData.append('escrituras_titulo',$('#escrituras_titulo')[0].files[0])
-            formData.append('arrendador',$('#id_arrendador').val().trim())
-            console.log("Soy id arrendador", $('#id_arrendador').val().trim())
-            formData.forEach(function(value, key) {
-                console.log(key + ': ' + value);
-            });
-            console.log("Antes de enviar", formData)
-            localStorage.removeItem('datos')
-        $.ajax({
-                type: 'POST',
-                url: `${server}/documentos_arrendador/`,
-                headers: {'X-CSRFToken': csrftoken},
-                mode: 'same-origin',
-                data:  formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    console.log(response);
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Agregado correctamente!',
-                        text: 'Se agrego documentos de forma exitosa.',
-                        showConfirmButton: false,
-                        timer: 2000
-                    }, 2000).then(() => {
-                            location.reload();
-                        }).catch((error) => {
-                            console.error(error);
-                        });
-                },
-                error: function(response) {
-                    console.log(response); // handle any errors from the server
-                }
-            });
-    } else {
-        // El formulario no es válido, muestra los mensajes de validación
+formRegistroArchivos.addEventListener("submit", function(event){
+    event.preventDefault();
+    if (formRegistroArchivos.checkValidity()){
+        guardarArchivosArrendador();
+    }else{
         formRegistroArchivos.classList.add("was-validated");
-        console.log("No paso la validacion")
+        console.log("No paso la validacion");
     }
 });
+
+const guardarArchivosArrendador = async () => {
+    const formData = new FormData();
+    formData.append('ine', $('#ine')[0].files[0]);
+    formData.append('comp_dom', $('#comp_dom')[0].files[0]);
+    formData.append('predial', $('#predial')[0].files[0]);
+    formData.append('escrituras_titulo', $('#escrituras_titulo')[0].files[0]);
+    formData.append('arrendador', $('#id_arrendador').val().trim());
+    console.log("Soy id arrendador", $('#id_arrendador').val().trim());
+    //formData.forEach(function(value, key) {
+    //    console.log(key + ': ' + value);
+    //});
+    localStorage.removeItem('datos');
+    try {
+        const response = await guardarArchivosArrendador_(formData);
+        Swal.fire({
+            icon: 'success',
+            title: '¡Agregado correctamente!',
+            text: 'Se agregaron los documentos de forma exitosa.',
+            showConfirmButton: false,
+            timer: 2000
+        }).then(() =>{
+            location.reload();
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
+const guardarArchivosArrendador_ = (formData) =>{
+    //console.log("Siiiiii", formData);
+    return axios.post(`${server}/Arrendador_Api/create_documentos/`, formData, configin_archivos);
+}
+
 </script>
 
 <script>
@@ -2095,16 +2054,7 @@ inputElement.addEventListener("input", function(event) {
     // Update the input value
     inputElement.value = limitedValue;
 });
- {% comment %} $(document).ready(function() {
-    $('#email').on('input', function() {
-        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (this.checkValidity()) {
-            $(this).removeClass('is-invalid');
-        } else {
-            $(this).addClass('is-invalid');
-        }
-    });
-  }); {% endcomment %}
+
 
 function verificarInputs() {
     $('input[required]').each(function() {
@@ -2139,6 +2089,120 @@ estado_civil.addEventListener("input", function(){
         auten()
     }
 </script>
+
+
+
+
+<script>
+
+{% comment %} const genera_pdf = document.getElementById("genera_pdf");
+
+genera_pdf.addEventListener("click", function(){
+   data = {
+    "Nombre":"Jose",
+    "valor":10
+   } 
+    generarPDF(data);
+}); {% endcomment %}
+
+{% comment %} const generarPDF = async(data)=>{
+    try {
+        const response = await axios.post(`${server}/pdf/`, JSON.stringify(data), { responseType: 'blob' });
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'archivo.pdf';
+        link.click();
+        window.URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error('Error al generar el PDF:', error);
+    }
+} {% endcomment %}
+
+</script>
+
+
+<script>
+const button = document.getElementById('loader');
+
+// Agregar el evento de clic al botón
+{% comment %} button.addEventListener('click', () => {
+  const loaderContainer = document.createElement('div');
+  loaderContainer.style.width = '100px';
+  loaderContainer.style.height = '100px';
+  loaderContainer.style.display = 'flex';
+  loaderContainer.style.justifyContent = 'center';
+  loaderContainer.style.alignItems = 'center';
+  loaderContainer.style.overflow = 'hidden';
+  loaderContainer.style.background = 'none'; // Establecer el fondo como none
+
+  const loaderSpan = document.createElement('span');
+  loaderSpan.className = 'loader';
+
+  loaderContainer.appendChild(loaderSpan);
+
+  Swal.fire({
+    title: '',
+    html: loaderContainer.outerHTML,
+      showCloseButton: true,
+    showConfirmButton: false,
+    background: 'none', // Establecer el fondo del contenedor principal como none
+    didOpen: () => {
+      const swalContainer = Swal.getHtmlContainer();
+      swalContainer.style.display = 'flex';
+      swalContainer.style.justifyContent = 'center';
+      swalContainer.style.alignItems = 'center';
+      swalContainer.style.background = 'none'; // Establecer el fondo del contenedor del span como none
+    },
+    willClose: () => {
+        clearInterval(timerInterval);
+    }
+  });
+}); {% endcomment %}
+
+
+
+{% comment %} const button = document.getElementById('loader');
+
+  // Agregar el evento de clic al botón
+  button.addEventListener('click', () => {
+    // Obtener el contenedor del loader
+    const loaderContainer = document.querySelector('.loader-container');
+
+    // Crear el span del loader
+    const loaderSpan = document.createElement('span');
+    loaderSpan.className = 'loader';
+
+    // Agregar el span al contenedor del loader
+    loaderContainer.appendChild(loaderSpan);
+
+    // Mostrar el modal
+    $('#loaderModal').modal({
+      backdrop: 'static',
+      keyboard: false
+    });
+
+    // Código adicional para controlar el cierre del modal y limpiar el intervalo del timer
+    $('#loaderModal').on('hidden.bs.modal', function (e) {
+      clearInterval(timerInterval);
+    });
+  }); {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
 {% comment %} <script src="/static/assets/js/ocultadorespf.js"></script> {% endcomment %}
 <script src="/static/assets/js/validacionpf.js"></script>
 {% endblock javascripts %}

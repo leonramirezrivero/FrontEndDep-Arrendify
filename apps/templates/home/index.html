@@ -603,13 +603,14 @@
             </div>
         </section> area de ejemplo de con cuadro blanco central {% endcomment %}
 
-        <section style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,25,66,1) 35%, rgba(255,255,255,1) 100%); margin-bottom:-30px;" class="section section-lg bg-white">
+        <section id="cotizador-rapido" style="background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(35,25,66,1) 35%, rgba(255,255,255,1) 100%); margin-bottom:-30px;" class="section section-lg bg-white">
             <div class="container">
                 <div class="row justify-content-md-center">
                     <div class="col-12 col-lg-8">
                         <h2 style="color:white" class="h1 fw-bold mb-3 ">Nuestros Planes</h2>
+                        <p style="color:white;" class="lead mb-4">¿Le gustaria contratar alguno de nuestro planes? checalos a continuación.</p>  
+                        <p style="color:white;" class="lead mb-4">¿Cuanto sería el valor de tu renta?</p>  
                         <input type="text" style="width: 300px; height: 35px; padding-left: 20px; padding-right: 20px; margin-top:-15px;" maxlength="8" class="rounded-pill" alt="..." id="val1" onkeyup="sumar()"  placeholder=" ¿Valor $ de tu renta?">
-                        <p style="color:white;" class="lead mb-4">¿Le gustaria comprar alguno de nuestro planes? checalos a continuación.</p>  
                         
                     </div>
                     
@@ -634,7 +635,7 @@
                                 <body>
                                     <div style="Display:inline-block">
                                     <span class="h3 text-primary fw-bold align-top">$</span>
-                                    <h1 style="Display:inline-block"> <span id="Display"> </span></h1>
+                                    <h1 style="Display:inline-block"> <span id=""> </span></h1>
                                     </div>
                                   </body>
                             </div>
@@ -642,14 +643,58 @@
                             <!-- Content -->
                             <div style="margin-bottom:26px" class="card-body">
                                 <ul class="list-group list-group-flush price-list">
-                                    <li class="list-group-item border-0 ps-0"><strong>1</strong> inmueble</li>
-                                    <li class="list-group-item border-0 ps-0"><strong>6 </strong> meses de cobertura</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Asesoria legal</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Cobertura Juridica</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0 pb-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> Soporte Premium </li>
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación Buró de crédito del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación en listas negras arrendatario</li>
+                                    
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación de solvencia del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración contrato de arrendamiento</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación fiador/obligado solidario</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Inventario fotográfico</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración de pagarés</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Acompañamiento durante la vida del contrato</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Honorarios de Conciliación°</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Monitoreo periódico de la relación de arrendamiento</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Extinción de dominio</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Recuperación de adeudos vencidos</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Cobro extrajudicial de rentas</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Recuperación legal en caso de abandono</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Cobranza Renta</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Arrendify Renta Segura</li>
+                                        <p><small> (Hasta 12 meses de renta o un valor maximo de $51,600.00)</small></p>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Seguro Responsabilidad Civil (Sin costo)</li>
+                                        <p><small> $1,075.00</small></p>
                                 </ul>
                             </div>
                             <!-- End Content -->
@@ -665,9 +710,9 @@
                                     <span class="h2 text-primary fw-bold align-top">Plan Oro</span>
                                 </span>
                                 <body>
-                                    <div style="Display:inline-block">
+                                    <div style=":inline-block">
                                     <span class="h3 text-primary fw-bold align-top">$</span>
-                                    <h1 style="Display:inline-block"> <span  id="Display2"> </span></h1>
+                                    <h1 style=":inline-block"> <span  id="2"> </span></h1>
                                     {% comment %} <span class="h5 text-primary fw-bold align-top">°°</span> {% endcomment %}
                                     </div>
                                   </body>
@@ -676,14 +721,58 @@
                             <!-- Content -->
                             <div class="card-body">
                                 <ul class="list-group list-group-flush price-list">
-                                    <li class="list-group-item bg-white border-0 ps-0"><strong>6</strong> inmuebles</li>
-                                    <li class="list-group-item bg-white border-0 ps-0"><strong>2</strong> años de cobertura</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Asesoria legal</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-danger me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 border-0 ps-0 pb-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Soporte Premium </li>
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación Buró de crédito del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación en listas negras arrendatario</li>
+                                    
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación de solvencia del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración contrato de arrendamiento</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación fiador/obligado solidario</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Inventario fotográfico</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración de pagarés</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Acompañamiento durante la vida del contrato</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Honorarios de Conciliación°</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Monitoreo periódico de la relación de arrendamiento</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Extinción de dominio</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Recuperación de adeudos vencidos</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Cobro extrajudicial de rentas</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Recuperación legal en caso de abandono</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Cobranza Renta</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Arrendify Renta Segura</li>
+                                        <p><small> (Hasta 12 meses de renta o un valor maximo de $51,600.00)</small></p>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://static.vecteezy.com/system/resources/previews/011/193/361/non_2x/check-mark-and-cross-mark-icon-tick-symbol-in-red-color-illustration-vector.jpg" height="20px" width="20px"> </img> Seguro Responsabilidad Civil (Sin costo)</li>
+                                        <p><small> $1,075.00</small></p>
                                 </ul>
                             </div>
                             <!-- End Content -->
@@ -708,14 +797,59 @@
                             <!-- Content -->
                             <div class="card-body">
                                 <ul class="list-group list-group-flush price-list">
-                                    <li class="list-group-item bg-white border-0 ps-0"><strong>10</strong> inmuebles</li>
-                                    <li class="list-group-item bg-white border-0 ps-0"><strong>5</strong> años de cobertura</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Asesoria legal</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Cobertura Juridica</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 ps-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> ETC 1</li>
-                                    <li class="list-group-item d-flex align-items-center border-0 border-0 ps-0 pb-0"><svg class="icon icon-xs text-success me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Soporte Premium </li></ul>
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación Buró de crédito del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación en listas negras arrendatario</li>
+                                    
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación de solvencia del arrendatario</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración contrato de arrendamiento</li>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Investigación fiador/obligado solidario</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Inventario fotográfico</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Elaboración de pagarés</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Acompañamiento durante la vida del contrato</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Honorarios de Conciliación°</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Monitoreo periódico de la relación de arrendamiento</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Extinción de dominio</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Recuperación de adeudos vencidos</li>
+                                    
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Cobro extrajudicial de rentas</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Recuperación legal en caso de abandono</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Cobranza Renta</li>
+
+                                     <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Arrendify Renta Segura</li>
+                                        <p><small> (Hasta 12 meses de renta o un valor maximo de $51,600.00)</small></p>
+
+                                    <li class="list-group-item d-flex align-items-center border-0 ps-0">
+                                        <img src="https://i.pinimg.com/564x/cc/16/af/cc16af3389aa2e353ad80a2f6962e413.jpg" height="20px" width="20px"> </img> Seguro Responsabilidad Civil (Sin costo)</li>
+                                        <p><small> $1,075.00</small></p>
+                                </ul>
                             </div>
                             <!-- End Content -->
                         </div>
@@ -724,12 +858,14 @@
                     
                 </div>
                 <div style="margin-top:20px ;">
-                    <h2 style="color:white" class="h4 fw-bold mb-3">¿Le gustaria un plan personalizado?</h2> 
+                    <h2 style="color:white" class="h4 fw-bold mb-3">¿Le gusta lo que vez?</h2> 
                     </div>
-                    <a class="btn btn-lg btn-secondary" href="/cot_per.html">Haz click aqui</a>
+                    <a class="btn btn-lg btn-secondary" href="/cotizacion.html">Haz click aqui para generar tu cotizacion</a>
                     <p style="color:#231944; margin-left:1792px; text-align:left;" class="lead mb-4">*Costos no incluyen IVA</p>
                     <p style="color:#231942; margin-left:1677px; margin-top:-30px;" class="lead mb-4">**El pago de la poliza es anual</p>
                     <p style="color:#231942; margin-left:1250px; margin-top:-30px; " class="lead mb-4">***En costros mayores a 25,000 consultar con asesor</p>
+                    <p style="color:#231942; margin-left:1400px; margin-top:-30px; " class="lead mb-4">°Los honorarios varian en función de la póliza</p>
+                   
             </div>
         </section>
     </main>

@@ -1,0 +1,470 @@
+{% extends "layouts/base.html" %}
+{% block title %} Paquetes {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+
+  <!-- Segundo modo -->
+        <section style="background: rgb(2,0,36);
+        background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(11,220,112,1) 70%, rgba(0,255,173,1) 100%);" class="card card-body border-0 shadow mb-4">
+            <div id="cf"  class="container ">
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-lg-5">
+                        
+                        <svg style=" margin-left:200px; margin-bottom:5px; padding-right:100px width:100%; height:50px; background:#231942ff " xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-coin border border-primary rounded-circle" viewBox="0 0 16 16">
+                            <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                        </svg>
+                        <div style="padding-left:25px; padding-left:100%  width:50px; height:50px; background:#231942ff;" class=" border border-tertiary border-2 rounded-3">
+                        <h2 style="z-index:1; color:white" align="center" class="h2 fw-bold mb-3">Paquetes</h2>
+                        </div>
+                    </div>
+                    <section style="background:#0BDC70;" class="card card-body border-0 shadow mb-4 mt-4">
+                        <div  class="container ">
+                            <div  class="row justify-content-md-center">
+                                <div class="container">
+                                    <div class="row mt-2">
+                                        <div  class="col-6">
+                                            <label>Código paquete:</label>
+                                            <input class="form-control w-100" id="nombre_paquete" name="nombre_paquete" type="text" onkeyup="prueba2(this)"  maxlength="20"  alt="..."  placeholder="AFY0100CX5183"></input>
+                                         </div>
+                                      <div class="col-6">
+                                        <label>Selecciona Cotización:</label>
+                                        <select class="form-select" id="sel-cotizacion" name="cotizacion" onChange="javascript:prueba2(this); seleccionar_cotizacion(this);" aria-label="Default select example">
+                                            <option id="cliente"  value="--------">--------</option>
+                                        </select>
+                                    </div>
+                                      <div class="col-6  mt-2">
+                                        <label>Arrendador</label>
+                                        <select class="form-select" id="sel-arrendador" name="arrendador" onChange="javascript:prueba2(this); llamar_inmueble(this);" aria-label="Default select example">
+                                            <option id="cliente"  value="--------">--------</option>
+                                          </select>
+                                      </div>
+                                      <div class="col-6  mt-2">
+                                        <label>Arrendatario</label>
+                                        <select class="form-select" id="sel-inquilino" name="inquilino" onChange="javascript:prueba2(this); obtenerFiador(this);" aria-label="Default select example">
+                                            <option id="cliente"  value="--------">--------</option>
+                                        </select>
+
+                                      </div>
+                                      
+                                    </div>
+                                    <div class="row mt-4">                                        
+                                         <div  class="col-6 ">
+                                            <label>Inmueble</label>
+                                                <select class="form-select" id="sel-inmueble" name="inmueble" onChange="javascript: prueba2(this);" aria-label="Default select example">
+                                                    <option value="---------" selected>---------</option> 
+                                                    </select>
+                                          </div>
+                                          <div  class="col-6">
+                                            <label>Fiador/Obligado</label>
+                                            <select class="form-select" id="sel-fiador" name="fiador" onChange="javascript: prueba2(this);" aria-label="Default select example">
+                                                <option value="---------" selected>---------</option> 
+                                            </select>
+                                          </div>
+                                           
+                                        </div>
+
+                                    <div class="row mt-4">
+                                           <div class="col-12">
+                                            <textarea style="color:black" id="comentarios" name="comentarios" oninput="prueba2(this);" class="form-control" placeholder="..." id="textarea" name="comentarios" rows="10">descripcion</textarea>
+                                           </div>
+                                    </div>
+                                </div>
+
+                                <div id="botones" style="display:non" class="row mt-2">
+                                    <div class="col">
+                                        <button style="background-color:#231942ff; color:white; " onClick="obtenerCotizacion()" type="button" class="btn btn-primary btn-lg " >Obtener cotizacion</button>
+                                    </div>     
+                                    <div class="col">
+                                        <button style="background-color: #000000 ; color:white; " onclick="location.href='index.html#cotizador-rapido';" type="button" class="btn btn-secondary btn-lg">Generar Pagare</button>
+                                    </div>  
+                                      <div class="col">
+                                        <button style="background-color:#231942ff; color:white; " onClick="generarPDF()" type="button" class="btn btn-primary btn-lg " >Generar Contrato</button>
+                                    </div>        
+                                                                
+                                </div>
+
+
+                                <div style="margin-top:10px;" class="row d-inline bg-white border border-2">
+                                    <label style="Display:inline;">¿Tienes un código de descuento? Introducelo aqui =></label>
+                                    <input style="Display:inline; width:250px" class="form-control" type="text"  maxlength="8"  alt="..."  placeholder="Código de descuento"></input>
+                                </div>
+                                <div class="row" style="display:;">
+                                   
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="monto_total" name="monto_total" type="text"  alt="..."  placeholder="monto_total"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="costos_extra" name="costos_extra" type="text"  alt="..."  placeholder="costos_extra"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="renta_segura" name="renta_segura" type="text"  alt="..."  placeholder="arrendify renta_segura"></input>
+                                    </div>
+
+                                    <div class="col">
+                                        <input style="Display:none;" class="form-control" id="seguro_rc" name="seguro_rc" type="text"  alt="..."  placeholder="seguro_responsibilidad Civil"></input>
+                                    </div>
+                                    
+                                    <!-- Modal -->
+                                        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+                                        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body" >
+                                                    {% comment %} <div class="loader"></div> {% endcomment %}
+                                                    <div>
+                                                        <img class="cargador" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                                                    <div>
+                                                    <div class="message">Generando cotización, por favor espere...</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    <!-- Modal -->
+
+
+                                </div>
+
+                    </section>
+                </section>
+
+</div>
+      
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<script>
+    document.getElementById("cf").onload = fac()
+    let formulario = {};
+    var arr = {}
+    var datos_cot = []
+    var rentas = [] 
+    const server = "https://arrendify-api.onrender.com"
+    const configin = {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+        },
+    }; 
+    
+    function fac(){
+
+        var f = new Date();
+        //let fec = (f.getDate() + "/" + '0' +(f.getMonth() +1) + "/" + f.getFullYear());
+        let fec = (f.getFullYear() + "" + '0' +(f.getMonth() +1) + "-" +  f.getDate() );
+        document.getElementById("nombre_paquete").value = "PL" + " " + fec
+    }
+
+    function obtenerCotizacion(){
+        
+        axios.get(`${server}/cotizaciones/`,configin)
+        .then(function (response) {
+          // Manejar la respuesta exitosa del servidor
+          datos = response.data;
+          datos_cot = response.data   
+          console.log(datos)   
+          // Llenar el elemento select con los datos recibidos
+          var select = document.getElementById('sel-cotizacion');
+          // Limpiamos los select de inmueble y cliente y la renta
+          select.innerHTML = ""
+          // agregamos opciones vacias al sel limpiados
+          var defecto = document.createElement('option')
+          defecto.text = "---------"
+          select.add(defecto)
+          datos.forEach(function(dato) {
+            //creamos el option
+                var option = document.createElement('option');
+                // asignamos valor al texto
+                option.text = dato.nombre_cotizacion + " " + dato.cliente
+                // asignamos valor al al valor
+                option.value = dato.id;
+                //agregamos la opcion al select
+                select.add(option);
+          });
+          
+        
+        })
+        .catch(function (error) {
+          // Manejar el error de la solicitud
+          console.log(error);
+        });
+    }
+
+    function obtenerArrendador(){
+        
+        axios.get(`${server}/arrendadores_campos_establecidos/`,configin)
+        .then(function (response) {
+          // Manejar la respuesta exitosa del servidor
+          datos = response.data;
+          console.log("datos de arrendador",datos)
+          // Llenar el elemento select con los datos recibidos
+          let select_in = document.getElementById("sel-inmueble")
+          var select = document.getElementById('sel-arrendador');
+          // Limpiamos los select de inmueble y cliente y la renta
+          select.innerHTML = ""
+          select_in.innerHTML = ""
+          // agregamos opciones vacias al sel limpiados
+          var defecto = document.createElement('option')
+          var defecto2 = document.createElement('option')
+          defecto.text = "---------"
+          defecto2.text = "---------"
+          select.add(defecto)
+          select_in.add(defecto2)
+
+          datos.forEach(function(dato) {
+            //creamos el option
+                var option = document.createElement('option');
+                // asignamos valor al texto
+                option.text = (dato.nombre != null)?dato.nombre + " " + dato.apellido + " " + dato.apellido1 : dato.n_inmobiliaria
+                // asignamos valor al al valor
+                option.value = dato.id;
+                //agregamos la opcion al select
+                select.add(option);
+              
+          });
+        })
+        .catch(function (error) {
+          // Manejar el error de la solicitud
+          console.log(error);
+        });
+    }
+ 
+    function selecionar_inmueble(inmueble_id){
+        console.log(inmueble_id.value)
+        let variable = rentas.filter(e=>e.id==inmueble_id.value )
+        document.getElementById("renta").value = variable[0].renta
+        renta_inmueble = variable[0].renta
+  }
+
+    function seleccionar_cotizacion(cotizacion_id){
+        console.log("soy el valor del id",cotizacion_id.value)
+
+        var select_arrendador = document.getElementById('sel-arrendador');
+        var select_inquilino = document.getElementById('sel-inquilino');
+        var defecto = document.createElement('option')
+        let variable = datos_cot.filter(e=>e.id==cotizacion_id.value)
+
+        if(variable[0].datos_arrendador){
+            console.log("tengo datos de arrendador")
+            defecto.text = variable[0].datos_arrendador.nombre + " " + variable[0].datos_arrendador.apellido + " " + variable[0].datos_arrendador.apellido1
+            defecto.value = variable[0].datos_arrendador.id
+            select_arrendador.add(defecto)
+            obtenerInquilinos()
+            
+        }
+        else{
+            console.log("tengo datos de inquilino")
+            defecto.text = variable[0].cot_inquilino.nombre + " " + variable[0].cot_inquilino.apellido + " " + variable[0].cot_inquilino.apellido1
+            defecto.value = variable[0].cot_inquilino.id
+            select_inquilino.add(defecto)
+            obtenerArrendador()
+        }
+    }
+
+ function obtenerInquilinos(){
+    
+    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    .then(function (response) {
+      // Manejar la respuesta exitosa del servidor
+      var datos = response.data;
+      // Llenar el elemento select con los datos recibidos
+        var select = document.getElementById('sel-inquilino');
+        // Limpiamos los select de inmueble y cliente y la renta
+        select.innerHTML = ""
+        // agregamos opciones vacias al sel limpiados
+        var defecto = document.createElement('option')
+        defecto.text = "---------"
+        select.add(defecto)
+
+      datos.forEach(function(dato) {
+        //creamos el option
+        var option = document.createElement('option');
+        // asignamos valor al texto
+        option.text = dato.nombre+ " " + dato.apellido + " " + dato.apellido1;
+        // asignamos valor al al valor
+        option.value = dato.id;
+        //agregamos la opcion al select
+        select.add(option);
+      });
+    
+    })
+    .catch(function (error) {
+      // Manejar el error de la solicitud
+      console.log(error);
+    });
+}
+
+function llamar_inmueble(id){
+    console.log(id.value)
+    console.log(datos_cot[id.value].datos_arrendador)
+    // Llenar el elemento select con los datos recibidos
+    // usar la funcion filter del array permite filtrar las opciones seleccionardas
+   let variable = datos_cot.filter(function(obj){console.log(obj); 
+    if(obj.datos_arrendador != null){
+        return obj.datos_arrendador.id == id.value;
+    }
+   
+    })
+   console.log("esta es la variable",variable)
+   var select_in = document.getElementById("sel-inmueble")
+    
+    if(variable[0].datos_inmueble){
+       console.log("si hay inmueble")
+       var option = document.createElement('option');
+            option.text = variable[0].datos_inmueble.alias_inmueble
+            option.value = variable[0].datos_inmueble.id
+            select_in.add(option);     
+    } 
+    else{
+        console.log("entre en el else")
+        var option = document.createElement('option');
+        console.log("entre en el else2",option)
+        option.text = "sin inmuebles"
+        option.value = "sin inmuebles";
+        select_in.add(option);
+    }
+}
+
+
+function prueba2(val){
+    console.log(val.name)
+    arr[""+val.name] = '' +val.value
+    console.log(arr)
+}
+
+function recopilar()
+{
+    // Obtener y Guardar el valor del input en localStorage
+    console.log("estoy en guardar",JSON.stringify(arr))
+    localStorage.setItem('datos_cotizacion', JSON.stringify(arr));
+}
+
+async function generarPDF(){
+    try {
+        recopilar()
+        event.preventDefault();
+        //desde que mostramos modal
+        console.log("cotizacion")
+        poliza = document.getElementById("plan")
+        agentify = document.getElementById("agentify")
+        formulario = JSON.parse(localStorage.getItem('datos_cotizacion'));
+        console.log(poliza.value)
+        console.log(agentify.value)
+
+        if(poliza.value == "Selecciona tu Póliza" || agentify.value == "Agentify"){
+            Swal.fire({
+                icon: 'error',
+                title: 'Upss...☹️',
+                text: 'Por favor completa todos los campos'
+              })
+        }
+
+        else{
+            $('#loadingModal').modal('show');
+            if(!formulario.hasOwnProperty("nombre_cotizacion")){
+                formulario.nombre_cotizacion = document.getElementById("nombre_cotizacion").value
+                console.log(formulario)
+            }
+
+            if(!formulario.hasOwnProperty("cliente") ){
+                // por checar el funcionamiento del .textContent
+                cli = document.getElementById("sel-cliente")
+                var opcion = cli.options[cli.selectedIndex];
+                var cliente = opcion.textContent;
+                formulario.cliente = cliente
+            }
+
+            if(!formulario.hasOwnProperty("renta") ){
+                formulario.renta = renta_inmueble
+            }
+    
+            if(!formulario.hasOwnProperty("monto") ){
+                formulario.monto = document.getElementById("monto").value
+            }
+    
+            if(!formulario.hasOwnProperty("monto_impuesto") ){
+                formulario.monto_impuesto = document.getElementById("monto_impuesto").value
+            }
+    
+            if(!formulario.hasOwnProperty("monto_total") ){
+                formulario.monto_total = document.getElementById("monto_total").value
+            }
+            if (poliza.value == "Platino")
+            {
+                if(!formulario.hasOwnProperty("renta_segura") ){
+                    formulario.renta_segura = document.getElementById("renta_segura").value
+                }
+    
+                if(!formulario.hasOwnProperty("seguro_rc") ){
+                    formulario.seguro_rc = document.getElementById("seguro_rc").value
+                }
+            }
+            console.log(formulario)
+            probar_modal(formulario)
+        }
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+
+function obtenerFiador(id_inquilino){
+console.log(id_inquilino)
+
+
+}
+
+</script>
+
+<style>
+    @keyframes rotate {from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}}
+
+    @-webkit-keyframes rotate {from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}}
+
+    .cargador{
+      -webkit-animation: 3s rotate linear infinite;
+      animation: 3s rotate linear infinite;
+      -webkit-transform-origin: 50% 50%;
+      transform-origin: 50% 50%;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+  }
+
+  .message {
+      text-align: center;
+      font-size: 24px;
+      margin-top: 20px;
+  }
+
+ .modal-backdrop{
+   backdrop-filter: blur(5px);
+   background-color: #01223770;
+   transition: 0.1s filter;
+ }
+ .modal-backdrop.in{
+ opacity: 0.1 !important;
+ }
+    
+</style>
+
+{% endblock javascripts %}
+

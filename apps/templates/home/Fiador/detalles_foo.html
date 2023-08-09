@@ -50,11 +50,15 @@
                                 <label>RFC: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" name="rfc_fiador" id="rfc_fiador"  type="text" value="" readonly>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label>Parentesco: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" id="p_fiador" name="p_fiador"   type="text" value=""  readonly>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label>Nacionalidad: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="nacionalidad" name="nacionalidad"   type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <label>Estado Civil: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1"  id="estado_civil_fiador" name="estado_civil_fiador"  type="text" value=""  readonly>
                             </div>
@@ -141,8 +145,16 @@
                                     <label>Nombre Notario Público: </label>
                                     <input class="form-control-plaintext card shadow border-1 ps-1" id="nombre_notario" name="nombre_notario"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
                                 </div>
+
                             </div>
-                          
+                            <h2 class="h5 mb-2 mt-2">Dirección</h2>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>Domicilio: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" id="direccion_escritura" name="direccion_escritura"  type="text" value="{{ arrendador.nombre_notario_ac}}"  readonly>
+                            </div>
+                        </div>  
                         </div>  
                     </div>
 
@@ -385,7 +397,7 @@
 {% comment %} <script src="/static/assets/repositorios/detail_inq.js"></script>  {% endcomment %}
 
 <script>
-    const server = 'http://192.168.2.24:8001'
+    const server = "https://arrendify-api.onrender.com";
     var datos = JSON.parse( localStorage.getItem('data_fiador'))
     var full = document.getElementById("nombre_full")
     var full_em = document.getElementById("nombre_full_em")
@@ -398,7 +410,7 @@
     
 function plantar()
 {
-    axios.get(`${server}/inquilino_fiador_obligado/`,configin)
+    axios.get(`${server}/inquilinos_fiadores/`,configin)
     .then(function (response) {
         var datos_inq = response.data;
         var select = document.getElementById('inquilino');
@@ -447,17 +459,23 @@ function plantar_pf(){
     document.getElementById("inquilino").value = datos.inquilino_nombre + " " + datos.inquilino_apellido + " " +  datos.inquilino_apellido1
     document.getElementById("rfc_fiador").value = datos.rfc_fiador
     document.getElementById("p_fiador").value = datos.p_fiador
+    document.getElementById("nacionalidad").value = datos.nacionalidad
     document.getElementById("estado_civil_fiador").value = datos.estado_civil_fiador
+
    
     // datos Domiciliarios
     document.getElementById("full_dom").value = `${ datos.calle_fiador } ${ datos.n_ext_fiador } Int. ${ datos.n_int_fiador } Col. ${ datos.colonia_fiador } ${ datos.cp_fiador } ${ datos.municipio_fiador}, ${datos.estado_fiador}` 
+    if(datos.escritura_publica == null){
+        document.getElementById("nav-escritura").style.display = 'none'
+        document.getElementById("nav-escritura1").style.display = 'none'
+    }
     
-    
-    for(let i= 18; i<= 31;i++)
+    for(let i= 20; i<= 31;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         k2[0].value =  datos[k1[i]];
     }
+    document.getElementById("direccion_escritura").value = `${datos.calle_escrituras} ${datos.num_ext_escrituras} Int. ${datos.num_int_escrituras}, ${datos.colonia_escrituras}, ${datos.cp_escrituras}, ${ datos.municipio_escrituras}, ${datos.estado_escrituras} `
 }
 
 function plantar_pm(){
@@ -476,14 +494,14 @@ function plantar_pm(){
 
 
 
-    for(let i= 31; i<= 42;i++)
+    for(let i= 32; i<= 43;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         k2[0].value =  datos[k1[i]];
     }
 
     // segundo for para FO Persona Moral
-    for(let i = 63; i<= 76;i++)
+    for(let i = 64; i<= 77;i++)
     {
         let k2 = document.getElementsByName(k1[i]);
         k2[0].value =  datos[k1[i]];

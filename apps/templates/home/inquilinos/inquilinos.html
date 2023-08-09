@@ -5,6 +5,8 @@
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
 <link href="/static/assets/css/ms.css" rel="stylesheet"/>
+<link href="/static/assets/css/tabla.css" rel="stylesheet"/>
+
 {% endblock stylesheets %}
 
 {% block content %}
@@ -43,19 +45,19 @@
     </div>
 </div>
 <div class="card card-body shadow border-0 table-wrapper table-responsive"><!-- podemos agregar la clase => table-responsive-->
-    <table  class="table user-table table-hover align-items-center mb-5"> <!--id="datatable"-->
+    <table class="table user-table table-hover align-items-center mb-5 tabla_datos"> <!--id="datatable"-->
         <thead>
             <tr>
                 <th class="border-bottom"><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></th>
                 <th class="border-bottom">ID</th>
                 <th class="border-bottom">Nombre completo</th>						
                 <th class="border-bottom">Fecha de Registro</th>
-                <th class="border-bottom">Regimen Fiscal</th>
+                <th class="border-bottom">Régimen fiscal</th>
                <!--<th class="border-bottom">Estatus</th> -->
                 <th class="border-bottom">Fiador</th>
                 <th class="border-bottom">Archivos</th>
                 <th class="border-bottom">Acción</th>
-                <th class="border-bottom"></th>
+               <!-- <th class="border-bottom"></th>-->
             </tr>
         </thead>
         <tbody id="table_body">
@@ -84,7 +86,7 @@
                 {% csrf_token %}
                 <div class="left-side">
                     <div class="left-heading">
-                        <h3>Introduce la información Solicitada</h3>
+                        <h3>Introduce La Información Solicitada</h3>
                     </div>
                     <div class="steps-content" style="margin-bottom:-50px;">
                         <h3>Paso <span class="step-number">1</span></h3>
@@ -99,7 +101,6 @@
                         <li id="li6">Paso 6</li>
                         <li id="li7">Paso 7</li>
                         <li id="li8">Paso 8</li>
-                        <li id="li8">Paso 9</li>
                     </ul>
                 </div>
                 <div class="right-side">
@@ -113,8 +114,8 @@
                         </div>
                         <div class="input-div">
                             <select class="form-select" id="p_fom" onChange="fomOnchange()" oninput="prueba2(this)" name="p_fom" aria-label="Default select example">
-                                <option selected>Selecciona un opción</option>
-                                <option value="Persona Fisica">Persona Fisica</option>
+                                <option selected>Selecciona una opción</option>
+                                <option value="Persona Fisica">Persona Física</option>
                                 <option value="Persona Moral">Persona Moral</option>
                             </select>
                         </div>
@@ -123,34 +124,40 @@
                             <div class="input-text">
                                 <div class="input-div">
                                     <input type="text" name="nombre" id="nombre" oninput="prueba2(this)" requerido>
-                                    <span>Nombre(s)</span>
+                                    <span>Nombre(s) <label class="obl">*</label><span>
                                 </div>
                                 <div class="input-div"> 
                                     <input type="text" name="apellido" id="apellido" oninput="prueba2(this)" requerido>
-                                    <span>Apellido Paterno</span>
+                                    <span>Apellido Paterno <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input type="text" name="apellido1" id="apellido1" oninput="prueba2(this)" requerido>
-                                    <span>Apellido Materno</span>
+                                    <span>Apellido Materno <label class="obl">*</label></span>
                                 </div>
                             </div>
                             
                             <div class="input-text">
                                 <div class="input-div">
-                                    <input type="text" id="rfc" name="rfc" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();" requerido>
-                                    <span>RFC</span>
+                                    <input type="text" id="nacionalidad" name="nacionalidad" maxlength="18" oninput="prueba2(this)" placeholder="Mexicana">
+                                    <span>Nacionalidad <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
-                                    {% comment %} <span>Estado Civil</span> {% endcomment %}
-                                    <select class="form-select" id="estado_civil" onChange="mostrarOnChange()" oninput="prueba2(this)" placeholder="estado_civil" name="estado_civil" aria-label="Default select example" requerido>
-                                        <option selected>Estado Civil</option>
-                                        <option value="Soltero">Soltero(a)</option>
-                                        <option value="Casado">Casado(a)</option>
-                                        <option value="Viudo">Viudo(a)</option>
-                                        <option value="Bienes Mancomunados">Bienes Mancomunados</option>
-                                        <option value="Bienes Separados">Bienes Separados</option>
-                                        <option value="Union Libre">Union Libre</option>
-                                    </select>
+                                    <input type="text" id="rfc" name="rfc" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();" requerido>
+                                    <span>RFC <label class="obl">*</label></span>
+                                </div>
+                                <div class="input-div">
+                                    <div class="input-div" style="position: relative; bottom: 23px;">
+                                        <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado Civil <b style="color:red;">*</b></label>
+                                        <select class="form-select" id="estado_civil" onChange="mostrarOnChange()" oninput="prueba2(this)" placeholder="estado_civil" name="estado_civil" aria-label="Default select example" requerido>
+                                            <option selected>Estado Civil</option>
+                                            <option value="Soltero">Soltero(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Viudo">Viudo(a)</option>
+                                            <option value="Bienes Mancomunados">Bienes Mancomunados</option>
+                                            <option value="Bienes Separados">Bienes Separados</option>
+                                            <option value="Union Libre">Union Libre</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -173,15 +180,15 @@
                             <div class="input-text">
                                 <div class="input-div"> 
                                     <input class="form-control" name="numeroTel" id="numeroTel" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);" >
-                                    <span>Numero Telefonico Fijo</span>
+                                    <span>Numero Telefónico Fijo</span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" name="numeroTel1" id="numeroTel1" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  requerido>
-                                    <span>Celular</span>
+                                    <span>Celular <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input type="text" id="email" name="email" type="email" placeholder="name@domain.com" oninput="javascript: prueba2(this); validarEmail(this);" requerido>
-                                    <span>E-mail</span>
+                                    <span>E-mail <label class="obl">*</label></span>
                                     <p style="float:right; color:red; font-size:10px;" id="msj_email"></p>
                                 </div>
                             </div>                          
@@ -203,11 +210,11 @@
                         <div class="input-text">
                             <div class="input-div">
                                 <input type="text" id="calle" name="calle" oninput="prueba2(this)" requerido>
-                                <span>Calle</span>
+                                <span>Calle <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
                                 <input class="form-control" type="tel" id="num_ext" name="num_ext" maxlength="5" oninput="prueba2(this)" requerido>
-                                <span>Número Ext. </span>
+                                <span>Número Ext. <label class="obl">*</label></span>
                             </div>
                             <div class="input-div">
                                 <input class="form-control" type="tel" id="num_int" name="num_int" oninput="prueba2(this)" >
@@ -217,22 +224,22 @@
                         <div class="input-text">
                             <div class="input-div"> 
                                 <input type="text"id="colonia" name="colonia" oninput="prueba2(this)" requerido>
-                                <span>Colonia</span>
+                                <span>Colonia <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input class="form-control" id="codigopostal" name="codigopostal" type="tel" maxlength="5" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  requerido>
-                                <span>Código Postal</span>
+                                <span>Código Postal <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="municipio_alcaldia" name="municipio_alcaldia" oninput="prueba2(this)" requerido>
-                                <span>Municipio/Alcaldia</span>
+                                <span>Municipio/Alcaldía <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="input-text">
                             <div class="input-div"> 
                                 <div class="input-div"> 
                                     <input type="text" id="estado" name="estado" oninput="prueba2(this)" requerido>
-                                    <span>Estado/Ciudad</span>
+                                    <span>Estado/Ciudad <label class="obl">*</label></span>
                                 </div>    
                             </div>
                             <div class="input-div">
@@ -263,31 +270,31 @@
                             <div class="input-text">
                                 <div class="input-div">
                                     <input type="text" id="profesion" name="profesion" oninput="prueba2(this)" >
-                                    <span>Profesión u Ocupación</span>
+                                    <span>Profesión u Ocupación <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input class="form-control" type="number" id="antiguedad" name="antiguedad" title="Especifique en Años" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)" >
-                                    <span>Antiguedad</span>
+                                    <span>Antigüedad <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input type="text" id="puesto" name="puesto" oninput="prueba2(this)" >
-                                    <span>Puesto</span>
+                                    <span>Puesto <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <input class="form-control" type="tel" maxlength="10" id="tel_empleo" name="tel_empleo" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"   >
-                                    <span>Número Teléfono Empresarial</span>
+                                    <span>Número Teléfono Empresa</span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" type="tel" maxlength="10" id="ingreso_men" name="ingreso_men" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"   >
-                                    <span>Ingreso Mensual</span>
+                                    <span>Ingreso Mensual <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <input type="text" id="nombre_empresa" name="nombre_empresa" oninput="prueba2(this)" >
-                                    <span>Empresa Donde Labora</span>
+                                    <span>Empresa Donde Labora <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" type="email" id="email_empresarial" name="email_empresarial" oninput="javascript: prueba2(this); validarEmail(this);" >
@@ -303,11 +310,11 @@
                             <div class="input-text">
                                 <div class="input-div">
                                     <input type="text" id="jefe" name="jefe" oninput="prueba2(this)" >
-                                    <span>Jefe Inmediato</span>
+                                    <span>Jefe Inmediato <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input type="text" id="puesto_jefe" name="puesto_jefe" title="Especifique el puesto de su jefe" data-bs-toggle="tooltip" data-bs-placement="bottom" oninput="prueba2(this)" >
-                                    <span>Puesto</span>
+                                    <span>Puesto <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
@@ -317,17 +324,17 @@
                                 </div>
                                 <div class="input-div">
                                     <input type="text" id="giro" name="giro" oninput="prueba2(this)" >
-                                    <span>Giro</span>
+                                    <span>Giro <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <input class="form-control" id="tel_jefe" name="tel_jefe" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  >
-                                    <span>Teléfono Jefe</span>
+                                    <span>Teléfono Jefe <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" type="email" id="email_jefe" name="email_jefe" oninput="javascript: prueba2(this); validarEmail(this);" >
-                                    <span>Email Jefe</span>
+                                    <span>Email Jefe <label class="obl">*</label></span>
                                     <p style="float:right; color:red; font-size:10px;" id="msj_email"></p>
                                 </div>
                             </div>
@@ -338,42 +345,67 @@
                             <div class="input-text">
                                 <div class="input-div"> 
                                     <input type="text" id="empresa_constituida" name="empresa_constituida" oninput="prueba2(this)" >
-                                    <span>Nombre Empresa Constituida</span>
+                                    <span>Nombre Empresa Constituida <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input class="form-control" type="number" id="escritura_numero_ac" name="escritura_numero_ac" oninput="prueba2(this)" >
-                                    <span>Escritura Número</span>
+                                    <span>Escritura Número <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div"> 
                                     <input class="form-control" id="fecha_ac" name="fecha_ac" type="date" oninput="prueba2(this)" >  
-                                    <span>Fecha</span>
+                                    <span>Fecha <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input type="text" id="nombre_notario_ac" name="nombre_notario_ac" oninput="prueba2(this)" >
-                                    <span>Nombre de Notario</span>
+                                    <span>Nombre de Notario <label class="obl">*</label></span>
                                 </div>
                             </div>
                             
                             <div class="input-text">
-                                <div class="input-div"> 
-                                    <div class="row" style="margin-left:5px;">
-                                        <div class="form-check" >
-                                            <input class="form-check-input" type="radio" id="coe" name="coe" onChange="prueba2(this)" value="CDMX">
-                                            <label class="form-check-label" for="coe">CDMX</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="coe" name="coe" onChange="prueba2(this)" value="Estado de México">
-                                            <label class="form-check-label" for="coe">Estado de México</label>
-                                        </div>                                         
-                                    </div>  
-                                </div>
+                               <div class="input-div" style="position: relative; bottom: 23px;">
+                                <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado <label class="obl">*</label></label>
+                                <select class="form-select LetraSelect" id="coe" name="coe" aria-label="Floating label select example" require>
+                                    <option value="CDMX" selected>CDMX</option>
+                                    <option value="México"> México</option>
+                                    <option value="Aguascalientes" > Aguascalientes</option>
+                                    <option value="Baja California"> Baja California</option>
+                                    <option value="Baja California Sur"> Baja California Sur</option>
+                                    <option value="Campeche"> Campeche</option>
+                                    <option value="Coahuila"> Coahuila</option>
+                                    <option value="Colima"> Colima</option>
+                                    <option value="Chiapas"> Chiapas</option>
+                                    <option value="Chihuahua"> Chihuahua</option>
+                                    <option value="Durango"> Durango</option>
+                                    <option value="Guanajuato"> Guanajuato</option>
+                                    <option value="Guerrero"> Guerrero</option>
+                                    <option value="Hidalgo"> Hidalgo</option>
+                                    <option value="Jalisco"> Jalisco</option>
+                                    <option value="Michoacán"> Michoacán</option>
+                                    <option value="Morelos"> Morelos</option>
+                                    <option value="Nayarit"> Nayarit</option>
+                                    <option value="Nuevo León"> Nuevo León</option>
+                                    <option value="Oaxaca"> Oaxaca</option>
+                                    <option value="Puebla"> Puebla</option>
+                                    <option value="Querétaro"> Querétaro</option>
+                                    <option value="Quintana Roo"> Quintana Roo</option>
+                                    <option value="San Luis Potosí"> San Luis Potosí</option>
+                                    <option value="Sinaloa"> Sinaloa</option>
+                                    <option value="Sonora"> Sonora</option>
+                                    <option value="Tabasco"> Tabasco</option>
+                                    <option value="Tamaulipas"> Tamaulipas</option>
+                                    <option value="Tlaxcala"> Tlaxcala</option>
+                                    <option value="Veracruz"> Veracruz</option>
+                                    <option value="Yucatán"> Yucatán</option>
+                                    <option value="Zacatecas"> Zacatecas</option>
+                                </select>                                            
+                            </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div"> 
                                     <input class="form-control" type="number" id="folio_mercantil" name="folio_mercantil" oninput="prueba2(this)">
-                                    <span>Folio Mercantil</span>
+                                    <span>Folio Mercantil <label class="obl">*</label></span>
                                 </div>
                             </div>
                         </div> 
@@ -398,11 +430,11 @@
                             <div class="input-text">
                                 <div class="input-div">
                                     <input type="text" id="calle_empleo" name="calle_empleo" oninput="prueba2(this)" >
-                                    <span>Calle</span>
+                                    <span>Calle <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input class="form-control" id="num_ext_empleo" name="num_ext_empleo" type="number" oninput="prueba2(this)" >
-                                    <span>Número Ext.</span>
+                                    <span>Número Ext. <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" id="num_int_empleo" name="num_int_empleo" type="number" oninput="prueba2(this)" >
@@ -413,21 +445,21 @@
                             <div class="input-text">
                                 <div class="input-div"> 
                                     <input type="text" id="colonia_empleo" name="colonia_empleo" oninput="prueba2(this)" >
-                                    <span>Colonia</span>
+                                    <span>Colonia <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div">
                                     <input class="form-control" type="tel" id="codigo_postal_empleo" name="codigo_postal_empleo" maxlength="5" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  equiered>
-                                    <span>Código Postal</span>
+                                    <span>Código Postal <label class="obl">*</label></span>
                                 </div>
                                 <div class="input-div"> 
                                     <input type="text" id="municipio_empleo" name="municipio_empleo" oninput="prueba2(this)" equiered>
-                                    <span>Municipio/Alcaldia</span>
+                                    <span>Municipio/Alcaldía <label class="obl">*</label></span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
                                     <input id="ciudad_empleo" name="ciudad_empleo" type="text" oninput="prueba2(this)" equiered>
-                                    <span>Estado/Ciudad</span>
+                                    <span>Estado/Ciudad <label class="obl">*</label></span>
                                 </div>
                                 
                             </div>
@@ -441,7 +473,7 @@
                             <div class="input-text">
                                 <div class="text">
                                     <p> Procesando informacion</p>
-                                    <h2>Porfavor Dale click en Siguiente</h2>
+                                    <h2>Por favor Dale clic en Siguiente</h2>
                                     <h2>Para continuar a REFERENCIAS DE ARRENDAMIENTO ANTERIOR</h2>
                                     <p></p>
                                 </div>
@@ -461,7 +493,7 @@
                             <img src="/static/assets/img/icons/aa.png" style="width:25px; height:25px;" alt="icon">
                         </small>
                         <div class="text">
-                            <h2>Arrendatario Anterior</h2>
+                            <h2>Arrendador Anterior</h2>
                             <p>Por favor introduce la Referencia del Arrendador Anterior.</p>
                         </div>
                         <hr class="hr" />
@@ -545,7 +577,7 @@
                                         </div>
                                         <div class="input-div"> 
                                             <input type="text" id="municipio_dia" name="municipio_dia" oninput="prueba2(this)" >
-                                            <span>Municipio/Alcaldia</span>
+                                            <span>Municipio/Alcaldía</span>
                                         </div>
                                     </div>
                                     <div class="input-text" style="margin-bottom:-5px;">
@@ -576,15 +608,15 @@
                         <div class="input-text">
                             <div class="input-div">
                                 <input type="text" id="n_ref1" name="n_ref1" oninput="prueba2(this)" requerido>
-                                <span>Nombre</span>
+                                <span>Nombre <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="p_ref1" name="p_ref1" oninput="prueba2(this)" requerido>
-                                <span>Perentesco</span>
+                                <span>Perentesco <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input class="form-control" id="tel_ref1" name="tel_ref1" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  requerido>
-                                <span>Teléfono</span>
+                                <span>Teléfono <label class="obl">*</label></span>
                             </div>
                         </div>
                         <hr class="hr" />
@@ -592,15 +624,15 @@
                         <div class="input-text">
                             <div class="input-div">
                                 <input type="text" id="n_ref2" name="n_ref2" oninput="prueba2(this)" requerido>
-                                <span>Nombre</span>
+                                <span>Nombre <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="p_ref2" name="p_ref2" oninput="prueba2(this)" requerido>
-                                <span>Perentesco</span>
+                                <span>Perentesco <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input class="form-control" id="tel_ref2" name="tel_ref2" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  requerido>
-                                <span>Teléfono</span>
+                                <span>Teléfono <label class="obl">*</label></span>
                             </div>
                         </div>
                         <hr class="hr" />
@@ -608,15 +640,15 @@
                         <div class="input-text">
                             <div class="input-div">
                                 <input type="text" id="n_ref3" name="n_ref3" oninput="prueba2(this)" requerido>
-                                <span>Nombre</span>
+                                <span>Nombre <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="p_ref3" name="p_ref3" oninput="prueba2(this)" requerido>
-                                <span>Perentesco</span>
+                                <span>Perentesco <label class="obl">*</label></span>
                             </div>
                             <div class="input-div"> 
                                 <input class="form-control" id="tel_ref3" name="tel_ref3" type="tel" maxlength="10" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba2(this);"  requerido>
-                                <span>Teléfono</span>
+                                <span>Teléfono <label class="obl">*</label></span>
                             </div>
                         </div>
                         <div class="buttons button_space">
@@ -648,12 +680,12 @@
                         </div> 
                             <div class="input-text" id="inq_1" style="Display:; margin-bottom:-10px;">
                                 <div class="input-div">
-                                    <label for="n_inquilino1">Nombre</label>
+                                    <label for="n_inquilino1">Nombre <label class="obl">*</label></label>
                                     <input class="form-control" id="n_inquilino1" name="n_inquilino1" type="text" placeholder="Nombre Completo" oninput="prueba2(this)" requerido>
                                 </div>
                             
                                 <div class="input-div">
-                                    <label for="p_inquilino1">Parentesco</label>
+                                    <label for="p_inquilino1">Parentesco <label class="obl">*</label></label>
                                     <input class="form-control" id="p_inquilino1" name="p_inquilino1" type="text" value="Arrendatario"  oninput="prueba2(this)" requerido>
                                 </div>
                             </div> 
@@ -708,7 +740,7 @@
     
                         <div class="buttons button_space mt-4">
                             <button type="button" class="btn btn-outline-dark back_button">Atras</button>
-                            <input class="btn btn-primary next_button" type="button" onClick="recopilar()" value="Siguiente">
+                            <input class="btn btn-primary next_button" type="button" onClick="javascript:recopilar(); msj_credito();" value="Siguiente">
                             </div>
                     </div>
 
@@ -745,7 +777,7 @@
                                 </div>
                                 <div class="input-div"> 
                                     <input class="form-control" id="tdc_limite" name="tdc_limite" type="tel" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba1(this);" >
-                                    <span>Limite De Credito</span>
+                                    <span>Límite De Crédito</span>
                                 </div>
                                 <div class="input-div"> 
                                     <input class="form-control" id="tdc_io" name="tdc_io" type="text" maxlength="10" oninput="prueba1(this)">
@@ -784,7 +816,7 @@
                                   <div class="col border borde-shadow-2" id="div-automotriz" style="display:none;">
                                     <p>Automotriz </p>
                                     <div class="input-div">
-                                        <span>Número De Credito</span>
+                                        <span>Número De Crédito</span>
                                         <input type="text" id="auto_num_cre" name="auto_num_cre" maxlength="20"  oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba1(this);">
                                     </div>
                                 
@@ -797,7 +829,7 @@
                                   <div class="col border borde-shadow-2" id="div-hipotecario" style="display:none;">
                                     <p>Hipotecario</p>
                                     <div class="input-div">
-                                        <span>Número De Credito</span>
+                                        <span>Número De Crédito</span>
                                         <input type="text" id="hipo_num_cre" name="hipo_num_cre" maxlength="20" oninput="javascript:this.value = this.value.replace(/[^0-9]/g, '') ; prueba1(this);">
                                     </div>
                               
@@ -820,30 +852,37 @@
                         <small>
                             <img src="/static/assets/img/icons/ref.png" style="width:25px; height:25px;" alt="icon">
                         </small>
-                        <div class="text">
+
+                        <div class="text" id="texto_direccion_credito">
                             <h2>Datos Domiciliarios de crédito</h2>
                             <p>Por favor introduce la dirección completa con la que haz realizado los tramites de tus creditos.</p>
-                        </div>
-                        <div class="input-text">
-                            <div class="input-div">
-                                <input type="text" id="direccion_completa" name="direccion_completa" oninput="prueba1(this)" requerido>
-                                <span>Dirección Completa</span>
+
+                            <div class="input-text" id="direccion_credito">
+                                <div class="input-div">
+                                    <input type="text" id="direccion_completa" name="direccion_completa" oninput="prueba1(this)" requerido>
+                                    <span>Dirección Completa</span>
+                                </div>
                             </div>
-                        
                         </div>
+
+                        <div class="text" id="div_final">
+                            <h2>Final</h2>
+                            <p>Para finalizar por favor haz clic en la casilla y posteriormente en finalizar</p>
+                            
+                        </div>
+
+                      
+
                         <hr class="hr" />
-                        <div class="form-check form-check-inline">
+                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" onChange="javascript:termino();prueba2(this)" value="ACEPTO" style="color:black; text-weight:bold;" id="tyc" name="tyc">
                             <p style="color:black;padding-left:5px;">He leído y acepto los <a target="_blank" style="color:blue;" href="/tyc/">términos y condiciones</a> de uso.</p>
                           </div>
-                          
-                          
-                          
-                          
+                            
                           <div class="buttons button_space">
                               <button type="button" class="btn btn-outline-dark back_button">Atras</button>
                               <button class="submit_button next_button" style="background-color:gray" onClick="recopilar()" id="finalizar1" type="submit" disabled>Finalizar</button>
-                        </div>
+                         </div>
                         
                     </div>
 
@@ -856,7 +895,12 @@
                         <div class="text congrats">
                             <h2>¡Listo!</h2>
                             <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha enviado con éxito para futuras referencias.</p> <strong>Pronto nos pondremos en contacto con usted. </strong>
-                            <img src="https://i.pinimg.com/originals/91/8b/c1/918bc135ae83beee618996f17a2ef32a.gif"></img>
+                            
+                            <div class="mt-4"> 
+                                <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                            </div>
+                                <div style="" class="message">Cargando Datos...</div>
+                            {% comment %} <img src="https://i.pinimg.com/originals/91/8b/c1/918bc135ae83beee618996f17a2ef32a.gif"></img> {% endcomment %}
                         </div>
                     </div>
                     </div>
@@ -889,6 +933,7 @@ function tdc(radio){
 
         if(radio.id=="credito_si") {
             arr.style.display='';
+            Swal.fire('Es muy importante que des de alta todos tus créditos de manera verídica ya que de lo contrario no se podrá realizar la investigación para el arrendamiento.')
             //bot.style.display='';
         }
 
@@ -901,25 +946,32 @@ function tdc(radio){
 function cred_vig(radio){
     var arr = document.getElementById("tipos_credito");
     var bot = document.getElementById("but_credito");
+    dc = document.getElementById("direccion_credito")
+    dir_completa = document.getElementById("direccion_completa")
+    txt_dc = document.getElementById("texto_direccion_credito")
+    div_final = document.getElementById("div_final")
 
     console.log(radio.id)
 
         if(radio.id=="cv_si") {
             arr.style.display='';
             bot.style.display='';
-            
-            
+            dc.style.display='';
+            txt_dc.style.display='';
+            div_final.style.display = 'none';     
+                 
         }
 
         if(radio.id=="cv_no") {
             arr.style.display='none';
             bot.style.display='';
+            dc.style.display='none';
+            dir_completa.removeAttribute("requerido");
+            txt_dc.style.display='none';
+            div_final.style.display = ''
             document.getElementById("div-automotriz").style.display='none';
             document.getElementById("div-hipotecario").style.display='none';
         }
-
-        
-       
 }
 
 function creditos(){
@@ -1055,8 +1107,8 @@ function termino(){
             console.log("en espera pa")
             dato.style.color= "green"
         }
-
     }
+
  // ==========================variables globales================================================================  
  var li1= document.getElementById("li1");
  var li2= document.getElementById("li2");
@@ -1086,12 +1138,14 @@ function fomOnchange()  {
         switch (sel.value)
         {
             case "Persona Fisica":
-            Swal.fire(
-            '',
-            'Este Cuestionarios te tomara alrededor de 5 minutos',
-            //'La referencia puede ayudar al  resultado!',
-            'info'
-            )
+            Swal.fire({
+                icon: 'info',
+                html:
+                  '<b>Este Registro le tomara alrededor de 5 minutos realizarlo.</b><br/> ' +
+                  'Los campos marcados con un <b style="color:red">*</b> son de carácter oblicatorio.',
+                showCloseButton: true,
+                focusConfirm: false
+              })
 
             $( "#FM" ).fadeOut( "fast" );
             console.log("persona fisica")
@@ -1125,11 +1179,14 @@ function fomOnchange()  {
             break;
             
             case "Persona Moral":
-            Swal.fire(
-                '',
-                'Este Cuestionarios te tomara alrededor de 5 minutos',
-                'info'
-                )
+            Swal.fire({
+                icon: 'info',
+                html:
+                '<b>Este Registro le tomara alrededor de 5 minutos realizarlo.</b><br/> ' +
+                'Los campos marcados con un <b style="color:red">*</b> son de carácter oblicatorio.',
+                showCloseButton: true,
+                focusConfirm: false
+              })
                 
             $( "#FM" ).fadeOut( "fast" );
             console.log("persona moral")
@@ -1237,7 +1294,7 @@ function aa(radio) {
             bot.style.display='';
             Swal.fire(
             '¿Estas Seguro?',
-            'La referencia aumentan la probabilidad de que puedas ser aprovado!',
+            'Si haz rentado antes aumenta la probabilidad de que puedas ser aprovado(a)!',
             //'La referencia puede ayudar al  resultado!',
             'question'
             )
@@ -1265,10 +1322,9 @@ document.getElementById("li1").onload = auten()
 
 // limpiamos el almacenamiento local cuando regresamos de ver los detalles de un inquilino
 localStorage.removeItem('data_inquilino')
-
     var data_inquilinos =[]
 // Configuracion general de axios
-    const server = 'http://192.168.2.24:8001'
+    const server = 'https://arrendify-api.onrender.com'
     const configin = {
         headers: {
           'Content-Type': 'application/json',
@@ -1307,6 +1363,92 @@ document.getElementById("cargar_tabla").onload = tabla()
             check.setAttribute("type","checkbox");
             check.setAttribute("class","form-check-input");
 
+            if(res[i].status == "0"){
+            col1.setAttribute("style","background-color:#929292");
+            col2.setAttribute("style","background-color:#929292");
+            col3.setAttribute("style","background-color:#929292");
+            col4.setAttribute("style","background-color:#929292");
+            col5.setAttribute("style","background-color:#929292");
+         
+            col7.setAttribute("style","background-color:#929292");
+            col8.setAttribute("style","background-color:#929292");
+            col9.setAttribute("style","background-color:#929292");
+            
+            check.disabled= true
+            col1.appendChild(check);
+            col2.innerHTML = `<span class="fw-normal ">${i+1}</span>`
+            col3.innerHTML = `<a class="d-flex align-items-center">
+                              <div class="d-block">
+                                <span class="fw-bold">${res[i].nombre + " " +res[i].apellido + " " + res[i].apellido1}</span>
+                                <div class="small text-gray">${res[i].email}</div>
+                              </div>
+                              </a>`
+            col4.innerHTML = `<span class="fw-normal ">${res[i].created}</span>`
+            col5.innerHTML = `<span class="fw-normal ">${res[i].p_fom}</span>`
+           // col6.innerHTML = ' <select id="status{{inq.id}}" style="color:green; font-weight:bold;" class="form-select" onChange="cambio_status(this)" aria-label="Default select example"><option value="Activo" selected style="color:green; font-weight:bold;"><span >Activo</span></option><option value="En espera" style="color:orange; font-weight:bold;">En espera</option><option value="Rechazado" style="color:red; font-weight:bold;">Rechazado</option></select>'
+           //condicion cuanto haya Aval o no
+            if (!res[i].aval[0]){  
+                col7.innerHTML = `<span class="fw-normal ">No hay Fiador</span>`
+            }else{
+                //condicion cuando el Aval es pf
+                if (res[i].aval[0].fiador_obligado == "Fiador Solidario"){
+                    col7.innerHTML = `<span class="fw-normal ">${res[i].aval[0].n_fiador + " " +res[i].aval[0].a_fiador + " " + res[i].aval[0].a2_fiador}</span>`
+                }
+                //condicion cuando el Aval es pm
+                else{
+                    col7.innerHTML = `<span class="fw-normal ">${res[i].aval[0].nombre_comercial}</span>`
+                }
+            }
+            
+            //condicion cuanto haya Archivos o no
+            if (!res[i].archivos[0])
+            {
+                col8.innerHTML = `<button type="button" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                    <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
+                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
+                    </svg>
+                    Subir
+              </button>`
+            }
+            else{
+                var prueba = JSON.stringify(res[i])
+                col8.innerHTML = `<button type="button" class="btn btn-primary" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                    <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"></path>
+                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"></path>
+                    </svg>
+                    Ver Docs
+              </button>`
+                }
+            col9.innerHTML =   `<div class="btn-group dropstart">
+                                <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                
+                                <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
+                                    <a class="dropdown-item d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red" class="bi bi-person-fill-x" viewBox="0 0 16 16">
+                                            <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-9 8c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z"/>
+                                            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708Z"/>
+                                          </svg>&nbsp;Prospecto Rechazado
+                                    </a>
+                                </div>   
+                            </div>`; 
+                           
+            tr.appendChild(col1);
+            tr.appendChild(col2);
+            tr.appendChild(col3);
+            tr.appendChild(col4);
+            tr.appendChild(col5);
+          //  tr.appendChild(col6);
+            tr.appendChild(col7);
+            tr.appendChild(col8);
+            tr.appendChild(col9);
+            cuerpo.appendChild(tr);
+        }
+        else{
             col1.appendChild(check);
             col2.innerHTML = `<span class="fw-normal ">${i+1}</span>`
             col3.innerHTML = `<a class="d-flex align-items-center">
@@ -1384,6 +1526,8 @@ document.getElementById("cargar_tabla").onload = tabla()
             tr.appendChild(col8);
             tr.appendChild(col9);
             cuerpo.appendChild(tr);
+
+        }
         }
             console.log(response);
         } else{
@@ -1508,6 +1652,13 @@ async function eliminar(id){
     location.reload()
   });
      
+}
+function msj_credito(){
+    Swal.fire({
+        title: 'Atención',
+        text: "Es muy importante que si cuenta con un crédito verifique que toda la información sea verídica y correcta para continuar con el proceso adecuadamente, ya que no podrá añadir esta información posteriormente.",
+        icon: 'warning'
+      })
 }
 </script>
 <script src="/static/assets/repositorios/loader.js"></script>

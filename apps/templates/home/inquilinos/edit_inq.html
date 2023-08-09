@@ -181,20 +181,26 @@
                             
                             <div class="input-text">
                                 <div class="input-div">
+                                    <input type="text" id="nacionalidad" name="nacionalidad" maxlength="18" oninput="prueba2(this)" placeholder="Mexicana">
+                                    <span>Nacionalidad</span>
+                                </div>
+                                <div class="input-div">
                                     <input type="text" id="rfc" name="rfc" maxlength="13" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();" value="{{inquilino.rfc}}">
                                     <span>RFC</span>
                                 </div>
                                 <div class="input-div">
-                                    {% comment %} <span>Estado Civil</span> {% endcomment %}
-                                    <select class="form-select" id="estado_civil" onChange="javascript:mostrarOnChange(); prueba2(this);" placeholder="estado_civil" name="estado_civil" aria-label="Default select example">
-                                        <option value="{{inquilino.estado_civil}}" selected>{{inquilino.estado_civil}}</option>
-                                        <option value="Soltero">Soltero(a)</option>
-                                        <option value="Casado">Casado(a)</option>
-                                        <option value="Viudo">Viudo(a)</option>
-                                        <option value="Bienes Mancomunados">Bienes Mancomunados</option>
-                                        <option value="Bienes Separados">Bienes Separados</option>
-                                        <option value="Union Libre">Union Libre</option>
-                                    </select>
+                                    <div class="input-div" style="position: relative; bottom: 23px;">
+                                        <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado Civil <b style="color:red;">*</b></label>
+                                        <select class="form-select" id="estado_civil" onChange="mostrarOnChange()" oninput="prueba2(this)" placeholder="estado_civil" name="estado_civil" aria-label="Default select example" requerido>
+                                            <option selected>Estado Civil</option>
+                                            <option value="Soltero">Soltero(a)</option>
+                                            <option value="Casado">Casado(a)</option>
+                                            <option value="Viudo">Viudo(a)</option>
+                                            <option value="Bienes Mancomunados">Bienes Mancomunados</option>
+                                            <option value="Bienes Separados">Bienes Separados</option>
+                                            <option value="Union Libre">Union Libre</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 
                             </div>
@@ -226,7 +232,7 @@
                                     <span>Celular</span>
                                 </div>
                                 <div class="input-div">
-                                    <input type="text" id="email" name="email" type="email" placeholder="name@domain.com" oninput="prueba2(this)" value="{{inquilino.email}}" require>
+                                    <input type="text" id="email" name="email" type="email" placeholder="name@domain.com" oninput="prueba2(this)" value="{{inquilino.email}}">
                                     <span>E-mail</span>
                                 </div>
                             </div>                          
@@ -271,7 +277,7 @@
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="municipio_alcaldia" name="municipio_alcaldia" value="{{inquilino.municipio_alcaldia}}" oninput="prueba2(this)">
-                                <span>Municipio/Alcaldia</span>
+                                <span>Municipio/Alcaldía</span>
                             </div>
                         </div>
                         <div class="input-text">
@@ -313,7 +319,7 @@
                             </div>
                             <div class="input-div"> 
                                 <input class="form-control" type="number" id="antiguedad" name="antiguedad" oninput="prueba2(this)" title="Especifique en Años" data-bs-toggle="tooltip" data-bs-placement="bottom" value="{{inquilino.antiguedad}}">
-                                <span>Antiguedad</span>
+                                <span>Antigüedad</span>
                             </div>
                             <div class="input-div"> 
                                 <input type="text" id="puesto" name="puesto" value="{{inquilino.puesto}}" oninput="prueba2(this)">
@@ -461,7 +467,7 @@
                                 </div>
                                 <div class="input-div"> 
                                     <input type="text" id="municipio_empleo" oninput="prueba2(this)" name="municipio_empleo" value="{{inquilino.municipio_empleo}}" >
-                                    <span>Municipio/Alcaldia</span>
+                                    <span>Municipio/Alcaldía</span>
                                 </div>
                             </div>
                             <div class="input-text">
@@ -578,7 +584,7 @@
                                                 </div>
                                                 <div class="input-div"> 
                                                     <input type="text" id="municipio_dia" name="municipio_dia" oninput="prueba2(this)">
-                                                    <span>Municipio/Alcaldia</span>
+                                                    <span>Municipio/Alcaldía</span>
                                                 </div>
                                             </div>
                                             <div class="input-text" style="margin-bottom:-5px;">
@@ -754,7 +760,10 @@
                         <div class="text congrats">
                             <h2>¡Listo!</h2>
                             <p>Gracias Sr./Sra. <span class="shown_name"></span>  {{ request.user.first_name }} su información se ha actualizado y se ah enviado con éxito para futuras referencias.</p>
-                            <img src="https://pa1.narvii.com/6845/a6249d87c9b0863cfb83c1557ad39a51cf248c46_hq.gif"></img>
+                            <div class="mt-4"> 
+                                <img class="deslizar" src="/static/assets/img/brand/candado.svg" style="width:120px; height:120px;" alt="icon">   
+                            </div>
+                                <div style="" class="message">Cargando Datos...</div>
                         </div>
                     </div>
 
@@ -966,7 +975,7 @@ function mostrarOnChange() {
             }
 
 
-const server = 'http://192.168.2.24:8001'
+const server = 'https://arrendify-api.onrender.com'
 const configin = {
     headers: {
       'Content-Type': 'application/json',

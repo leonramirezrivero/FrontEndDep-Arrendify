@@ -58,22 +58,27 @@
                                 <input class="form-control-plaintext card shadow border-1 ps-1" name="numeroTel1" id="numeroTel1"  type="text" value="" readonly>
                             </div>
                             <div class="col-md-3 mb-3">
+                                <label>Nacionalidad: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1" name="nacionalidad" id="nacionalidad"   type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-3 mb-3">
                                 <label>RFC: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" name="rfc" id="rfc"   type="text" value=""  readonly>
                             </div>
-                            <div class="col-md-3 mb-3">
-                                <label>Email: </label>
-                                <input class="form-control-plaintext card shadow border-1 ps-1"  name="email" id="email"  type="text" value=""  readonly>
-                            </div>
+                           
                       
                         </div>        
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
+                                <label>Email: </label>
+                                <input class="form-control-plaintext card shadow border-1 ps-1"  name="email" id="email"  type="text" value=""  readonly>
+                            </div>
+                            <div class="col-md-4 mb-3">
                                 <label>Estado Civil: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" type="text" name="" id="estado_civil" value=""  readonly>
                             </div>  
                             {% comment %} {% if datos.n_conyugue %} {% endcomment %}
-                            <div class="col-md-6 mb-3" id="conyu">
+                            <div class="col-md-4 mb-3" id="conyu">
                                 <label>Cónyuge: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" name="n_conyuge" id="n_conyuge" type="text"  readonly>
                             </div>     
@@ -104,7 +109,7 @@
                                 <input class="form-control-plaintext card shadow border-1 ps-1" id="profesion" name="profesion" type="text" value="{{ inquilino.profesion }}" readonly>
                             </div>
                             <div class="col-md-3 mb-1">                                
-                                <label for="antiguedad">Antiguedad: </label>
+                                <label for="antiguedad">Antigüedad: </label>
                                 <input class="form-control-plaintext card shadow border-1 ps-1" id="antiguedad" name="antiguedad" type="text" value="{{ inquilino.antiguedad }} años" readonly>
                                                                                            
                             </div>
@@ -331,7 +336,7 @@
                         <h2 class="h5 mb-2">Créditos </h2>
                         <hr class="hr" />
                         <div class="col-md-3 mb-4">                                    
-                            <label for="tel_rep">¿Credito vigente?:</label>
+                            <label for="tel_rep">¿Crédito vigente?:</label>
                             <input class="form-control-plaintext card shadow border-1 ps-1" id="credito_vigente" name="credito_vigente" type="text" value="{{ inquilino.tel_jefe}}" readonly>                                 
                         </div>
                         <div class="col-md-3 mb-4">                                    

@@ -209,21 +209,21 @@
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
-                                    <input type="text"  oninput="prueba2(this)" name="nombre" id="nombre" oninput="prueba2(this)" value="{{arrendador.nombre}}" require>
+                                    <input type="text"  oninput="prueba2(this)" name="nombre" id="nombre" oninput="prueba2(this)" value="{{arrendador.nombre}}" equire>
                                     <span>Nombre(s)</span>
                                 </div>
                                 <div class="input-div"> 
-                                    <input type="text" name="apellido" id="apellido" value="{{arrendador.apellido}}" oninput="prueba2(this)" require>
+                                    <input type="text" name="apellido" id="apellido" value="{{arrendador.apellido}}" oninput="prueba2(this)" equire>
                                     <span>Apellido Paterno</span>
                                 </div>
                                 <div class="input-div"> 
-                                    <input type="text" name="apellido1" id="apellido1" value="{{arrendador.apellido1}}" oninput="prueba2(this)" require>
+                                    <input type="text" name="apellido1" id="apellido1" value="{{arrendador.apellido1}}" oninput="prueba2(this)" equire>
                                     <span>Apellido Materno</span>
                                 </div>
                             </div>
                             <div class="input-text">
                                 <div class="input-div">
-                                    <input type="text" id="rfc" name="rfc" maxlength="13" value="{{arrendador.rfc}}" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();" require>
+                                    <input type="text" id="rfc" name="rfc" maxlength="13" value="{{arrendador.rfc}}" style="text-transform:uppercase" oninput="prueba2(this)" onkeyup="javascript:this.value=this.value.toUpperCase();" equire>
                                     <span>RFC</span>
                                 </div>
                                 <div class="input-div">
@@ -274,7 +274,7 @@
                                     </div>
                                 </div>     
                                 <div>
-                                    <input class="form-control" oninput="process(event)" id="numeroTel1" type="tel" value="{{arrendador.numeroTel1}}" oninput="prueba2(this)" name="numeroTel1" placeholder="" />
+                                    <input class="form-control"  id="numeroTel1" type="tel" name="numeroTel1" oninput="javascript:this.value = this.value.replace(/[^0-9,+]/g, '');prueba2(this);process(event);" placeholder="" />
                                 </div> 
                             </div>  
                             <div class="buttons mt-3">
@@ -339,7 +339,7 @@
                             <p>Por favor introduce los campos solicitados.</p>
                         </div>
                         <div class="input-div">
-                             <h2 class="h5 mb-2">Documentación De Identificación Presentada:</h2>
+                            <h2 class="h5 mb-2">Documentación De Identificación Presentada:</h2>
                             <div class="input-div">
                                 <select class="form-select"id="doc" name="doc" aria-label="Default select example" equire>
                                     <option hidden selected>{{arrendador.doc}}</option>
@@ -518,11 +518,40 @@
                         </div>
                         <div class="input-text">
                             <div class="input-div">
-                                <label>CDMX o Edo. Méx</label>
-                                <select class="form-select" id="coe" name="coe" onChange="prueba2(this)" aria-label="Default select example">
-                                    <option selected>{{inquilino.coe}}</option>
-                                    <option value="CDMX">CDMX</option>
-                                    <option value="Estado de México">Estado de México</option>
+                                <label class="p-0 m-0" style="font-size:10px; font-weight:bold; " for="floatingSelect">Estado<label class="obl">*</label></label>
+                                <select class="form-select LetraSelect" id="coe" name="coe" aria-label="Floating label select example" require oninput="prueba2(this)" >
+                                    <option value="CDMX" selected>CDMX</option>
+                                    <option value="México">México</option>
+                                    <option value="Aguascalientes" > Aguascalientes</option>
+                                    <option value="Baja California"> Baja California</option>
+                                    <option value="Baja California Sur"> Baja California Sur</option>
+                                    <option value="Campeche"> Campeche</option>
+                                    <option value="Coahuila"> Coahuila</option>
+                                    <option value="Colima"> Colima</option>
+                                    <option value="Chiapas"> Chiapas</option>
+                                    <option value="Chihuahua"> Chihuahua</option>
+                                    <option value="Durango"> Durango</option>
+                                    <option value="Guanajuato"> Guanajuato</option>
+                                    <option value="Guerrero"> Guerrero</option>
+                                    <option value="Hidalgo"> Hidalgo</option>
+                                    <option value="Jalisco"> Jalisco</option>
+                                    <option value="Michoacán"> Michoacán</option>
+                                    <option value="Morelos"> Morelos</option>
+                                    <option value="Nayarit"> Nayarit</option>
+                                    <option value="Nuevo León"> Nuevo León</option>
+                                    <option value="Oaxaca"> Oaxaca</option>
+                                    <option value="Puebla"> Puebla</option>
+                                    <option value="Querétaro"> Querétaro</option>
+                                    <option value="Quintana Roo"> Quintana Roo</option>
+                                    <option value="San Luis Potosí"> San Luis Potosí</option>
+                                    <option value="Sinaloa"> Sinaloa</option>
+                                    <option value="Sonora"> Sonora</option>
+                                    <option value="Tabasco"> Tabasco</option>
+                                    <option value="Tamaulipas"> Tamaulipas</option>
+                                    <option value="Tlaxcala"> Tlaxcala</option>
+                                    <option value="Veracruz"> Veracruz</option>
+                                    <option value="Yucatán"> Yucatán</option>
+                                    <option value="Zacatecas"> Zacatecas</option>
                                 </select>
                             </div>
                         </div>
@@ -1171,18 +1200,10 @@ $( "#next1" ).on( "click", function() {
 } );
 
 
-{% comment %} const server = 'https://arrendify-api.onrender.com';
-const configin = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Authorization': `Token ${localStorage.getItem('token')}`
-    },
-  }; {% endcomment %}
-
 const csrftoken = document.cookie.match(/csrftoken=(\w+)/)[1];
 axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
-const server = 'http://127.0.0.1:8000'
+{% comment %} const server = "https://arrendify-api.onrender.com"; {% endcomment %}
+const server = "https://arrendify-api.onrender.com";
 const configin = {
     headers: {
         'Content-Type': 'application/json',
@@ -1198,7 +1219,7 @@ console.log("en onload",datos)
 function plantar()
 {
     datos = JSON.parse( localStorage.getItem('data_arrendador'))
-    console.log(localStorage)
+    //console.log(localStorage)
     console.log("soy datos",datos[0].pmoi)
     console.log(datos.id)
     if (datos[0].pmoi === 'Inmobiliaria')
@@ -1306,83 +1327,36 @@ function prueba2(val){
     localStorage.setItem('datos', JSON.stringify(arr));
     }
 
-const btnSubmit = document.getElementById("finalizar1")
+const btnSubmit = document.getElementById("finalizar1");
 btnSubmit.addEventListener("click", function (event) {
     event.preventDefault();
-    console.log("Editar jojojo")
-    //datos = JSON.parse( localStorage.getItem('data_arrendador'))
-    //enviar_datos(datos)
-    //setTimeout(() => {
-        //window.location.href = '/arrendador/'
-   // }, "3000");
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
+    editarArrendador();
+});
+
+
+const editarArrendador = async () => {
+    try {
+        const response = await axios.put(`${server}/Arrendador_Api/${datos[0].slug}/`, datos[0], configin);
+        setTimeout(() => {
+            localStorage.removeItem('data_arrendador');
+            window.location.href = '/arrendadores/';
+        }, 2000);
+    } catch (error) {
+        console.log(error); // handle any errors from the server
     }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
+};
 
-    var pmoi = document.getElementById("pmoi").value
-    console.log("Soy valor pmoi", datos[0].pmoi)
-    console.log("datos", datos)
-    //datos.pmoi = pmoi
-   $.ajax({
-        type: 'PUT',
-        url: `http://127.0.0.1:8001/Arrendador_Api/${datos[0].slug}/`,
-        //url: `http://127.0.0.1:8000/Inmuebles/`,
-        headers: {'Authorization': `Token ${localStorage.getItem('token')}`},
-        mode: 'same-origin',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(datos[0]),
-      success: function(response) {
-        console.log(response); // handle the response from the server
-        //location.reload()
-        //Swal.fire({
-        //            icon: 'success',
-        //            title: '¡Editado correctamente!',
-        //            text: 'Se edito correctamente.',
-        //            showConfirmButton: false,
-        //            timer: 1500
-        //        }, 2000).then(() => {
-        //                    //localStorage.removeItem('data_arrendador');
-        //                    //window.location = '/arrendador/';
-        //                }).catch((error)=>{
-        //                    console.error(error);
-        //                });
-            setTimeout(() => {
-                window.location.href = '/arrendadores/'
-            }, "2000");
-      },
-      error: function(response) {
-        console.log(response); // handle any errors from the server
-      }
-    });
-   
-})
+{% comment %} const editarArrendador = async () =>{
+    try{
+        const response = axios.put(`${server}/Arrendador_Api/${datos[0].slug}/`, datos[0], configin);
+        setTimeout(()=>{
+            window.location.href = '/arrendadores/';
+        },2000);
+    }catch(error){
+        console.log(error);
+    }
+} {% endcomment %}
 
-async function enviar_datos(formulario){
-    slug = formulario[0].slug
-    console.log("Slug", slug)
-    console.log("Esta llegando a editar")
-    console.log("datos formulario", formulario)
-    var data = $("Formu").serializeArray();
-    //var slug = document.getElementById('slug').value
-    const response = await axios.put(`${server}/Arrendador_Api/eduardo/`,formulario,configin)
-    var form = document.getElementById("Formu");
-    form.reset();
-    console.log("response",response)
- 
-}
 
 
 </script>
