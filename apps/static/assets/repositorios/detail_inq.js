@@ -1,4 +1,4 @@
-const server = "https://arrendify-api.onrender.com";
+const server = "https://arredify-docker.onrender.com";
     document.getElementById("cargar_tabla").onload = plantar()
     
     

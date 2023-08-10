@@ -1202,8 +1202,8 @@ $( "#next1" ).on( "click", function() {
 
 const csrftoken = document.cookie.match(/csrftoken=(\w+)/)[1];
 axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
-{% comment %} const server = "https://arrendify-api.onrender.com"; {% endcomment %}
-const server = "https://arrendify-api.onrender.com";
+{% comment %} const server = "https://arredify-docker.onrender.com"; {% endcomment %}
+const server = "https://arredify-docker.onrender.com";
 const configin = {
     headers: {
         'Content-Type': 'application/json',
